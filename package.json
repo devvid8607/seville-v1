@@ -1,0 +1,44 @@
+{
+  "name": "seville-v1",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.10.8",
+    "@apollo/experimental-nextjs-app-support": "^0.11.2",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@glideapps/glide-data-grid": "^6.0.3",
+    "@mui/icons-material": "^5.15.21",
+    "@mui/material": "^5.15.21",
+    "@types/cookie-parser": "^1.4.7",
+    "@types/lodash": "^4.17.6",
+    "@types/next-auth": "^3.15.0",
+    "@types/uuid": "^10.0.0",
+    "axios": "^1.7.2",
+    "graphql": "^16.9.0",
+    "lodash": "^4.17.21",
+    "next": "14.2.4",
+    "next-auth": "^4.24.7",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-select": "^5.8.0",
+    "reactflow": "^11.11.4",
+    "set-cookie-parser": "^2.6.0",
+    "uuid": "^10.0.0",
+    "zustand": "^4.5.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.4",
+    "typescript": "^5"
+  }
+}

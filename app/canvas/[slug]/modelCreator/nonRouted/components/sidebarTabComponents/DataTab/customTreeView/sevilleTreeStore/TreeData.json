@@ -1,0 +1,32 @@
+[
+  {
+    "id": "1",
+    "parentId": null,
+    "title": "Root node",
+    "isOpen": true,
+    "children": [
+      {
+        "id": "2",
+        "parentId": "1",
+        "title": "Child node 1",
+        "isOpen": false,
+        "children": [
+          {
+            "id": "3",
+            "parentId": "2",
+            "title": "Grandchild node 1",
+            "isOpen": false,
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "4",
+        "parentId": "1",
+        "title": "Child node 2",
+        "isOpen": false,
+        "children": []
+      }
+    ]
+  }
+]

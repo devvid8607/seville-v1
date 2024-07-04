@@ -1,0 +1,800 @@
+[
+  {
+    "modelId": "123",
+    "modelName": "Employee",
+    "modelFriendlyName": "Employee fn",
+    "modelDesc": "Emp description",
+    "url": "string",
+    "createdBy": "string",
+    "modifiedBy": "string",
+    "dateCreated": "string",
+    "dateModified": "string",
+    "attributes": [
+      {
+        "id": "emp_id",
+        "name": "Employee ID",
+        "friendlyName": "Employee ID",
+        "description": "id of employees",
+        "key": true,
+        "locked": false,
+        "notNull": true,
+        "isRemovable": false,
+        "enabled": true,
+        "dataType": "text",
+        "icon": "ABCOutlined"
+      },
+      {
+        "id": "emp_name",
+        "name": "Employee Name",
+        "friendlyName": "Employee Name",
+        "description": "Name of employees",
+        "key": false,
+        "locked": false,
+        "notNull": true,
+        "isRemovable": true,
+        "enabled": true,
+        "dataType": "text"
+      },
+      {
+        "id": "emp_dept",
+        "name": "Employee Department",
+        "friendlyName": "Employee Department",
+        "description": "Department of employees",
+        "key": false,
+        "locked": false,
+        "notNull": true,
+        "isRemovable": true,
+        "enabled": true,
+        "dataType": "text"
+      },
+      {
+        "id": "emp_sal",
+        "name": "Employee Salary",
+        "friendlyName": "Employee Salary",
+        "description": "Salary of employees",
+        "key": false,
+        "locked": false,
+        "notNull": true,
+        "isRemovable": true,
+        "enabled": true,
+        "dataType": "number"
+      },
+      {
+        "id": "emp_address",
+        "name": "Employee Address",
+        "friendlyName": "Employee Address",
+        "description": "Address of employees",
+        "key": false,
+        "locked": false,
+        "notNull": true,
+        "isRemovable": true,
+        "enabled": true,
+        "dataType": "model",
+        "showModel": false,
+        "dataSourceId": "789",
+        "dataSourceFriendlyName": "Address"
+      },
+      {
+        "id": "emp_phoneNumber",
+        "name": "Employee Phone Number",
+        "friendlyName": "Employee Phone Number",
+        "description": "Phone number of employees",
+        "key": false,
+        "locked": false,
+        "notNull": true,
+        "isRemovable": true,
+        "enabled": true,
+        "dataType": "list",
+        "showModel": false,
+        "dataSourceId": "",
+        "dataSourceFriendlyName": ""
+      },
+      {
+        "id": "652eb9fd-1c92-4299-a239-24c19ce6799f",
+        "name": "modelist",
+        "friendlyName": "modelist",
+        "description": "",
+        "key": false,
+        "locked": false,
+        "notNull": false,
+        "isRemovable": true,
+        "enabled": true,
+        "dataType": "list",
+        "hasHandle": false,
+        "properties": [
+          {
+            "id": "1",
+            "type": "listdropdown",
+            "label": "List Data Type",
+            "tooltip": "Default Value",
+            "placeholder": "",
+            "visible": true,
+            "required": true,
+            "enabled": true,
+            "size": "small",
+            "defaultValue": "",
+            "currentValue": "",
+            "currentListValues": [
+              {
+                "id": "25901b72-962a-4b50-851e-70459045e3d6",
+                "typeId": "4",
+                "typeCode": "model",
+                "name": "Model",
+                "children": [],
+                "properties": [
+                  {
+                    "id": "1",
+                    "type": "modeldropdown",
+                    "label": "Default",
+                    "tooltip": "Default Value",
+                    "placeholder": "",
+                    "visible": true,
+                    "required": true,
+                    "enabled": true,
+                    "size": "small",
+                    "defaultValue": "",
+                    "currentValue": "456",
+                    "propertyName": "defaultValue",
+                    "config": {
+                      "options": [
+                        {
+                          "id": "123",
+                          "label": "Employee"
+                        },
+                        {
+                          "id": "456",
+                          "label": "Customer"
+                        },
+                        {
+                          "id": "789",
+                          "label": "Address"
+                        }
+                      ],
+                      "fromApi": false,
+                      "ApiURL": ""
+                    }
+                  }
+                ]
+              }
+            ],
+            "propertyName": "defaultValue",
+            "config": {
+              "options": [],
+              "fromApi": false,
+              "ApiURL": ""
+            }
+          }
+        ],
+        "dataSourceFriendlyName": "Customer",
+        "dataSourceId": "456",
+        "childDataType": "model"
+      },
+      {
+        "id": "fd5aae4e-e372-49a1-8166-585f22140bf5",
+        "name": "listNum",
+        "friendlyName": "listNum",
+        "description": "",
+        "key": false,
+        "locked": false,
+        "notNull": false,
+        "isRemovable": true,
+        "enabled": true,
+        "dataType": "list",
+        "hasHandle": false,
+        "properties": [
+          {
+            "id": "1",
+            "type": "listdropdown",
+            "label": "List Data Type",
+            "tooltip": "Default Value",
+            "placeholder": "",
+            "visible": true,
+            "required": true,
+            "enabled": true,
+            "size": "small",
+            "defaultValue": "",
+            "currentValue": "",
+            "currentListValues": [
+              {
+                "id": "d080ab6f-98e2-487d-a387-8de71576cb9b",
+                "typeId": "2",
+                "typeCode": "number",
+                "name": "Number",
+                "children": [],
+                "properties": [
+                  {
+                    "id": "1",
+                    "type": "number",
+                    "label": "Default",
+                    "tooltip": "Default Value",
+                    "placeholder": "Default Value",
+                    "visible": true,
+                    "required": false,
+                    "enabled": true,
+                    "size": "small",
+                    "defaultValue": "",
+                    "currentValue": "",
+                    "propertyName": "defaultValue",
+                    "config": {
+                      "step": "1",
+                      "minValue": "5",
+                      "maxValue": "100",
+                      "errorMessage": "Number not in range (5-100)"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "type": "number",
+                    "label": "Max Value",
+                    "tooltip": "Maximum Value of the field",
+                    "placeholder": "Enter a maximum value",
+                    "visible": true,
+                    "required": true,
+                    "enabled": true,
+                    "size": "small",
+                    "defaultValue": "20",
+                    "currentValue": "",
+                    "propertyName": "maxValue",
+                    "config": {
+                      "step": "1",
+                      "minValue": "5",
+                      "maxValue": "100",
+                      "errorMessage": "Number not in range (5-100)"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "type": "number",
+                    "label": "Min Value",
+                    "tooltip": "Minimum value of the field",
+                    "placeholder": "Enter a minimum value",
+                    "visible": true,
+                    "required": true,
+                    "enabled": true,
+                    "size": "small",
+                    "defaultValue": "50",
+                    "currentValue": "",
+                    "propertyName": "minValue",
+                    "config": {
+                      "minValue": "5",
+                      "maxValue": "100",
+                      "errorMessage": "Number not in range (5-100)"
+                    }
+                  }
+                ]
+              }
+            ],
+            "propertyName": "defaultValue",
+            "config": {
+              "options": [],
+              "fromApi": false,
+              "ApiURL": ""
+            }
+          }
+        ],
+        "dataSourceFriendlyName": null,
+        "dataSourceId": null,
+        "childDataType": "number"
+      }
+    ]
+  },
+  {
+    "modelId": "456",
+    "modelName": "Customer",
+    "modelFriendlyName": "Customer Fn",
+    "modelDesc": "Customer description",
+    "url": "string",
+    "createdBy": "string",
+    "modifiedBy": "string",
+    "dateCreated": "string",
+    "dateModified": "string",
+    "attributes": [
+      {
+        "id": "cust_id",
+        "name": "Customer ID",
+        "friendlyName": "Customer ID",
+        "description": "ID of the customer",
+        "key": true,
+        "locked": false,
+        "notNull": true,
+        "isRemovable": false,
+        "enabled": true,
+        "dataType": "number",
+        "icon": "PersonOutlineOutlined"
+      },
+      {
+        "id": "cust_name",
+        "name": "Customer Name",
+        "friendlyName": "Customer Name",
+        "description": "Name of the customer",
+        "key": false,
+        "locked": false,
+        "notNull": true,
+        "isRemovable": true,
+        "enabled": true,
+        "dataType": "text",
+        "icon": "TextFieldOutlined"
+      },
+      {
+        "id": "cust_email",
+        "name": "Customer Email",
+        "friendlyName": "Customer Email",
+        "description": "Email address of the customer",
+        "key": false,
+        "locked": false,
+        "notNull": false,
+        "isRemovable": true,
+        "enabled": true,
+        "dataType": "email",
+        "icon": "EmailOutlined"
+      }
+    ]
+  },
+  {
+    "modelId": "789",
+    "modelName": "Address",
+    "modelFriendlyName": "Address Fn",
+    "modelDesc": "Address description",
+    "url": "string",
+    "createdBy": "string",
+    "modifiedBy": "string",
+    "dateCreated": "string",
+    "dateModified": "string",
+    "attributes": [
+      {
+        "id": "addr_id",
+        "name": "Address ID",
+        "friendlyName": "Address ID",
+        "description": "ID of the address",
+        "key": true,
+        "locked": false,
+        "notNull": true,
+        "isRemovable": false,
+        "enabled": true,
+        "dataType": "number",
+        "icon": "HomeOutlined"
+      },
+      {
+        "id": "addr_line",
+        "name": "Address Line",
+        "friendlyName": "Address Line",
+        "description": "Street address of the customer",
+        "key": false,
+        "locked": false,
+        "notNull": true,
+        "isRemovable": true,
+        "enabled": true,
+        "dataType": "text",
+        "icon": "LocationOnOutlined"
+      },
+      {
+        "id": "addr_city",
+        "name": "City",
+        "friendlyName": "City",
+        "description": "City of the address",
+        "key": false,
+        "locked": false,
+        "notNull": true,
+        "isRemovable": true,
+        "enabled": true,
+        "dataType": "text",
+        "icon": "LocationCityOutlined"
+      },
+      {
+        "id": "addr_zip",
+        "name": "Zip Code",
+        "friendlyName": "Zip Code",
+        "description": "Postal code of the address",
+        "key": false,
+        "locked": false,
+        "notNull": true,
+        "isRemovable": true,
+        "enabled": true,
+        "dataType": "model",
+        "icon": "MarkunreadMailboxOutlined",
+        "dataSourceId": "456",
+        "dataSourceFriendlyName": "Customer"
+      },
+      {
+        "id": "addr_user",
+        "name": "Random User",
+        "friendlyName": "Random User",
+        "description": "Random User",
+        "key": false,
+        "locked": false,
+        "notNull": true,
+        "isRemovable": true,
+        "enabled": true,
+        "dataType": "model",
+        "icon": "MarkunreadMailboxOutlined",
+        "dataSourceId": "1010",
+        "dataSourceFriendlyName": "User Fn"
+      },
+      {
+        "id": "cdefa6f7-87cd-47d0-a18b-1c2cb5297e7d",
+        "name": "Country of Origin",
+        "friendlyName": "Country of Origin",
+        "description": "",
+        "key": false,
+        "locked": false,
+        "notNull": false,
+        "isRemovable": true,
+        "enabled": true,
+        "dataType": "codeList",
+        "hasHandle": false,
+        "dataSourceFriendlyName": "Country of Origin",
+        "dataSourceId": "1",
+        "properties": [
+          {
+            "id": "1",
+            "type": "codeListDropdown",
+            "label": "Code Lists",
+            "tooltip": "Default Value",
+            "placeholder": "",
+            "visible": true,
+            "required": true,
+            "enabled": true,
+            "size": "small",
+            "defaultValue": "",
+            "currentValue": "1",
+            "propertyName": "defaultValue",
+            "config": {
+              "options": [
+                {
+                  "id": "1",
+                  "label": "Country Code List"
+                },
+                {
+                  "id": "2",
+                  "label": "Currency Code List"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "67650aa6-f3c7-40ed-9bb8-f0cde183daef",
+        "name": "numList",
+        "friendlyName": "numList",
+        "description": "",
+        "key": false,
+        "locked": false,
+        "notNull": false,
+        "isRemovable": true,
+        "enabled": true,
+        "dataType": "list",
+        "hasHandle": false,
+        "properties": [
+          {
+            "id": "1",
+            "type": "listdropdown",
+            "label": "List Data Type",
+            "tooltip": "Default Value",
+            "placeholder": "",
+            "visible": true,
+            "required": true,
+            "enabled": true,
+            "size": "small",
+            "defaultValue": "",
+            "currentValue": "",
+            "currentListValues": [
+              {
+                "id": "e89c08d8-a99e-4d68-8887-a8dd03f405fe",
+                "typeId": "2",
+                "typeCode": "number",
+                "name": "Number",
+                "children": [],
+                "properties": [
+                  {
+                    "id": "1",
+                    "type": "number",
+                    "label": "Default",
+                    "tooltip": "Default Value",
+                    "placeholder": "Default Value",
+                    "visible": true,
+                    "required": false,
+                    "enabled": true,
+                    "size": "small",
+                    "defaultValue": "",
+                    "currentValue": "",
+                    "propertyName": "defaultValue",
+                    "config": {
+                      "step": "1",
+                      "minValue": "5",
+                      "maxValue": "100",
+                      "errorMessage": "Number not in range (5-100)"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "type": "number",
+                    "label": "Max Value",
+                    "tooltip": "Maximum Value of the field",
+                    "placeholder": "Enter a maximum value",
+                    "visible": true,
+                    "required": true,
+                    "enabled": true,
+                    "size": "small",
+                    "defaultValue": "20",
+                    "currentValue": "",
+                    "propertyName": "maxValue",
+                    "config": {
+                      "step": "1",
+                      "minValue": "5",
+                      "maxValue": "100",
+                      "errorMessage": "Number not in range (5-100)"
+                    }
+                  },
+                  {
+                    "id": "3",
+                    "type": "number",
+                    "label": "Min Value",
+                    "tooltip": "Minimum value of the field",
+                    "placeholder": "Enter a minimum value",
+                    "visible": true,
+                    "required": true,
+                    "enabled": true,
+                    "size": "small",
+                    "defaultValue": "50",
+                    "currentValue": "",
+                    "propertyName": "minValue",
+                    "config": {
+                      "minValue": "5",
+                      "maxValue": "100",
+                      "errorMessage": "Number not in range (5-100)"
+                    }
+                  }
+                ]
+              }
+            ],
+            "propertyName": "defaultValue",
+            "config": {
+              "options": [],
+              "fromApi": false,
+              "ApiURL": ""
+            }
+          }
+        ],
+        "dataSourceFriendlyName": null,
+        "dataSourceId": null,
+        "childDataType": "number"
+      },
+      {
+        "id": "ae018eea-9e52-4f29-b2f1-002597c7558e",
+        "name": "modelList",
+        "friendlyName": "modelList",
+        "description": "",
+        "key": false,
+        "locked": false,
+        "notNull": false,
+        "isRemovable": true,
+        "enabled": true,
+        "dataType": "list",
+        "hasHandle": false,
+        "properties": [
+          {
+            "id": "1",
+            "type": "listdropdown",
+            "label": "List Data Type",
+            "tooltip": "Default Value",
+            "placeholder": "",
+            "visible": true,
+            "required": true,
+            "enabled": true,
+            "size": "small",
+            "defaultValue": "",
+            "currentValue": "",
+            "currentListValues": [
+              {
+                "id": "06fdaf01-ca34-4602-abaa-c0d68a8ed186",
+                "typeId": "4",
+                "typeCode": "model",
+                "name": "Model",
+                "children": [],
+                "properties": [
+                  {
+                    "id": "1",
+                    "type": "modeldropdown",
+                    "label": "Default",
+                    "tooltip": "Default Value",
+                    "placeholder": "",
+                    "visible": true,
+                    "required": true,
+                    "enabled": true,
+                    "size": "small",
+                    "defaultValue": "",
+                    "currentValue": "456",
+                    "propertyName": "defaultValue",
+                    "config": {
+                      "options": [
+                        {
+                          "id": "123",
+                          "label": "Employee"
+                        },
+                        {
+                          "id": "456",
+                          "label": "Customer"
+                        },
+                        {
+                          "id": "789",
+                          "label": "Address"
+                        }
+                      ],
+                      "fromApi": false,
+                      "ApiURL": ""
+                    }
+                  }
+                ]
+              }
+            ],
+            "propertyName": "defaultValue",
+            "config": {
+              "options": [],
+              "fromApi": false,
+              "ApiURL": ""
+            }
+          }
+        ],
+        "dataSourceFriendlyName": "Customer",
+        "dataSourceId": "456",
+        "childDataType": "model"
+      },
+      {
+        "id": "b13a86db-9063-4f09-beae-86714a0801f7",
+        "name": "listofcodelist",
+        "friendlyName": "listofcodelist",
+        "description": "",
+        "key": false,
+        "locked": false,
+        "notNull": false,
+        "isRemovable": true,
+        "enabled": true,
+        "dataType": "list",
+        "hasHandle": false,
+        "properties": [
+          {
+            "id": "1",
+            "type": "listdropdown",
+            "label": "List Data Type",
+            "tooltip": "Default Value",
+            "placeholder": "",
+            "visible": true,
+            "required": true,
+            "enabled": true,
+            "size": "small",
+            "defaultValue": "",
+            "currentValue": "",
+            "currentListValues": [
+              {
+                "id": "d40c6891-b33a-4be1-9cd9-54142e291e4a",
+                "typeId": "6",
+                "typeCode": "codeList",
+                "name": "Code List",
+                "children": [],
+                "properties": [
+                  {
+                    "id": "1",
+                    "type": "codeListDropdown",
+                    "label": "Code Lists",
+                    "tooltip": "Default Value",
+                    "placeholder": "",
+                    "visible": true,
+                    "required": true,
+                    "enabled": true,
+                    "size": "small",
+                    "defaultValue": "",
+                    "currentValue": "2",
+                    "propertyName": "defaultValue",
+                    "config": {
+                      "options": [
+                        {
+                          "id": "1",
+                          "label": "Country Code List"
+                        },
+                        {
+                          "id": "2",
+                          "label": "Currency Code List"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ],
+            "propertyName": "defaultValue",
+            "config": {
+              "options": [],
+              "fromApi": false,
+              "ApiURL": ""
+            }
+          }
+        ],
+        "dataSourceFriendlyName": "Currency",
+        "dataSourceId": "2",
+        "childDataType": "codeList"
+      }
+    ]
+  },
+  {
+    "modelId": "1010",
+    "modelName": "User",
+    "modelFriendlyName": "User Fn",
+    "modelDesc": "User profile description",
+    "url": "string",
+    "createdBy": "string",
+    "modifiedBy": "string",
+    "dateCreated": "string",
+    "dateModified": "string",
+    "attributes": [
+      {
+        "id": "user_id",
+        "name": "User ID",
+        "friendlyName": "User ID",
+        "description": "ID of the user",
+        "key": true,
+        "locked": false,
+        "notNull": true,
+        "isRemovable": false,
+        "enabled": true,
+        "dataType": "number",
+        "icon": "PersonOutlineOutlined"
+      },
+      {
+        "id": "user_name",
+        "name": "User Name",
+        "friendlyName": "User Name",
+        "description": "Name of the user",
+        "key": false,
+        "locked": false,
+        "notNull": true,
+        "isRemovable": true,
+        "enabled": true,
+        "dataType": "text",
+        "icon": "TextFieldOutlined"
+      },
+      {
+        "id": "user_email",
+        "name": "User Email",
+        "friendlyName": "User Email",
+        "description": "Email address of the user",
+        "key": false,
+        "locked": false,
+        "notNull": true,
+        "isRemovable": true,
+        "enabled": true,
+        "dataType": "email",
+        "icon": "EmailOutlined"
+      },
+      {
+        "id": "user_role",
+        "name": "User Role",
+        "friendlyName": "User Role",
+        "description": "Role of the user within the system",
+        "key": false,
+        "locked": false,
+        "notNull": true,
+        "isRemovable": true,
+        "enabled": true,
+        "dataType": "text",
+        "icon": "SupervisorAccountOutlined"
+      },
+      {
+        "id": "user_address",
+        "name": "User Address",
+        "friendlyName": "User Address",
+        "description": "Address of the user",
+        "key": false,
+        "locked": false,
+        "notNull": false,
+        "isRemovable": true,
+        "enabled": true,
+        "dataType": "model",
+        "showModel": false,
+        "dataSourceId": "789",
+        "dataSourceFriendlyName": "Address",
+        "icon": "HomeOutlined"
+      }
+    ]
+  }
+]

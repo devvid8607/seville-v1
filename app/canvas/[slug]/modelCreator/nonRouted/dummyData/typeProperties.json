@@ -1,0 +1,334 @@
+{
+  "text": {
+    "Properties": [
+      {
+        "id": "1",
+        "type": "text",
+        "label": "Default",
+        "tooltip": "Default Value",
+        "placeholder": "Default Value",
+        "visible": true,
+        "required": false,
+        "enabled": true,
+        "size": "small",
+        "defaultValue": "",
+        "currentValue": "",
+        "propertyName": "defaultValue",
+        "config": {
+          "minLength": "5",
+          "maxLength": "100",
+          "errorMessage": "Length not in range (5-100)"
+        }
+      },
+      {
+        "id": "2",
+        "type": "number",
+        "label": "Max Length",
+        "tooltip": "Maximum length of the field",
+        "placeholder": "Enter a maximum length",
+        "visible": true,
+        "required": true,
+        "size": "small",
+        "enabled": true,
+        "defaultValue": "20",
+        "currentValue": "",
+        "propertyName": "maxLength",
+        "config": {
+          "step": "1",
+          "minValue": "5",
+          "maxValue": "100",
+          "errorMessage": "Number not in range (5-100)"
+        }
+      },
+      {
+        "id": "3",
+        "type": "number",
+        "label": "Min Length",
+        "tooltip": "Minimum length of the field",
+        "placeholder": "Enter a minimum length",
+        "visible": true,
+        "required": true,
+        "enabled": true,
+        "size": "small",
+        "defaultValue": "50",
+        "currentValue": "",
+        "propertyName": "minLength",
+        "config": {
+          "minValue": "5",
+          "maxValue": "100",
+          "errorMessage": "Number not in range (5-100)"
+        }
+      },
+      {
+        "id": "4",
+        "type": "text",
+        "label": "Pattern",
+        "tooltip": "Regex Pattern",
+        "placeholder": "Enter a regex patter",
+        "visible": true,
+        "required": false,
+        "enabled": true,
+        "size": "small",
+        "defaultValue": "",
+        "currentValue": "",
+        "propertyName": "regexPattern",
+        "config": {
+          "minValue": "5",
+          "maxValue": "100",
+          "errorMessage": "Length not in range (5-100)"
+        }
+      }
+    ]
+  },
+  "number": {
+    "Properties": [
+      {
+        "id": "1",
+        "type": "number",
+        "label": "Default",
+        "tooltip": "Default Value",
+        "placeholder": "Default Value",
+        "visible": true,
+        "required": false,
+        "enabled": true,
+        "size": "small",
+        "defaultValue": "",
+        "currentValue": "",
+        "propertyName": "defaultValue",
+        "config": {
+          "step": "1",
+          "minValue": "5",
+          "maxValue": "100",
+          "errorMessage": "Number not in range (5-100)"
+        }
+      },
+      {
+        "id": "2",
+        "type": "number",
+        "label": "Max Value",
+        "tooltip": "Maximum Value of the field",
+        "placeholder": "Enter a maximum value",
+        "visible": true,
+        "required": true,
+        "enabled": true,
+        "size": "small",
+        "defaultValue": "20",
+        "currentValue": "",
+        "propertyName": "maxValue",
+        "config": {
+          "step": "1",
+          "minValue": "5",
+          "maxValue": "100",
+          "errorMessage": "Number not in range (5-100)"
+        }
+      },
+      {
+        "id": "3",
+        "type": "number",
+        "label": "Min Value",
+        "tooltip": "Minimum value of the field",
+        "placeholder": "Enter a minimum value",
+        "visible": true,
+        "required": true,
+        "enabled": true,
+        "size": "small",
+        "defaultValue": "50",
+        "currentValue": "",
+        "propertyName": "minValue",
+        "config": {
+          "minValue": "5",
+          "maxValue": "100",
+          "errorMessage": "Number not in range (5-100)"
+        }
+      }
+    ]
+  },
+  "boolean": {
+    "Properties": [
+      {
+        "id": "1",
+        "type": "dropdown",
+        "label": "Default",
+        "tooltip": "Default Value",
+        "placeholder": "",
+        "visible": true,
+        "required": true,
+        "enabled": true,
+        "size": "small",
+        "defaultValue": "true",
+        "currentValue": "",
+        "propertyName": "defaultValue",
+        "config": {
+          "options": [
+            { "id": "true", "label": "Yes" },
+            { "id": "false", "label": "No" }
+          ]
+        }
+      }
+    ]
+  },
+  "uiTest": {
+    "Properties": [
+      {
+        "id": "1",
+        "type": "switch",
+        "label": "Enable Feature",
+        "visible": true,
+        "required": false,
+        "enabled": true,
+        "defaultValue": true,
+        "size": "small",
+        "currentValue": null,
+        "propertyName": "enableFeature",
+        "config": {
+          "color": "primary",
+          "labelPlacement": "start"
+        }
+      },
+      {
+        "id": "2",
+        "type": "checkbox",
+        "label": "Checkbox",
+        "visible": true,
+        "required": true,
+        "enabled": true,
+        "defaultValue": true,
+        "size": "small",
+        "currentValue": null,
+        "propertyName": "checkboxField",
+        "config": {
+          "color": "primary",
+          "labelPlacement": "start"
+        }
+      },
+      {
+        "id": "3",
+        "type": "radioGroup",
+        "label": "Select Option",
+        "tooltip": "Choose your option",
+        "visible": true,
+        "required": true,
+        "enabled": true,
+        "defaultValue": "option1",
+        "size": "small",
+        "currentValue": "",
+        "propertyName": "radioField",
+        "config": {
+          "options": [
+            { "id": "option1", "label": "Option 1" },
+            { "id": "option2", "label": "Option 2" },
+            { "id": "option3", "label": "Option 3" }
+          ],
+          "orientation": "vertical"
+        }
+      },
+      {
+        "id": "4",
+        "type": "rating",
+        "label": "Feedback Rating",
+        "visible": true,
+        "required": false,
+        "enabled": true,
+        "size": "small",
+        "defaultValue": 3,
+        "currentValue": 0,
+        "propertyName": "ratingField",
+        "config": {
+          "max": 5,
+          "precision": 0.5,
+          "readOnly": false,
+          "color": "primary"
+        }
+      },
+      {
+        "id": "5",
+        "type": "slider",
+        "label": "Volume Control",
+        "visible": true,
+        "required": false,
+        "enabled": true,
+        "size": "small",
+        "defaultValue": 30,
+        "currentValue": 0,
+        "propertyName": "sliderField",
+        "config": {
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "marks": [
+            { "value": 0, "label": "0" },
+            { "value": 20, "label": "20" },
+            { "value": 50, "label": "50" },
+            { "value": 80, "label": "80" },
+            { "value": 100, "label": "100" }
+          ],
+          "orientation": "horizontal",
+          "color": "primary"
+        }
+      },
+      {
+        "id": "6",
+        "type": "toggleButton",
+        "label": "Alignment",
+        "visible": true,
+        "required": false,
+        "enabled": true,
+        "defaultValue": "center",
+        "size": "small",
+        "currentValue": null,
+        "propertyName": "toggleButtonField",
+        "config": {
+          "exclusive": true,
+          "options": [
+            {
+              "value": "left",
+              "icon": "FormatAlignLeftOutlined"
+            },
+            {
+              "value": "center",
+              "icon": "FormatAlignCenterOutlined"
+            },
+            {
+              "value": "right",
+              "icon": "FormatAlignRightOutlined"
+            },
+            {
+              "value": "justify",
+              "icon": "FormatAlignJustifyOutlined"
+            }
+          ],
+
+          "color": "primary"
+        }
+      }
+    ]
+  },
+  "model": {
+    "Properties": [
+      {
+        "id": "1",
+        "type": "modeldropdown",
+        "label": "Default",
+        "tooltip": "Default Value",
+        "placeholder": "",
+        "visible": true,
+        "required": true,
+        "enabled": true,
+        "size": "small",
+        "defaultValue": "",
+        "currentValue": "",
+        "propertyName": "defaultValue",
+
+        "config": {
+          "options": [
+            { "id": "123", "label": "Employee" },
+            { "id": "456", "label": "Customer" },
+            { "id": "789", "label": "Address" }
+          ],
+          "fromApi": true,
+          "ApiURL": ""
+        }
+      }
+    ]
+  }
+}
