@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import axios from "axios";
-import dataTypeDataDromJSON from "../dummyData/DataTypes.json";
+import dataTypeDataDromJSON from "../../nonRouted/dummyData/DataTypes.json";
 
 // Define a type for the store's state for better TypeScript support (optional)
 export type DataType = {

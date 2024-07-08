@@ -1,11 +1,11 @@
 import { Box, Divider, Menu, MenuItem, Typography } from "@mui/material";
-import { useCodeListStore } from "../Store/CodeListStore";
+import { useCodeListStore } from "../../../../../../nonRouted/nodes/codeListNode/store/CodeListStore";
 import { useModelNodesStore } from "../../../../store/modelStore/ModelNodesStore";
 import useModelStore from "../../../../store/modelStore/ModelDetailsFromBackendStore";
-import { createCodeListNode } from "../../../../helpers/createCodeListNode";
+import { createCodeListNode } from "../../../../../../nonRouted/helpers/createCodeListNode";
 import { getAttributeIdFromHandle } from "../../../../helpers/createModelData";
 import { v4 as uuidv4 } from "uuid";
-import { ListItem } from "../../../sidebarTabComponents/propertiesTab/components/RecursiveDropdownv3";
+import { findLastChildWithProperties } from "../../../../helpers/helperFunction";
 
 interface ContextMenuProps {
   mouseX: number | null;
@@ -15,23 +15,23 @@ interface ContextMenuProps {
   sourcePage?: string;
 }
 
-function findLastChildWithProperties(data: ListItem[]): any[] | null {
-  let lastProperties = null;
+// function findLastChildWithProperties(data: ListItem[]): any[] | null {
+//   let lastProperties = null;
 
-  for (const item of data) {
-    if (item.properties && item.properties.length > 0) {
-      lastProperties = item.properties; // Update last found properties
-    }
-    if (item.children.length > 0) {
-      const childProperties = findLastChildWithProperties(item.children);
-      if (childProperties) {
-        lastProperties = childProperties; // Update with deeper nested properties
-      }
-    }
-  }
+//   for (const item of data) {
+//     if (item.properties && item.properties.length > 0) {
+//       lastProperties = item.properties; // Update last found properties
+//     }
+//     if (item.children.length > 0) {
+//       const childProperties = findLastChildWithProperties(item.children);
+//       if (childProperties) {
+//         lastProperties = childProperties; // Update with deeper nested properties
+//       }
+//     }
+//   }
 
-  return lastProperties;
-}
+//   return lastProperties;
+// }
 
 export const CodeNodeContextMenu: React.FC<ContextMenuProps> = ({
   mouseX,

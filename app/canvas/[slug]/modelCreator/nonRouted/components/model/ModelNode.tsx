@@ -15,15 +15,21 @@ import useModelStore, {
 } from "../../store/modelStore/ModelDetailsFromBackendStore";
 
 export const ModelNode = memo(({ data }: { data: any }) => {
+  // #region state variables
   const { modelDetails } = data;
   const [loading, setLoading] = useState(true);
   const [localModel, setLocalModel] = useState<Model | null>(null);
+  //#endregion
+
+  // #region useModelStore imports
   const getModelById = useModelStore((state) => state.getModelById);
   const addModelToStore = useModelStore((state) => state.addModelToStore);
   const addAttributeToModel = useModelStore(
     (state) => state.addAttributeToModel
   );
+  //#endregion
 
+  // #region useeffect
   useEffect(() => {
     const getModel = async () => {
       setLoading(true);
@@ -48,13 +54,25 @@ export const ModelNode = memo(({ data }: { data: any }) => {
 
     getModel();
   }, [modelDetails.dataSourceId, modelDetails.url, data]);
+  // #endregion
 
+  // #region evenHandlers
   const handleOnDrop = (event: React.DragEvent) => {
     event.preventDefault();
     const node = event.dataTransfer.getData("text/plain");
+    console.log("nodejson", node);
     //dropping a model item
+
+    let nodeJSON;
     if (node) {
-      const nodeJSON = JSON.parse(node);
+      try {
+        nodeJSON = JSON.parse(node);
+        console.log("Parsed JSON:", nodeJSON);
+      } catch (error) {
+        console.log("Not a JSON string, treating as regular string:", node);
+        nodeJSON = null; // Or handle the string case as needed
+      }
+      // const nodeJSON = JSON.parse(node);
       console.log("nodejson", nodeJSON);
       const targetModelId = event.currentTarget.getAttribute("data-model-id");
 
@@ -63,11 +81,11 @@ export const ModelNode = memo(({ data }: { data: any }) => {
         nodeJSON.dropType &&
         nodeJSON.dropType === DropTypes.Model
       ) {
-        console.log("text ", nodeJSON);
-        console.log("dropped on", targetModelId);
+        // console.log("text ", nodeJSON);
+        // console.log("dropped on", targetModelId);
         if (nodeJSON && targetModelId && nodeJSON.parentId != targetModelId) {
           const newAttribute = createListAttributeDataWithParameters(nodeJSON);
-          console.log("newAttribute", newAttribute);
+          // console.log("newAttribute", newAttribute);
           addAttributeToModel(targetModelId, newAttribute);
         }
       } else if (
@@ -92,6 +110,7 @@ export const ModelNode = memo(({ data }: { data: any }) => {
     //   if (targetModelId) addAttributeToModel(targetModelId, newAttribute);
     // }
   };
+  // #endregion
 
   return (
     <Box

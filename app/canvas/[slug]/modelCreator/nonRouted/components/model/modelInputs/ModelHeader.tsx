@@ -8,42 +8,47 @@ import { createModelNode } from "../../../helpers/createModelNode";
 import useModelBackendStore from "../../../store/modelStore/ModelBackEndStore";
 import useModelStore from "../../../store/modelStore/ModelDetailsFromBackendStore";
 import { useModelNodesStore } from "../../../store/modelStore/ModelNodesStore";
-import { useTabStore } from "../../../store/TabStateManagmentStore";
+import { useTabStore } from "../../../../../nonRouted/store/TabStateManagmentStore";
 import { ModelNodeContextMenu } from "./ModelNodeContextMenu";
 import { Edge } from "reactflow";
-import { ListItem } from "../../sidebarTabComponents/propertiesTab/components/RecursiveDropdownv3";
+import { findLastChildWithProperties } from "../../../helpers/helperFunction";
 
+// #region types and functions
 interface ModelHeaderProps {
   nodeId: string;
   modelId: string;
 }
 
-function findLastChildWithProperties(data: ListItem[]): any[] | null {
-  let lastProperties = null;
+// function findLastChildWithProperties(data: ListItem[]): any[] | null {
+//   let lastProperties = null;
 
-  for (const item of data) {
-    if (item.properties && item.properties.length > 0) {
-      lastProperties = item.properties; // Update last found properties
-    }
-    if (item.children.length > 0) {
-      const childProperties = findLastChildWithProperties(item.children);
-      if (childProperties) {
-        lastProperties = childProperties; // Update with deeper nested properties
-      }
-    }
-  }
+//   for (const item of data) {
+//     if (item.properties && item.properties.length > 0) {
+//       lastProperties = item.properties; // Update last found properties
+//     }
+//     if (item.children.length > 0) {
+//       const childProperties = findLastChildWithProperties(item.children);
+//       if (childProperties) {
+//         lastProperties = childProperties; // Update with deeper nested properties
+//       }
+//     }
+//   }
 
-  return lastProperties;
-}
+//   return lastProperties;
+// }
+
+const isRootNode = (nodeId: string, edges: Edge[]): boolean => {
+  return !edges.some((edge) => edge.target === nodeId);
+};
+// #endregion
 
 export const ModelHeader: React.FC<ModelHeaderProps> = ({
   nodeId,
   modelId,
 }) => {
-  const { modelNodeSchemas } = useModelBackendStore();
-  const IconComponent =
-    MuiIcons[modelNodeSchemas.icon as keyof typeof MuiIcons];
+  // #region imports
 
+  // #region useModelNodesStore imports
   const removeNodeAndDescendants = useModelNodesStore(
     (state) => state.removeNodeAndDescendants
   );
@@ -61,13 +66,34 @@ export const ModelHeader: React.FC<ModelHeaderProps> = ({
     (state) => state.removeOutgoingEdgesFromNodeAndDescendants
   );
   const addEdge = useModelNodesStore((state) => state.addEdge);
+  // #endregion
 
+  // #region useModelStore imports
   const cloneModel = useModelStore((state) => state.cloneModel);
   const getModelById = useModelStore((state) => state.getModelById);
   const updateModelProperty = useModelStore(
     (state) => state.updateModelProperty
   );
+  const updatePropertyCurrentValue = useModelStore(
+    (state) => state.updatePropertyCurrentValue
+  );
+  const { getAttributeProperties, updatePropertyCurrentListValues } =
+    useModelStore((state) => ({
+      getAttributeProperties: state.getAttributeProperties,
+      updatePropertyCurrentListValues: state.updatePropertyCurrentListValues,
+    }));
 
+  const { models } = useModelStore();
+
+  const updateAttributeValueOfAModel = useModelStore(
+    (state) => state.updateAttributeValueOfAModel
+  );
+  const removeAllAttributesFromModel = useModelStore(
+    (state) => state.removeAllAttributesFromModel
+  );
+  // #endregion
+
+  // #region useTabStore imports
   const showNodeContextMenu = useTabStore((state) => state.showNodeContextMenu);
   const setSliderOpen = useTabStore((state) => state.setSliderOpen);
 
@@ -87,32 +113,22 @@ export const ModelHeader: React.FC<ModelHeaderProps> = ({
   const setReplaceModelContextMenuSource = useTabStore(
     (state) => state.setReplaceModelContextMenuSource
   );
-  const updatePropertyCurrentValue = useModelStore(
-    (state) => state.updatePropertyCurrentValue
-  );
-  const { getAttributeProperties, updatePropertyCurrentListValues } =
-    useModelStore((state) => ({
-      getAttributeProperties: state.getAttributeProperties,
-      updatePropertyCurrentListValues: state.updatePropertyCurrentListValues,
-    }));
+  // #endregion
 
-  // if (modelId) {
-  const { models } = useModelStore();
+  const { modelNodeSchemas } = useModelBackendStore();
+  // #endregion
+
+  // #region state vars
   let model = models.find((model) => model.modelId === modelId);
-
-  // }
-
-  const isRootNode = (nodeId: string, edges: Edge[]): boolean => {
-    return !edges.some((edge) => edge.target === nodeId);
-  };
-
-  const updateAttributeValueOfAModel = useModelStore(
-    (state) => state.updateAttributeValueOfAModel
+  const IconComponent =
+    MuiIcons[modelNodeSchemas.icon as keyof typeof MuiIcons];
+  const [isEditing, setIsEditing] = useState<boolean>(false);
+  const [tempFriendlyName, setTempFriendlyName] = useState<string>(
+    model?.modelFriendlyName || ""
   );
-  const removeAllAttributesFromModel = useModelStore(
-    (state) => state.removeAllAttributesFromModel
-  );
+  //#endregion
 
+  // #region eventhandlers
   const handleMinimizeNode = (event: React.MouseEvent) => {
     event.stopPropagation();
     const rootNodes = nodes.filter((node) => isRootNode(node.id, edges));
@@ -131,38 +147,6 @@ export const ModelHeader: React.FC<ModelHeaderProps> = ({
 
   const handleCopyClick = (event: React.MouseEvent) => {
     event.stopPropagation();
-
-    // if (modelId) {
-    //   const result = cloneModel(modelId);
-
-    //   if (result) {
-    //     const newNode = cloneNodeAndUpdateDataSource(
-    //       nodeId,
-    //       result?.newModelId
-    //     );
-    //     const { sourceNode, sourceHandleId } =
-    //       getSourceNodeAndHandleByTargetNodeId(nodeId);
-    //     if (sourceNode && sourceHandleId) {
-    //       const currentDataSource = sourceNode?.data.modelDetails.dataSourceId;
-    //       const attributeId = getAttributeIdFromHandle(sourceHandleId);
-    //       updateAttributeValueOfAModel(
-    //         currentDataSource,
-    //         attributeId,
-    //         "dataSourceId",
-    //         result.newModelId
-    //       );
-    //       updateAttributeValueOfAModel(
-    //         currentDataSource,
-    //         attributeId,
-    //         "dataSourceFriendlyName",
-    //         result.newModelName
-    //       );
-    //     }
-    //     removeIncomingEdgesByNodeId(nodeId);
-    //     removeNodeAndDescendants(nodeId);
-    //   }
-    // }
-
     ///working code
     //clone model and add it to the model
     if (modelId) {
@@ -291,16 +275,6 @@ export const ModelHeader: React.FC<ModelHeaderProps> = ({
     if (!sliderOpen) setSliderOpen(true);
   };
 
-  //
-  const [isEditing, setIsEditing] = useState<boolean>(false);
-  const [tempFriendlyName, setTempFriendlyName] = useState<string>(
-    model?.modelFriendlyName || ""
-  );
-
-  useEffect(() => {
-    setTempFriendlyName(model?.modelFriendlyName || "");
-  }, [modelId]);
-
   const handleDoubleClick = (event: React.MouseEvent) => {
     event.stopPropagation();
 
@@ -329,6 +303,13 @@ export const ModelHeader: React.FC<ModelHeaderProps> = ({
       updateModelProperty(modelId, "modelFriendlyName", tempFriendlyName);
     setIsEditing(false);
   };
+  // #endregion
+
+  // #region useeffect
+  useEffect(() => {
+    setTempFriendlyName(model?.modelFriendlyName || "");
+  }, [modelId]);
+  //#endregion
 
   return (
     <>

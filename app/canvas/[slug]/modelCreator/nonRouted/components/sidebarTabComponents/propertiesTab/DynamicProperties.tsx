@@ -3,7 +3,7 @@ import React, { useCallback } from "react";
 // import useModelNodeDataStore from "../../Store/SevilleModelNodeStore";
 import useModelStore from "../../../store/modelStore/ModelDetailsFromBackendStore";
 import { useModelNodesStore } from "../../../store/modelStore/ModelNodesStore";
-import { useTabStore } from "../../../store/TabStateManagmentStore";
+import { useTabStore } from "../../../../../nonRouted/store/TabStateManagmentStore";
 import RecursiveDropdownv3 from "./components/RecursiveDropdownv3";
 import { SmallCheckbox } from "./components/SmallCheckBox";
 import { SmallDropdown } from "./components/SmallDropdown";
@@ -16,34 +16,35 @@ import { SmallSwitch } from "./components/SmallSwitch";
 import { SmallTextField } from "./components/SmallTextField";
 import { SmallToggleButton } from "./components/SmallToggleButton";
 import { CodeListDropdown } from "./components/CodeListDropdown";
-import { useCodeListStore } from "../../nodes/CodeListNode/Store/CodeListStore";
+import { useCodeListStore } from "../../../../../nonRouted/nodes/codeListNode/store/CodeListStore";
 
 export const DynamicProperties: React.FC = React.memo(() => {
+  //#region store imports
+
+  //#region tabstore imports
   const attributeId = useTabStore((state) => state.attributeId);
   const modelId = useTabStore((state) => state.modelId);
+  const isModelPropertyShowing = useTabStore(
+    (state) => state.isModelPropertyShowing
+  );
+  //#endregion
+
+  //#region useModelNodesStore imports
   const currentNode = useModelNodesStore((state) => state.currentNode);
   const getConnectedTargetNodeAndEdgeIdByHandle = useModelNodesStore(
     (state) => state.getConnectedTargetNodeAndEdgeIdByHandle
   );
-
-  const getCodeById = useCodeListStore((state) => state.getCodeById);
-
-  const isModelPropertyShowing = useTabStore(
-    (state) => state.isModelPropertyShowing
-  );
-
   const removeEdge = useModelNodesStore((state) => state.removeEdge);
   const removeNodeById = useModelNodesStore((state) => state.removeNodeById);
+  //#endregion
 
+  //#region useModelStore imports
   const properties = useModelStore(
     useCallback(
       (state) => state.getAttributeProperties(modelId, attributeId),
       [modelId, attributeId]
     )
   );
-
-  console.log("properties", properties);
-
   const updatePropertyCurrentValue = useModelStore(
     (state) => state.updatePropertyCurrentValue
   );
@@ -55,6 +56,11 @@ export const DynamicProperties: React.FC = React.memo(() => {
   );
 
   const getModelById = useModelStore((state) => state.getModelById);
+  //#endregion
+
+  const getCodeById = useCodeListStore((state) => state.getCodeById);
+
+  //#endregion
 
   if (!properties) return;
   const handleUpdatePropValueToStore = (propId: any, newValue: any) => {

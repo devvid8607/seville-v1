@@ -1,7 +1,7 @@
 import { Box, TextField, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import useModelBackendStore from "../../store/modelStore/ModelBackEndStore";
-import { canvasHeader } from "../../types/SevilleSchema";
+import useModelBackendStore from "../../modelCreator/nonRouted/store/modelStore/ModelBackEndStore";
+import { canvasHeader } from "../../modelCreator/nonRouted/types/SevilleSchema";
 // import useFlowBackendStore from "../newValueChangesFlow/FlowStore/FlowBackEndStore";
 // import { useLocation } from "react-router-dom";
 
@@ -10,11 +10,13 @@ type EditableContentProps = {
     event: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => void;
   header: canvasHeader;
+  onUpdateHeader: (newHeader: { canvasName: string }) => void;
 };
 
 export const EditableContent: React.FC<EditableContentProps> = ({
   onShowProperties,
   header,
+  onUpdateHeader,
 }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [text, setText] = useState(header.canvasName || "Edit Me");
@@ -31,9 +33,10 @@ export const EditableContent: React.FC<EditableContentProps> = ({
 
   const handleBlur = () => {
     setIsEditing(false);
+    onUpdateHeader({ canvasName: text });
     //console.log("pathname", location.pathname);
     // if (location.pathname === "/test/Index/ModelCreator")
-    updateHeader({ canvasName: text });
+    // updateHeader({ canvasName: text });
     // else flowUpdateHeader({ canvasName: text });
   };
 

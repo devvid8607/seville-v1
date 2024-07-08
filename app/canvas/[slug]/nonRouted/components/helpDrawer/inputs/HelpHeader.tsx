@@ -5,7 +5,7 @@ import {
 } from "@mui/icons-material";
 import { Box, IconButton, Typography } from "@mui/material";
 
-import { useHelpStore } from "../Store/HelpDrawerStore";
+import { useHelpStore } from "../store/HelpDrawerStore";
 
 export const HelpHeader = () => {
   const { setIsHelpDrawerOpen } = useHelpStore((state) => ({

@@ -16,7 +16,7 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import codeListData from "../../../../dummyData/CodeListData.json";
+import codeListData from "../../../../nonRouted/dummyData/CodeListData.json";
 
 interface CodeBodyProps {
   dataSourceId: string;

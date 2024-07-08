@@ -17,11 +17,12 @@ import {
 import useModelStore, {
   Model,
 } from "../../../store/modelStore/ModelDetailsFromBackendStore";
-import useRecentlyTypedItemsInModel from "../../../store/RecentlyTypedItemsInModel";
+import useRecentlyTypedItemsInModel from "../../../../../nonRouted/store/RecentlyTypedItemsInModel";
 import { AddNewModelType } from "../../../types/AddNewModelType";
 import { ModelField } from "./ModelField";
-import { useCodeListStore } from "../../nodes/CodeListNode/Store/CodeListStore";
-import useDataTypesStore from "../../../store/DataTypesStore";
+import { useCodeListStore } from "../../../../../nonRouted/nodes/codeListNode/store/CodeListStore";
+
+import useDataTypesStore from "../../../../../nonRouted/store/DataTypesStore";
 
 interface ModelBodyProps {
   dataSourceId: string;
@@ -38,21 +39,47 @@ export const ModelBody: React.FC<ModelBodyProps> = ({
   loading,
   nodeId,
 }) => {
-  const [inputValue, setInputValue] = useState("");
-
+  // #region store imports
   const { recentFields, addRecentField } = useRecentlyTypedItemsInModel();
   const addAttributeToModel = useModelStore(
     (state) => state.addAttributeToModel
   );
-  const storeDataTypes = useDataTypesStore((state) => state.dataTypes);
-
-  const models = useModelStore((state) => state.models);
-  const codeLists = useCodeListStore((state) => state.codeLists);
-
   const fields = useModelStore((state) =>
     state.getModelAttributes(model?.modelId || "")
   );
+  const models = useModelStore((state) => state.models);
+  const storeDataTypes = useDataTypesStore((state) => state.dataTypes);
+  const codeLists = useCodeListStore((state) => state.codeLists);
+  // #endregion
 
+  // #region state variables
+  const suggestions = useMemo(() => {
+    const modelSuggestions = models.map((model) => ({
+      label: model.modelFriendlyName ? model.modelFriendlyName : "",
+      id: model.modelId,
+      name: model.modelName,
+      category: "Model",
+      dataType: "model",
+    }));
+
+    const codeListSuggestions = codeLists.map((model) => ({
+      label: model.name ? model.name : "",
+      id: model.id,
+      name: model.name,
+      category: "Code List",
+      dataType: "codeList",
+    }));
+
+    return [...recentFields, ...modelSuggestions, ...codeListSuggestions];
+  }, [recentFields, models, codeLists]);
+
+  const CustomPopper = (props: PopperProps) => {
+    return <Popper {...props} placement="bottom-start" />;
+  };
+  const [inputValue, setInputValue] = useState("");
+  // #endregion
+
+  //#region event handlers
   const handleAddField = (fieldName: string) => {
     const newField = createAttributeData(fieldName);
     if (model) addAttributeToModel(model.modelId, newField);
@@ -78,31 +105,8 @@ export const ModelBody: React.FC<ModelBodyProps> = ({
     });
     setInputValue("");
   };
+  //#endregion
 
-  const suggestions = useMemo(() => {
-    const modelSuggestions = models.map((model) => ({
-      label: model.modelFriendlyName ? model.modelFriendlyName : "",
-      id: model.modelId,
-      name: model.modelName,
-      category: "Model",
-      dataType: "model",
-    }));
-
-    const codeListSuggestions = codeLists.map((model) => ({
-      label: model.name ? model.name : "",
-      id: model.id,
-      name: model.name,
-      category: "Code List",
-      dataType: "codeList",
-    }));
-
-    return [...recentFields, ...modelSuggestions, ...codeListSuggestions];
-  }, [recentFields, models, codeLists]);
-
-  const CustomPopper = (props: PopperProps) => {
-    return <Popper {...props} placement="bottom-start" />;
-  };
-  console.log("loading", loading);
   return (
     model && (
       <Box>

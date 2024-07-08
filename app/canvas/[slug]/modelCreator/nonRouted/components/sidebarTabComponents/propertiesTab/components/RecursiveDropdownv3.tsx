@@ -14,7 +14,9 @@ import React, {
   useCallback,
   useLayoutEffect,
 } from "react";
-import useDataTypesStore, { DataType } from "../../../../store/DataTypesStore";
+import useDataTypesStore, {
+  DataType,
+} from "../../../../../../nonRouted/store/DataTypesStore";
 
 import { v4 as uuidv4 } from "uuid";
 import { SmallCheckbox } from "./SmallCheckBox";
@@ -28,10 +30,10 @@ import { SmallSwitch } from "./SmallSwitch";
 import { SmallTextField } from "./SmallTextField";
 import { SmallToggleButton } from "./SmallToggleButton";
 import { useModelNodesStore } from "../../../../store/modelStore/ModelNodesStore";
-import { useTabStore } from "../../../../store/TabStateManagmentStore";
+import { useTabStore } from "../../../../../../nonRouted/store/TabStateManagmentStore";
 import useModelStore from "../../../../store/modelStore/ModelDetailsFromBackendStore";
 import { CodeListDropdown } from "./CodeListDropdown";
-import { useCodeListStore } from "../../../nodes/CodeListNode/Store/CodeListStore";
+import { useCodeListStore } from "../../../../../../nonRouted/nodes/codeListNode/store/CodeListStore";
 export type SmallListDropdownProps = {
   id: string;
   label: string;

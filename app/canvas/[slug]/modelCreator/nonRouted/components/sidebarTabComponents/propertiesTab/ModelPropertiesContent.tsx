@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useTabStore } from "../../../store/TabStateManagmentStore";
+import { useTabStore } from "../../../../../nonRouted/store/TabStateManagmentStore";
 import useModelStore from "../../../store/modelStore/ModelDetailsFromBackendStore";
 import { Box, Paper, TextField, Typography } from "@mui/material";
 

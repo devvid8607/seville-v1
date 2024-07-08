@@ -2,7 +2,7 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { v4 as uuidv4 } from "uuid";
 
-import { useTabStore } from "../../../store/TabStateManagmentStore";
+import { useTabStore } from "../../../../../nonRouted/store/TabStateManagmentStore";
 import {
   createModelData,
   getAttributeIdFromHandle,
@@ -12,11 +12,12 @@ import {
 import { useModelNodesStore } from "../../../store/modelStore/ModelNodesStore";
 import { createModelNode } from "../../../helpers/createModelNode";
 import useModelStore from "../../../store/modelStore/ModelDetailsFromBackendStore";
-import propertiesData from "../../../dummyData/typeProperties.json";
+import propertiesData from "../../../../../nonRouted/dummyData/typeProperties.json";
 import { Box } from "@mui/material";
 import { SmallModelDropdown } from "../../sidebarTabComponents/propertiesTab/components/SmallModelDropDown";
 
 export const AddModelCodeContextMenu = () => {
+  // #region store imports
   const { showContextMenu, setShowContextMenu, menuPosition, handleId } =
     useTabStore((state) => ({
       showContextMenu: state.showContextMenu,
@@ -24,12 +25,9 @@ export const AddModelCodeContextMenu = () => {
       menuPosition: state.menuPosition,
       handleId: state.handleId,
     }));
+
+  // #region useModelStore imports
   const addModelToStore = useModelStore((state) => state.addModelToStore);
-
-  const getNodeById = useModelNodesStore((state) => state.getNodeById);
-
-  const addNode = useModelNodesStore((state) => state.addNode);
-  const addEdge = useModelNodesStore((state) => state.addEdge);
   const updatePropertyCurrentValue = useModelStore(
     (state) => state.updatePropertyCurrentValue
   );
@@ -39,13 +37,36 @@ export const AddModelCodeContextMenu = () => {
   const updateProperties = useModelStore((state) => state.updateProperties);
   const getModelById = useModelStore((state) => state.getModelById);
   const cloneModel = useModelStore((state) => state.cloneModel);
-  const removeNodeAndDescendants = useModelNodesStore(
-    (state) => state.removeNodeAndDescendants
-  );
+  // #endregion
 
-  const removeIncomingEdgesByNodeId = useModelNodesStore(
-    (state) => state.removeIncomingEdgesByNodeId
-  );
+  // #region useModelNodeStore imports
+  const getNodeById = useModelNodesStore((state) => state.getNodeById);
+
+  const addNode = useModelNodesStore((state) => state.addNode);
+  const addEdge = useModelNodesStore((state) => state.addEdge);
+  // #endregion
+
+  // #endregion
+
+  const dropdownprop: any = {
+    id: "1",
+    type: "modeldropdown",
+    label: "Default",
+    tooltip: "Default Value",
+    placeholder: "",
+    visible: true,
+    required: true,
+    enabled: true,
+    size: "small",
+    defaultValue: "",
+    currentValue: "",
+    propertyName: "defaultValue",
+
+    config: {
+      fromApi: true,
+      ApiURL: "",
+    },
+  };
 
   const handleClose = () => {
     setShowContextMenu(false); // Hide the context menu
@@ -139,26 +160,6 @@ export const AddModelCodeContextMenu = () => {
     } else {
       console.log("No handleId provided."); // Inform if the initial handleId is missing or undefined
     }
-  };
-
-  const dropdownprop: any = {
-    id: "1",
-    type: "modeldropdown",
-    label: "Default",
-    tooltip: "Default Value",
-    placeholder: "",
-    visible: true,
-    required: true,
-    enabled: true,
-    size: "small",
-    defaultValue: "",
-    currentValue: "",
-    propertyName: "defaultValue",
-
-    config: {
-      fromApi: true,
-      ApiURL: "",
-    },
   };
 
   const handleModelChangeDropDown = (newValue: string) => {

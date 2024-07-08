@@ -1,10 +1,10 @@
 import { NodeStructure } from "../../../../../../FlowStore/FlowNodeStructureStore";
 import { NodeStructureOutput } from "../../../../../../FlowTypes/SevilleSchema";
 import { Variable } from "../../../../ContextDataNode/Store/CommonStoreType";
-import { DataType } from "../../../Store/DataTypeStore";
-import { Model } from "../../../Store/ModelDetailsFromBackendStore";
-import { FieldType } from "../../../Types/FieldType";
-import { DropTypes, TreeDataType } from "./SevilleTreeTypes/TreeTypes";
+import { DataType } from "@/app/canvas/[slug]/nonRouted/store/DataTypesStore";
+import { Model } from "../../../../store/modelStore/ModelDetailsFromBackendStore";
+import { FieldType } from "../../../../types/FieldType";
+import { DropTypes, TreeDataType } from "./sevilleTreeTypes/TreeTypes";
 import { v4 as uuidv4 } from "uuid";
 
 export const transformModelsToTreeData = (
@@ -89,6 +89,24 @@ export const transformModelsToTreeData = (
       ),
     };
   });
+};
+
+export const transformDataTypesToTreeData = (
+  types: DataType[]
+): TreeDataType[] => {
+  return types.map((type) => ({
+    id: type.id,
+    parentId: null,
+    parentName: null,
+    title: type.name,
+    name: type.code,
+    children: [],
+    isOpen: false,
+    type: type.code,
+    draggable: true,
+    properties: type.properties,
+    dropType: DropTypes.DataType,
+  }));
 };
 
 // Helper function to transform the store data to the TreeDataType structure
@@ -375,24 +393,6 @@ export const transformDetailedModelToTreeData = (
   });
 
   return treeData;
-};
-
-export const transformDataTypesToTreeData = (
-  types: DataType[]
-): TreeDataType[] => {
-  return types.map((type) => ({
-    id: type.id,
-    parentId: null,
-    parentName: null,
-    title: type.name,
-    name: type.code,
-    children: [],
-    isOpen: false,
-    type: type.code,
-    draggable: true,
-    properties: type.properties,
-    dropType: DropTypes.DataType,
-  }));
 };
 
 // export const getModelTree = (

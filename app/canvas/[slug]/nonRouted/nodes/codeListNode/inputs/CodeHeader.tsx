@@ -2,11 +2,11 @@ import { DragHandleOutlined, LockOpen } from "@mui/icons-material";
 import { Box, IconButton, TextField, Tooltip, Typography } from "@mui/material";
 import React from "react";
 import * as MuiIcons from "@mui/icons-material";
-import { useCodeListStore } from "../Store/CodeListStore";
+import { useCodeListStore } from "../store/CodeListStore";
 
-import { CodeNodeContextMenu } from "./CodeNodeContextMenu";
-import { useCodeUIStore } from "../Store/CodeUIStore";
-import { useModelNodesStore } from "../../../../store/modelStore/ModelNodesStore";
+import { CodeNodeContextMenu } from "../../../../modelCreator/nonRouted/components/nodes/codeListNode/inputs/CodeNodeContextMenu";
+import { useCodeUIStore } from "../store/CodeUIStore";
+import { useModelNodesStore } from "../../../../modelCreator/nonRouted/store/modelStore/ModelNodesStore";
 import { Edge } from "reactflow";
 
 interface CodeHeaderProps {

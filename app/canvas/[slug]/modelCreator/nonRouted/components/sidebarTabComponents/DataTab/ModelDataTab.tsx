@@ -7,7 +7,7 @@ import {
 import TreeView from "./customTreeView/TreeView";
 import useCustomTreeStore from "./customTreeView/customTreeStore/CustomTreeStore";
 
-import useDataTypesStore from "../../../store/DataTypesStore";
+import useDataTypesStore from "../../../../../nonRouted/store/DataTypesStore";
 
 export const ModelDataTab = () => {
   const models = useModelStore((state) => state.models);

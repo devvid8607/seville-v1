@@ -1,7 +1,7 @@
 import { Box, IconButton, List, TextField, Tooltip } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import { DragDataType } from "../../../../../Constants/transferType";
-import { TreeDataType } from "./SevilleTreeTypes/TreeTypes";
+import { TreeDataType } from "./sevilleTreeTypes/TreeTypes";
 import TreeNode from "./TreeNode";
 import { AddBox, IndeterminateCheckBox } from "@mui/icons-material";
 import useCustomTreeStore from "./customTreeStore/CustomTreeStore";

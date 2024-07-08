@@ -1,8 +1,8 @@
 import React from "react";
-import { useHelpStore } from "./Store/HelpDrawerStore";
+import { useHelpStore } from "./store/HelpDrawerStore";
 import { Box, Drawer } from "@mui/material";
-import { HelpHeader } from "./Inputs/HelpHeader";
-import { HelpContent } from "./Inputs/HelpContent";
+import { HelpHeader } from "./inputs/HelpHeader";
+import { HelpContent } from "./inputs/HelpContent";
 
 export const HelpDrawer = () => {
   const { isHelpDrawerOpen, setIsHelpDrawerOpen } = useHelpStore((state) => ({

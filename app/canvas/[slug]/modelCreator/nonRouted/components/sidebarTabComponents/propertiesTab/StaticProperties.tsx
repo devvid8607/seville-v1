@@ -11,33 +11,39 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useCallback, useState, useEffect } from "react";
-import { useTabStore } from "../../../store/TabStateManagmentStore";
+import { useTabStore } from "../../../../../nonRouted/store/TabStateManagmentStore";
 import useModelStore from "../../../store/modelStore/ModelDetailsFromBackendStore";
 // import dataTypeDataDromJSON from "../../SidebarTabComponents/PropertiesTab/Data/DataTypes.json";
-import { IconLookup, iconLookup } from "../../../constants/IconConstants";
+import {
+  IconLookup,
+  iconLookup,
+} from "../../../../../nonRouted/constants/IconConstants";
 import { FieldType } from "../../../types/FieldType";
 import { ModelPropertiesContent } from "./ModelPropertiesContent";
-import useDataTypesStore from "../../../store/DataTypesStore";
+import useDataTypesStore from "../../../../../nonRouted/store/DataTypesStore";
 import { useModelNodesStore } from "../../../store/modelStore/ModelNodesStore";
 
 export const StaticProperties: React.FC = () => {
+  //#region store imports
+
+  //#region tabstore imports
   const attributeId = useTabStore((state) => state.attributeId);
   const modelId = useTabStore((state) => state.modelId);
+  const isModelPropertyShowing = useTabStore(
+    (state) => state.isModelPropertyShowing
+  );
+  //#endregion
+
+  //#region useModelNodesStore imports
   const currentNode = useModelNodesStore((state) => state.currentNode);
   const getConnectedTargetNodeAndEdgeIdByHandle = useModelNodesStore(
     (state) => state.getConnectedTargetNodeAndEdgeIdByHandle
   );
   const removeEdge = useModelNodesStore((state) => state.removeEdge);
   const removeNodeById = useModelNodesStore((state) => state.removeNodeById);
+  //#endregion
 
-  const { storeDataTypes } = useDataTypesStore((state) => ({
-    storeDataTypes: state.dataTypes,
-  }));
-
-  const isModelPropertyShowing = useTabStore(
-    (state) => state.isModelPropertyShowing
-  );
-
+  //#region useModelStore imports
   const updateAttributeValueOfAModel = useModelStore(
     (state) => state.updateAttributeValueOfAModel
   );
@@ -50,7 +56,28 @@ export const StaticProperties: React.FC = () => {
       [modelId, attributeId]
     )
   );
+  //#endregion
 
+  const { storeDataTypes } = useDataTypesStore((state) => ({
+    storeDataTypes: state.dataTypes,
+  }));
+
+  //#endregion
+
+  //#region state vars and useeffect
+  const [name, setName] = useState(attribute?.name || "");
+  const [friendlyName, setFriendlyName] = useState(
+    attribute?.friendlyName || ""
+  );
+  const [description, setDescription] = useState(attribute?.description || "");
+  useEffect(() => {
+    setName(attribute?.name || "");
+    setFriendlyName(attribute?.friendlyName || "");
+    setDescription(attribute?.description || "");
+  }, [attribute]);
+  //#endregion
+
+  //#region event handlers
   const handleCheckboxChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       const { name, checked } = event.target;
@@ -129,17 +156,6 @@ export const StaticProperties: React.FC = () => {
       }
     };
 
-  const [name, setName] = useState(attribute?.name || "");
-  const [friendlyName, setFriendlyName] = useState(
-    attribute?.friendlyName || ""
-  );
-  const [description, setDescription] = useState(attribute?.description || "");
-  useEffect(() => {
-    setName(attribute?.name || "");
-    setFriendlyName(attribute?.friendlyName || "");
-    setDescription(attribute?.description || "");
-  }, [attribute]);
-
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
   };
@@ -160,6 +176,7 @@ export const StaticProperties: React.FC = () => {
       "description",
       description
     );
+  //#endregion
 
   return !isModelPropertyShowing ? (
     <Box>
@@ -172,8 +189,6 @@ export const StaticProperties: React.FC = () => {
             <TextField
               required
               size="small"
-              // value={attribute?.name}
-              // onChange={handlePropertyChange("name")}
               value={name}
               onChange={handleNameChange}
               onBlur={handleNameBlur}
@@ -287,14 +302,6 @@ export const StaticProperties: React.FC = () => {
                 displayEmpty
                 inputProps={{ "aria-label": "Without label" }}
               >
-                {/* <MenuItem value="text">Text</MenuItem>
-              <MenuItem value="number">Number</MenuItem>
-              <MenuItem value="boolean">Boolean</MenuItem>
-              <MenuItem value="uiTest">Test UI</MenuItem>
-              <MenuItem value="email">Email Address</MenuItem>
-              <MenuItem value="date">DateTime</MenuItem>
-              <MenuItem value="code">CodeList</MenuItem>
-              <MenuItem value="model">Model</MenuItem> */}
                 {storeDataTypes.map((type) => (
                   <MenuItem key={type.id} value={type.code}>
                     {type.name}

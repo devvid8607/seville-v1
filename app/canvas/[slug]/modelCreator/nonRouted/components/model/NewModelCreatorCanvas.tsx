@@ -1,9 +1,11 @@
+// #region Imports
 import { Box, Typography } from "@mui/material";
 import React, { DragEvent, memo, useCallback, useEffect } from "react";
 import {
   Background,
   BackgroundVariant,
   Controls,
+  EdgeTypes,
   MiniMap,
   Node,
   NodeTypes,
@@ -16,60 +18,90 @@ import {
 import "reactflow/dist/style.css";
 
 import { DeleteForeverOutlined } from "@mui/icons-material";
-import { EditableContent } from "../common/EditableContent";
-import SevilleToolbarNode from "../nodes/FlowComponents/FlowToolbar";
+import { EditableContent } from "../../../../nonRouted/components/EditableContent";
+import SevilleToolbarNode from "../../../../nonRouted/nodes/flowComponents/FlowToolbar";
 import { createSavedModelEdgesFromJSON } from "../../helpers/createSavedModelEdgesFromJSON";
 import { createSavedModelNodesfromJSON } from "../../helpers/createSavedModelNodesfromJSON";
-import { HelpDrawer } from "../common/HelpDrawer/HelpDrawer";
-// import { MappingDrawer } from "../FlowMappingDrawer/MappingDrawer";
-import { CanvasFixedRightSideBar } from "../CanvasFixedRightSideBar/CanvasFixedRightSideBar";
-import CustomEdge from "../Edges/ButtonEdge";
+import { HelpDrawer } from "../../../../nonRouted/components/helpDrawer/HelpDrawer";
+import { CanvasFixedRightSideBar } from "../canvasFixedRightSideBar/CanvasFixedRightSideBar";
+
 import { useCreateSavedModelNodesFromJSON } from "../../helpers/createSavedModelNodesFromJSONNodeFormat";
 import { AddModelCodeContextMenu } from "./modelInputs/AddModelCodeContextMenu";
 import useModelBackendStore from "../../store/modelStore/ModelBackEndStore";
 import useModelStore from "../../store/modelStore/ModelDetailsFromBackendStore";
 import { useModelNodesStore } from "../../store/modelStore/ModelNodesStore";
-import { useTabStore } from "../../store/TabStateManagmentStore";
-import CustomBreadcrumbs from "@/app/nonRouted/components/Breadcrumbs";
+import { useTabStore } from "../../../../nonRouted/store/TabStateManagmentStore";
 import NextBreadcrumb from "@/app/nonRouted/components/Breadcrumbs";
+import {
+  saveModelCanvasNodes,
+  saveModelEdges,
+} from "../../helpers/saveModelCanvas";
+// #endregion
 
+// #region types
 interface ReactFlowBoxProps {
   wrapperRef: React.RefObject<HTMLDivElement>;
   onInit: (instance: any) => void;
   nodeTypes: NodeTypes;
   rfInstance: ReactFlowInstance;
+  edgeTypes: EdgeTypes;
 }
 
-const edgeTypes = {
-  buttonedge: CustomEdge,
+type CanvasHeader = {
+  canvasName: string;
 };
+// #endregion
 
 export const NewModelCreatorCanvas = memo(
-  ({ wrapperRef, onInit, rfInstance, nodeTypes }: ReactFlowBoxProps) => {
+  ({
+    wrapperRef,
+    onInit,
+    rfInstance,
+    nodeTypes,
+    edgeTypes,
+  }: ReactFlowBoxProps) => {
+    // #region ModelNodesStore Imports
     const nodes = useModelNodesStore((state) => state.nodes);
     const edges = useModelNodesStore((state) => state.edges);
     const onNodesChange = useModelNodesStore((state) => state.onNodesChange);
-    const onEdgesChange = useModelNodesStore((state) => state.onEdgesChange);
     const onConnect = useModelNodesStore((state) => state.onConnect);
     const onConnectEnd = useModelNodesStore((state) => state.onConnectEnd);
     const onConnectStart = useModelNodesStore((state) => state.onConnectStart);
     const setCurrentNode = useModelNodesStore((state) => state.setCurrentNode);
+    const clearAllNodesDataInStore = useModelNodesStore(
+      (state) => state.clearAllNodesDataInStore
+    );
+    const clearAllEdgedDataInStore = useModelNodesStore(
+      (state) => state.clearAllEdgedDataInStore
+    );
+    // #endregion
 
-    const setActiveTabIndex = useTabStore((state) => state.setActiveTabIndex);
-    const setSliderOpen = useTabStore((state) => state.setSliderOpen);
-    const showMiniMap = useTabStore((state) => state.showMiniMap);
-
-    const models = useModelStore((state) => state.models);
-    const { setCenter, getNode } = useReactFlow();
-
+    // #region ModelModelBackend Imports
+    const savedNodes = useModelBackendStore((state) => state.savedNodes);
+    const updateHeader = useModelBackendStore((state) => state.updateHeader);
+    const savedEdges = useModelBackendStore((state) => state.savedEdges);
     const savedModelNodes = useModelBackendStore(
       (state) => state.savedModelNodes
     );
+    const fetchInitialSchema = useModelBackendStore(
+      (state) => state.fetchInitialSchema
+    );
+    const { header } = useModelBackendStore();
+    // #endregion
 
-    const savedNodes = useModelBackendStore((state) => state.savedNodes);
+    // #region useTabStore Imports
+    const setActiveTabIndex = useTabStore((state) => state.setActiveTabIndex);
+    const setSliderOpen = useTabStore((state) => state.setSliderOpen);
+    const showMiniMap = useTabStore((state) => state.showMiniMap);
+    // #endregion
 
-    const savedEdges = useModelBackendStore((state) => state.savedEdges);
+    // #region useModelStore Imports
+    const models = useModelStore((state) => state.models);
+    // #endregion
 
+    const { setCenter, getNode } = useReactFlow();
+
+    // #region event handlers
     const handleOnDragOver = (event: DragEvent<HTMLDivElement>) => {
       event.preventDefault();
     };
@@ -92,7 +124,6 @@ export const NewModelCreatorCanvas = memo(
       setActiveTabIndex(0);
       setSliderOpen(true);
     };
-    const { header } = useModelBackendStore();
 
     const handleMiniMapNodeClick = (event: React.MouseEvent, node: Node) => {
       const clickedNode = getNode(node.id);
@@ -113,6 +144,35 @@ export const NewModelCreatorCanvas = memo(
       setCenter(position.x, position.y, { zoom: 0.6 });
     };
 
+    const handleUpdateHeader = (newHeader: CanvasHeader) => {
+      updateHeader(newHeader);
+    };
+
+    const handleSave = () => {
+      const savedNodes = saveModelCanvasNodes();
+      const savedEdges = saveModelEdges();
+      console.log("Combined Nodes Data Model:", savedNodes);
+      console.log("Combined Edges Data Model:", savedEdges);
+      console.log(
+        "models data:",
+        models.filter((model) => model.isUpdated)
+      );
+    };
+
+    const handleReset = () => {
+      const loadSchema = async () => {
+        await fetchInitialSchema();
+      };
+      clearAllEdgedDataInStore();
+      clearAllNodesDataInStore();
+      // clearModels();
+      loadSchema();
+      console.log("savedmodelitems", savedModelNodes);
+      useCreateSavedModelNodesFromJSON(savedModelNodes);
+    };
+    // #endregion
+
+    // #region useEffects
     useEffect(() => {
       console.log("in initial user use effect");
       useCreateSavedModelNodesFromJSON(savedModelNodes);
@@ -121,18 +181,12 @@ export const NewModelCreatorCanvas = memo(
     useEffect(() => {
       console.log("in initial user use effect");
       createSavedModelNodesfromJSON(savedNodes);
-
-      // if (savedEdges) createSavedEdgesFromJSON(savedEdges);
     }, [savedNodes]);
 
     useEffect(() => {
       createSavedModelEdgesFromJSON(savedEdges);
     }, [savedEdges]);
-
-    // useEffect(() => {
-    //   console.log("in initial user use effect");
-    //   useCreateSavedNodesFromJSON(savedNodes);
-    // }, [savedNodes]);
+    // #endregion
 
     return (
       <Box ref={wrapperRef} style={{ height: "100vh", width: "100vw" }}>
@@ -161,6 +215,7 @@ export const NewModelCreatorCanvas = memo(
               <EditableContent
                 onShowProperties={handleShowProperties}
                 header={header}
+                onUpdateHeader={handleUpdateHeader}
               />
             </Box>
           </Panel>
@@ -177,7 +232,8 @@ export const NewModelCreatorCanvas = memo(
                 showHideItemsOption={false}
                 showHideOutputOption={false}
                 showHideContextDataOption={false}
-                onSave={() => alert("save")}
+                onSave={handleSave}
+                onReset={handleReset}
               />
             </Box>
           </Panel>
@@ -207,9 +263,7 @@ export const NewModelCreatorCanvas = memo(
 
           <Background color="#ccc" variant={BackgroundVariant.Dots} />
         </ReactFlow>
-
         <AddModelCodeContextMenu />
-        {/* <MappingDrawer />  */}
       </Box>
     );
   }

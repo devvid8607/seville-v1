@@ -10,11 +10,6 @@ import {
 import "./buttonedge.css";
 import { useModelNodesStore } from "../../store/modelStore/ModelNodesStore";
 
-// const onEdgeClick = (evt, id) => {
-//   evt.stopPropagation();
-//   alert(`remove ${id}`);
-// };
-
 export default function CustomEdge({
   id,
   sourceX,

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { NewModelCreator } from "./nonRouted/components/model/NewModelCreator";
-import useDataTypesStore from "./nonRouted/store/DataTypesStore";
+import useDataTypesStore from "../nonRouted/store/DataTypesStore";
 import useModelBackendStore from "./nonRouted/store/modelStore/ModelBackEndStore";
 import useModelStore from "./nonRouted/store/modelStore/ModelDetailsFromBackendStore";
 import { useModelNodesStore } from "./nonRouted/store/modelStore/ModelNodesStore";

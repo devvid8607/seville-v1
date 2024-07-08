@@ -16,16 +16,19 @@ import {
 import { memo, useEffect } from "react";
 import { useUpdateNodeInternals } from "reactflow";
 import { v4 as uuidv4 } from "uuid";
-import { iconLookup, IconLookup } from "../../../constants/IconConstants";
+import {
+  iconLookup,
+  IconLookup,
+} from "../../../../../nonRouted/constants/IconConstants";
 import { createModelNode } from "../../../helpers/createModelNode";
 
 import useModelStore from "../../../store/modelStore/ModelDetailsFromBackendStore";
 import { useModelNodesStore } from "../../../store/modelStore/ModelNodesStore";
-import { useTabStore } from "../../../store/TabStateManagmentStore";
+import { useTabStore } from "../../../../../nonRouted/store/TabStateManagmentStore";
 import { FieldType } from "../../../types/FieldType";
 import { HandleWrapper } from "./HandleWrapper";
 import React, { useState } from "react";
-import useDataTypesStore from "../../../store/DataTypesStore";
+import useDataTypesStore from "../../../../../nonRouted/store/DataTypesStore";
 import { getAttributeIdFromHandle } from "../../../helpers/createModelData";
 
 export const ModelField = memo(
@@ -38,6 +41,7 @@ export const ModelField = memo(
     modelId: string;
     nodeId: string;
   }) => {
+    // #region consts and state variables
     const {
       name,
       locked,
@@ -51,12 +55,19 @@ export const ModelField = memo(
       dataSourceFriendlyName,
     } = field;
 
-    console.log(dataType);
-
     const iconValue =
       iconLookup[dataType as keyof IconLookup] || "QuestionMarkOutlined";
     const IconComponent = MuiIcons[iconValue as keyof typeof MuiIcons];
 
+    const [draggedId, setDraggedId] = useState<string | null>(null);
+    const [overId, setOverId] = useState<string | null>(null);
+    const [dragPosition, setDragPosition] = useState<"above" | "below" | null>(
+      null
+    );
+    // #endregion
+
+    // #region store imports
+    // #region usemodelstore imports
     const getModelById = useModelStore((state) => state.getModelById);
     const getAttributeById = useModelStore((state) => state.getAttributeById);
     const updateAttributeValueOfAModel = useModelStore(
@@ -71,7 +82,9 @@ export const ModelField = memo(
     );
     const reorderAttributes = useModelStore((state) => state.reorderAttributes);
     const removeAttribute = useModelStore((state) => state.removeAttribute);
+    // #endregion
 
+    // #region usetabstore imports
     const setActiveTabIndex = useTabStore((state) => state.setActiveTabIndex);
     const setSliderOpen = useTabStore((state) => state.setSliderOpen);
     const sliderOpen = useTabStore((state) => state.sliderOpen);
@@ -81,11 +94,9 @@ export const ModelField = memo(
     const setIsModelPropertyShowing = useTabStore(
       (state) => state.setIsModelPropertyShowing
     );
+    // #endregion
 
-    const { storeDataTypes } = useDataTypesStore((state) => ({
-      storeDataTypes: state.dataTypes,
-    }));
-
+    // #region useModelNodesStore imports
     const addNode = useModelNodesStore((state) => state.addNode);
     const addEdge = useModelNodesStore((state) => state.addEdge);
     const getConnectedTargetNodeAndEdgeIdByHandle = useModelNodesStore(
@@ -97,9 +108,17 @@ export const ModelField = memo(
     const removeNodeAndDescendants = useModelNodesStore(
       (state) => state.removeNodeAndDescendants
     );
+    // #endregion
+
+    const { storeDataTypes } = useDataTypesStore((state) => ({
+      storeDataTypes: state.dataTypes,
+    }));
 
     const updateNodeInternals = useUpdateNodeInternals();
 
+    // #endregion
+
+    // #region event handlers
     const handleSingleClick = (key: string, dataType: string) => {
       setIsModelPropertyShowing(false);
       setActiveTabIndex(1);
@@ -120,14 +139,14 @@ export const ModelField = memo(
     };
 
     const toggleShowModel = (handleId: string) => {
-      console.log("handleid", handleId);
+      // console.log("handleid", handleId);
       const { edgeId } = getConnectedTargetNodeAndEdgeIdByHandle(
         nodeId,
         handleId
       );
 
       if (!edgeId && dataSourceId && dataSourceFriendlyName) {
-        console.log("no edge id", modelId, attributeId);
+        // console.log("no edge id", modelId, attributeId);
         //add edge and node
         const currentNode = getNodeById(nodeId);
         const newNodeId = uuidv4();
@@ -136,7 +155,7 @@ export const ModelField = memo(
         let attributeAtWork;
         if (currentAttrId)
           attributeAtWork = getAttributeById(modelId, currentAttrId);
-        console.log("attratwork", attributeAtWork);
+        // console.log("attratwork", attributeAtWork);
 
         if (
           dataType === "list" &&
@@ -144,7 +163,7 @@ export const ModelField = memo(
           attributeAtWork.childDataType &&
           attributeAtWork.childDataType === "model"
         ) {
-          console.log("path 1");
+          // console.log("path 1");
           newNode = createModelNode(
             newNodeId,
             dataSourceId,
@@ -159,7 +178,7 @@ export const ModelField = memo(
           attributeAtWork.childDataType &&
           attributeAtWork.childDataType === "codeList"
         ) {
-          console.log("path 2");
+          // console.log("path 2");
           newNode = createModelNode(
             newNodeId,
             dataSourceId,
@@ -169,7 +188,7 @@ export const ModelField = memo(
           );
           addNode(newNode);
         } else if (dataType === "model") {
-          console.log("path 3");
+          // console.log("path 3");
           newNode = createModelNode(
             newNodeId,
             dataSourceId,
@@ -179,7 +198,7 @@ export const ModelField = memo(
           );
           addNode(newNode);
         } else if (dataType === "codeList") {
-          console.log("path 4");
+          // console.log("path 4");
           //create a code list node
           newNode = createModelNode(
             newNodeId,
@@ -215,7 +234,7 @@ export const ModelField = memo(
       if (currentModel) {
         const currentField = getAttributeById(modelId, id);
         if (currentField) {
-          console.log("currentfield", currentField);
+          // console.log("currentfield", currentField);
           updateAttributeValueOfAModel(
             modelId,
             id,
@@ -230,20 +249,11 @@ export const ModelField = memo(
       event.stopPropagation();
       if (isRemovable) removeAttribute(modelId, id);
     };
+
     const handleNotNullUpdate = (event: React.MouseEvent) => {
       event.stopPropagation();
       updateAttributeValueOfAModel(modelId, id, "notNull", !notNull);
     };
-
-    useEffect(() => {
-      updateNodeInternals(nodeId);
-    }, [nodeId, field, modelId]);
-
-    const [draggedId, setDraggedId] = useState<string | null>(null);
-    const [overId, setOverId] = useState<string | null>(null);
-    const [dragPosition, setDragPosition] = useState<"above" | "below" | null>(
-      null
-    );
 
     const handleDragStart = (
       event: React.DragEvent<HTMLDivElement>,
@@ -285,7 +295,7 @@ export const ModelField = memo(
       const sourceId = event.dataTransfer.getData("text/plain"); // Retrieve the dragged item's ID
       const targetId = id;
 
-      console.log(sourceId, targetId);
+      // console.log(sourceId, targetId);
 
       const model = getModelById(modelId);
       if (sourceId && modelId) {
@@ -295,6 +305,13 @@ export const ModelField = memo(
       setDraggedId(null);
       setOverId(null);
     };
+    // #endregion
+
+    // #region useeffect
+    useEffect(() => {
+      updateNodeInternals(nodeId);
+    }, [nodeId, field, modelId]);
+    // #endregion
 
     return (
       <React.Fragment key={field.id}>

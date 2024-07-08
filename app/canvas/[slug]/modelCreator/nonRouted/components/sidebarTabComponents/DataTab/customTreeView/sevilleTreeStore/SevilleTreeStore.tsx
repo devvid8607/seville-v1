@@ -1,5 +1,7 @@
+//its not used anywhere for now
+
 import { create } from "zustand";
-import { TreeDataType } from "../SevilleTreeTypes/TreeTypes";
+import { TreeDataType } from "../sevilleTreeTypes/TreeTypes";
 
 type TreeState = {
   data: TreeDataType[];

@@ -3,7 +3,8 @@ import { ReactFlowProvider } from "reactflow";
 
 import { ModelNode } from "./ModelNode";
 import { NewModelCreatorCanvas } from "./NewModelCreatorCanvas";
-import CodeListNode from "../nodes/CodeListNode/CodeListNode";
+import CodeListNode from "../../../../nonRouted/nodes/codeListNode/CodeListNode";
+import CustomEdge from "../edges/ButtonEdge";
 
 export const NewModelCreator = () => {
   const [rfInstance, setRfInstance] = useState<any | null>(null);
@@ -17,6 +18,13 @@ export const NewModelCreator = () => {
     []
   );
 
+  const edgeTypes = useMemo(
+    () => ({
+      buttonedge: CustomEdge,
+    }),
+    []
+  );
+
   return (
     <>
       <ReactFlowProvider>
@@ -25,6 +33,7 @@ export const NewModelCreator = () => {
           wrapperRef={reactFlowWrapper}
           onInit={setRfInstance}
           rfInstance={rfInstance}
+          edgeTypes={edgeTypes}
         />
       </ReactFlowProvider>
     </>

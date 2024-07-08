@@ -18,27 +18,21 @@ import { Box, IconButton, Tooltip } from "@mui/material";
 
 import { memo } from "react";
 // import { useLocation } from "react-router-dom";
-import { useViewport } from "reactflow";
+
 // import useFlowBackendStore from "../FlowStore/FlowBackEndStore";
 // import { useNodeStructureStore } from "../FlowStore/FlowNodeStructureStore";
 // import { useCreateSavedInitialUserNodesFromJSON } from "./Helpers/Canvas/createSaveInitialUserNodesFromJSON";
 // import { saveCanvasNodes, saveEdges } from "./Helpers/Canvas/saveCanvas";
-import {
-  saveModelCanvasNodes,
-  saveModelEdges,
-} from "../../../helpers/saveModelCanvas";
-import { useHelpStore } from "../../common/HelpDrawer/Store/HelpDrawerStore";
-// import { useMapStore } from "./Node/FlowMappingModelNode/Store/NewMappingModelStore";
-import { useCreateSavedModelNodesFromJSON } from "../../../helpers/createSavedModelNodesFromJSONNodeFormat";
 
-import useModelBackendStore from "../../../store/modelStore/ModelBackEndStore";
-import useModelStore from "../../../store/modelStore/ModelDetailsFromBackendStore";
-import { useModelNodesStore } from "../../../store/modelStore/ModelNodesStore";
-import { useTabStore } from "../../../store/TabStateManagmentStore";
+import { useHelpStore } from "../../components/helpDrawer/store/HelpDrawerStore";
+// import { useMapStore } from "./Node/FlowMappingModelNode/Store/NewMappingModelStore";
+
+import { useTabStore } from "../../store/TabStateManagmentStore";
 // import useRulesStore from "./Node/RuleNode/Store/RuleStore";
 
 interface ToolbarNodeProps {
   onSave: () => void;
+  onReset: () => void;
   showHideInputOption: boolean;
   showHideOutputOption: boolean;
   showHideContextDataOption: boolean;
@@ -52,6 +46,7 @@ const SevilleToolbarNode: React.FC<ToolbarNodeProps> = memo(
     showHideOutputOption,
     showHideContextDataOption,
     showHideItemsOption,
+    onReset,
   }) => {
     // const {
     //   nodes,
@@ -63,15 +58,12 @@ const SevilleToolbarNode: React.FC<ToolbarNodeProps> = memo(
     // const { initialSchemaItems, savedModelNodes } =
     //   useFlowBackendStore.getState();
 
-    const { savedModelNodes: savedModelItems } =
-      useModelBackendStore.getState();
     // const { resetNodeStructures } = useNodeStructureStore();
     // const { header } = useFlowBackendStore();
 
     // const { maps } = useMapStore();
-    const { x, y, zoom } = useViewport();
+
     // const location = useLocation();
-    const { models } = useModelStore.getState();
 
     const { setIsHelpDrawerOpen, isHelpDrawerOpen } = useHelpStore((state) => ({
       setIsHelpDrawerOpen: state.setIsHelpDrawerOpen,
@@ -82,18 +74,6 @@ const SevilleToolbarNode: React.FC<ToolbarNodeProps> = memo(
       setShowMiniMap: state.setShowMiniMap,
       showMiniMap: state.showMiniMap,
     }));
-    const clearAllNodesDataInStore = useModelNodesStore(
-      (state) => state.clearAllNodesDataInStore
-    );
-    const clearAllEdgedDataInStore = useModelNodesStore(
-      (state) => state.clearAllEdgedDataInStore
-    );
-    // const clearModels = useModelStore((state) => state.clearModels);
-
-    // const fetchModels = useModelStore((state) => state.fetchModels);
-    const fetchInitialSchema = useModelBackendStore(
-      (state) => state.fetchInitialSchema
-    );
 
     // const {
     //   rules,
@@ -115,18 +95,19 @@ const SevilleToolbarNode: React.FC<ToolbarNodeProps> = memo(
     //   setIsUpdated: state.setIsUpdated,
     // }));
 
-    const handleReset = () => {
+    const handleCanvasReset = () => {
+      onReset();
       //if (location.pathname === "/test/Index/ModelCreator") {
-      const loadSchema = async () => {
-        // await fetchModels();
-        await fetchInitialSchema();
-      };
-      clearAllEdgedDataInStore();
-      clearAllNodesDataInStore();
-      // clearModels();
-      loadSchema();
-      console.log("savedmodelitems", savedModelItems);
-      useCreateSavedModelNodesFromJSON(savedModelItems);
+      // const loadSchema = async () => {
+      //   // await fetchModels();
+      //   await fetchInitialSchema();
+      // };
+      // clearAllEdgedDataInStore();
+      // clearAllNodesDataInStore();
+      // // clearModels();
+      // loadSchema();
+      // console.log("savedmodelitems", savedModelItems);
+      // useCreateSavedModelNodesFromJSON(savedModelItems);
       // } else {
       //   resetToInitialNodes();
       //   resetNodeStructures();
@@ -150,15 +131,16 @@ const SevilleToolbarNode: React.FC<ToolbarNodeProps> = memo(
     // };
 
     const handleSave = () => {
+      onSave();
       // if (location.pathname === "/test/Index/ModelCreator") {
-      const savedNodes = saveModelCanvasNodes();
-      const savedEdges = saveModelEdges();
-      console.log("Combined Nodes Data Model:", savedNodes);
-      console.log("Combined Edges Data Model:", savedEdges);
-      console.log(
-        "models data:",
-        models.filter((model) => model.isUpdated)
-      );
+      // const savedNodes = saveModelCanvasNodes();
+      // const savedEdges = saveModelEdges();
+      // console.log("Combined Nodes Data Model:", savedNodes);
+      // console.log("Combined Edges Data Model:", savedEdges);
+      // console.log(
+      //   "models data:",
+      //   models.filter((model) => model.isUpdated)
+      // );
       // } else {
       //   const savedNodes = saveCanvasNodes();
       //   const savedEdges = saveEdges();
@@ -257,7 +239,7 @@ const SevilleToolbarNode: React.FC<ToolbarNodeProps> = memo(
         </Tooltip>
 
         <Tooltip title="Reset Canvas">
-          <IconButton size="small" color="error" onClick={handleReset}>
+          <IconButton size="small" color="error" onClick={handleCanvasReset}>
             <DeleteIcon />
           </IconButton>
         </Tooltip>

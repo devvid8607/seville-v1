@@ -17,23 +17,11 @@ export const HandleWrapper: React.FC<HandleWrapperProps> = ({
   toggleShowModel,
   nodeId,
 }) => {
-  // const updateNodeInternals = useUpdateNodeInternals();
-  // const [handleId, setHandleId] = useState<string>("");
-
-  // useEffect(() => {
-  //   console.log("setting handle");
-  //   console.log(`handle|nd|${nodeId}|attr|${attributeId}|dt|${dataType}`);
-  //   setHandleId(`handle|nd|${nodeId}|attr|${attributeId}|dt|${dataType}`);
-  // }, [nodeId, attributeId, dataType]);
   const handleId = `handle|nd|${nodeId}|attr|${attributeId}|dt|${dataType}`;
   const handleClick = (event: React.MouseEvent) => {
     event.stopPropagation();
     toggleShowModel(handleId);
   };
-
-  // useEffect(() => {
-  //   updateNodeInternals(nodeId);
-  // }, [nodeId, dataType]);
 
   const handleStyle = {
     backgroundColor: dataSourceId ? "#4CAF50" : "#2196F3", // Example: Green for show/hide, Blue for add

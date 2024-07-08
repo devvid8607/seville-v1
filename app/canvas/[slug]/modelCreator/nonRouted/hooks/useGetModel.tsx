@@ -4,7 +4,7 @@ import useModelStore, {
   Model,
 } from "../store/modelStore/ModelDetailsFromBackendStore"; // Adjust the import path accordingly
 import { createModelData } from "../helpers/createModelData";
-import { useTabStore } from "../store/TabStateManagmentStore";
+import { useTabStore } from "../../../nonRouted/store/TabStateManagmentStore";
 
 // Assume this is your fetch function
 export const fetchModelFromAPI = async (

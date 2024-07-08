@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { Model } from "../store/modelStore/ModelDetailsFromBackendStore";
+import { Model } from "../../modelCreator/nonRouted/store/modelStore/ModelDetailsFromBackendStore";
 
 type MenuPosition = {
   x: number;

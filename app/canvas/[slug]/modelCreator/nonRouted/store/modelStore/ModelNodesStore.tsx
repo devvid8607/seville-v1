@@ -16,10 +16,10 @@ import {
 import { v4 as uuidv4 } from "uuid";
 import { create } from "zustand";
 import useModelBackendStore from "./ModelBackEndStore";
-import { useTabStore } from "../TabStateManagmentStore";
+import { useTabStore } from "../../../../nonRouted/store/TabStateManagmentStore";
 import { getAttributeIdFromHandle } from "../../helpers/createModelData";
 import useModelStore from "./ModelDetailsFromBackendStore";
-import useDataTypesStore from "../DataTypesStore";
+import useDataTypesStore from "../../../../nonRouted/store/DataTypesStore";
 
 export type RFState = {
   nodes: Node[];

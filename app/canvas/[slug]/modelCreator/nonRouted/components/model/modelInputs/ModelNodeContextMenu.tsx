@@ -1,17 +1,17 @@
-import React from "react";
+import { Box, Divider, Typography } from "@mui/material";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import useModelStore from "../../../store/modelStore/ModelDetailsFromBackendStore";
-import { Box, Button, Divider, ListSubheader, Typography } from "@mui/material";
-import { useModelNodesStore } from "../../../store/modelStore/ModelNodesStore";
-import { createModelNode } from "../../../helpers/createModelNode";
+import React from "react";
 import { v4 as uuidv4 } from "uuid";
+import { useTabStore } from "../../../../../nonRouted/store/TabStateManagmentStore";
 import { getAttributeIdFromHandle } from "../../../helpers/createModelData";
-import { useTabStore } from "../../../store/TabStateManagmentStore";
+import { createModelNode } from "../../../helpers/createModelNode";
+import useModelStore from "../../../store/modelStore/ModelDetailsFromBackendStore";
+import { useModelNodesStore } from "../../../store/modelStore/ModelNodesStore";
 // import { useFlowNodeStore } from "../../../store/";
 import { Node } from "reactflow";
 // import { validateAllNodesModelInputs } from "../../../Helpers/Canvas/CanvasValidation";
-import { ListItem } from "../../sidebarTabComponents/propertiesTab/components/RecursiveDropdownv3";
+import { findLastChildWithProperties } from "../../../helpers/helperFunction";
 
 interface ContextMenuProps {
   mouseX: number | null;
@@ -21,23 +21,23 @@ interface ContextMenuProps {
   sourcePage?: string;
 }
 
-function findLastChildWithProperties(data: ListItem[]): any[] | null {
-  let lastProperties = null;
+// function findLastChildWithProperties(data: ListItem[]): any[] | null {
+//   let lastProperties = null;
 
-  for (const item of data) {
-    if (item.properties && item.properties.length > 0) {
-      lastProperties = item.properties; // Update last found properties
-    }
-    if (item.children.length > 0) {
-      const childProperties = findLastChildWithProperties(item.children);
-      if (childProperties) {
-        lastProperties = childProperties; // Update with deeper nested properties
-      }
-    }
-  }
+//   for (const item of data) {
+//     if (item.properties && item.properties.length > 0) {
+//       lastProperties = item.properties; // Update last found properties
+//     }
+//     if (item.children.length > 0) {
+//       const childProperties = findLastChildWithProperties(item.children);
+//       if (childProperties) {
+//         lastProperties = childProperties; // Update with deeper nested properties
+//       }
+//     }
+//   }
 
-  return lastProperties;
-}
+//   return lastProperties;
+// }
 
 export const ModelNodeContextMenu: React.FC<ContextMenuProps> = ({
   mouseX,
@@ -48,20 +48,21 @@ export const ModelNodeContextMenu: React.FC<ContextMenuProps> = ({
 }) => {
   console.log("rendering this menu", sourcePage);
   const open = mouseX !== null && mouseY !== null;
-  const getNodeById = useModelNodesStore((state) => state.getNodeById);
 
+  //#region store imports
+  //#region useModelNodesStore imports
   const getSourceNodeAndHandleByTargetNodeId = useModelNodesStore(
     (state) => state.getSourceNodeAndHandleByTargetNodeId
   );
   const removeEdge = useModelNodesStore((state) => state.removeEdge);
-  const removeNodeById = useModelNodesStore((state) => state.removeNodeById);
+
   const removeNodeAndDescendants = useModelNodesStore(
     (state) => state.removeNodeAndDescendants
   );
   const addNode = useModelNodesStore((state) => state.addNode);
   const addEdge = useModelNodesStore((state) => state.addEdge);
-  // const currentNode = useModelNodesStore((state) => state.currentNode);
-
+  //#endregion
+  //#region useModelStore imports
   const getModelById = useModelStore((state) => state.getModelById);
   const updateAttributeValueOfAModel = useModelStore(
     (state) => state.updateAttributeValueOfAModel
@@ -74,12 +75,16 @@ export const ModelNodeContextMenu: React.FC<ContextMenuProps> = ({
       getAttributeProperties: state.getAttributeProperties,
       updatePropertyCurrentListValues: state.updatePropertyCurrentListValues,
     }));
-
+  const models = useModelStore((state) => state.models);
+  //#endregion
+  //#region usetabstore
   const replaceModelContextMenuSource = useTabStore(
     (state) => state.replaceModelContextMenuSource
   );
-
   const setSliderOpen = useTabStore((state) => state.setSliderOpen);
+  //#endregion
+  //#endregion
+
   // const { addFlowNode, removeFlowNode, getFlowNodeById, currentFlowNode } =
   //   useFlowNodeStore((state) => ({
   //     addFlowNode: state.addNode,
@@ -89,10 +94,11 @@ export const ModelNodeContextMenu: React.FC<ContextMenuProps> = ({
   //   }));
 
   let currentNode: Node | null;
+  currentNode = useModelNodesStore((state) => state.currentNode);
   // if (sourcePage === "validationSet") {
   //   currentNode = currentFlowNode;
   // } else {
-  currentNode = useModelNodesStore((state) => state.currentNode);
+
   // }
 
   if (!currentNode || currentNode === null) return;
@@ -240,7 +246,6 @@ export const ModelNodeContextMenu: React.FC<ContextMenuProps> = ({
 
     handleClose();
   };
-  const models = useModelStore((state) => state.models);
 
   return (
     <Box>

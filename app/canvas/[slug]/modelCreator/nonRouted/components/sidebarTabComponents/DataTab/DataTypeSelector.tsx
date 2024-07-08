@@ -1,5 +1,7 @@
 import React from "react";
-import useDataTypesStore, { DataType } from "../../../store/DataTypesStore";
+import useDataTypesStore, {
+  DataType,
+} from "../../../../../nonRouted/store/DataTypesStore";
 import { Box, Paper, Typography } from "@mui/material";
 interface DataTypeBoxProps {
   dataType: DataType;

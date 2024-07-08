@@ -4,9 +4,9 @@ import { Box, IconButton, Slide, Tab, Tabs, Typography } from "@mui/material";
 import React from "react";
 import useFlowModelBackendStore from "../../store/modelStore/ModelBackEndStore";
 import { ModelPropertiesTab } from "../sidebarTabComponents/propertiesTab/ModelPropertiesTab";
-import { ModelDataTab } from "../sidebarTabComponents/DataTab/ModelDataTab";
-import { useTabStore } from "../../store/TabStateManagmentStore";
-import { TabOption, TabPanelProps } from "./Types/SideBarTypes";
+import { ModelDataTab } from "../sidebarTabComponents/dataTab/ModelDataTab";
+import { useTabStore } from "../../../../nonRouted/store/TabStateManagmentStore";
+import { TabOption, TabPanelProps } from "./types/SideBarTypes";
 import { CanvasLevelPropertiesTab } from "../sidebarTabComponents/CanvasLevelPropertiesTab";
 
 export const CanvasFixedRightSideBar: React.FC = () => {

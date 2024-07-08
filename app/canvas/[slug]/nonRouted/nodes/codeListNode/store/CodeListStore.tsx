@@ -1,4 +1,4 @@
-import codeListDetails from "../../../../dummyData/CodeListData.json";
+import codeListDetails from "../../../../nonRouted/dummyData/CodeListData.json";
 import { create } from "zustand";
 
 interface Property {

@@ -1,9 +1,11 @@
+//this is use in model builder
+
 import { Box } from "@mui/material";
 import React, { memo, useState, useEffect } from "react";
 import { Handle, Position } from "reactflow";
-import CodeHeader from "./Inputs/CodeHeader";
-import { CodeBody } from "./Inputs/CodeBody";
-import { CodeList, useCodeListStore } from "./Store/CodeListStore";
+import CodeHeader from "./inputs/CodeHeader";
+import { CodeBody } from "./inputs/CodeBody";
+import { CodeList, useCodeListStore } from "./store/CodeListStore";
 
 export const CodeListNode = memo(({ data }: { data: any }) => {
   const [localModel, setLocalModel] = useState<CodeList | null>(null);

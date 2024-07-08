@@ -1,4 +1,4 @@
-import useDataTypesStore from "../../../../store/DataTypesStore";
+import useDataTypesStore from "../../../../../../nonRouted/store/DataTypesStore";
 import {
   Box,
   FormControl,

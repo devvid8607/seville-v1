@@ -1,9 +1,9 @@
 import { ChevronRightOutlined, ExpandMoreOutlined } from "@mui/icons-material";
 import { Box, Collapse, IconButton } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { TreeDataType } from "./SevilleTreeTypes/TreeTypes";
+import { TreeDataType } from "./sevilleTreeTypes/TreeTypes";
 import * as MuiIcons from "@mui/icons-material";
-import { iconLookup } from "../../../../constants/IconConstants";
+import { iconLookup } from "../../../../../../nonRouted/constants/IconConstants";
 import useCustomTreeStore from "./customTreeStore/CustomTreeStore";
 
 interface TreeNodeProps {
