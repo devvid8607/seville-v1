@@ -4,8 +4,6 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import { createBrowserToken } from "../../serverlib/tokens";
 import { fetchUser } from "../../serverlib/user";
-import { JWT } from "next-auth/jwt";
-import { refreshAccessToken } from "../../serverlib/refreshToken";
 
 export const authProviders: NextAuthOptions = {
   providers: [
@@ -98,10 +96,18 @@ export const authProviders: NextAuthOptions = {
         token.accessTokenExpires = Date.now() + user.expires_in * 1000;
       }
       if (Date.now() < token.accessTokenExpires) {
+        console.log("token valid");
         return token;
       } //else return null;
-
-      return token;
+      console.log("token expired");
+      return {
+        ...token,
+        access_token: "",
+        accessTokenExpires: 0,
+        refresh_token: "",
+        endpoint_tokens: [],
+        cookies: [],
+      };
       // return await refreshAccessToken(token as JWT);
     },
   },
@@ -112,7 +118,7 @@ export const authProviders: NextAuthOptions = {
     secret: process.env.NEXTAUTH_SECRET,
   },
   pages: {
-    // signIn: "/auth/signin", // Custom sign-in page
+    signIn: "/auth/signin", // Custom sign-in page
     // signOut: '/auth/signout',  // Custom sign-out page
     // error: '/auth/error',  // Error page to redirect to in case of errors
     // verifyRequest: '/auth/verify-request',  // Verification request page

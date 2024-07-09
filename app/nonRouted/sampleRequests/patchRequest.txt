@@ -1,0 +1,24 @@
+const {
+  data: patchedOrganisation,
+  error: patchOrganisationError,
+  status: patchOrganisationStatus,
+  loading: loadingPatchOrganisation,
+  fetchData: patchOrganisation,
+} = useFetch<Organisation>("/api/organisations/1");
+
+const handlePatchOrganisation = () => {
+  const patchData = {
+    name: "Partially Updated Organisation Name",
+    // other partial update data
+  };
+  patchOrganisation("PATCH", patchData);
+};
+
+return (
+  <div>
+    <button onClick={handlePatchOrganisation}>Patch Organisation</button>
+    {loadingPatchOrganisation && <p>Loading...</p>}
+    {patchOrganisationError && <p>Error: {patchOrganisationError}</p>}
+    {patchedOrganisation && <div>{/* Render patched organisation */}</div>}
+  </div>
+);

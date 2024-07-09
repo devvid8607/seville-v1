@@ -17,7 +17,7 @@ export async function refreshAccessToken(token: JWT): Promise<JWT> {
       ...token,
       access_token: refreshedTokens.access_token,
       accessTokenExpires: Date.now() + refreshedTokens.expires_in * 1000,
-      refresh_token: refreshedTokens.refresh_token ?? token.refresh_token, // Fall back to old refresh token
+      refresh_token: refreshedTokens.refresh_token ?? token.refresh_token,
     };
   } catch (error) {
     console.error("Failed to refresh access token", error);

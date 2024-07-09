@@ -1,0 +1,40 @@
+import React from "react";
+import useFetch from "./useFetch";
+
+const UpdateOrganisationComponent = () => {
+  const {
+    data: updatedOrganisation,
+    error: updateOrganisationError,
+    status: updateOrganisationStatus,
+    loading: loadingUpdateOrganisation,
+    sendRequest: updateOrganisation,
+  } = useFetch<Organisation>("/api/organisations/1"); // Assume the organisation ID is 1
+
+  const handleUpdateOrganisation = () => {
+    const updateData = {
+      organisationName: "Updated Organisation Name",
+      organisationCode: "UPDORG",
+      address1: "456 Elm St",
+      address2: "",
+      suburb: "North",
+      city: "Gotham",
+      state: "NY",
+      postCode: "67890",
+      country: "USA",
+      phoneNumber: "987-654-3210",
+      email: "contact@updorg.com",
+    };
+    updateOrganisation("PUT", updateData);
+  };
+
+  return (
+    <div>
+      <button onClick={handleUpdateOrganisation}>Update Organisation</button>
+      {loadingUpdateOrganisation && <p>Loading...</p>}
+      {updateOrganisationError && <p>Error: {updateOrganisationError}</p>}
+      {updatedOrganisation && <div>{/* Render updated organisation */}</div>}
+    </div>
+  );
+};
+
+export default UpdateOrganisationComponent;

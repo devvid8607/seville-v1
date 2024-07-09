@@ -1,0 +1,40 @@
+import React from "react";
+import useFetch from "./useFetch";
+
+const CreateOrganisationComponent = () => {
+  const {
+    data: newOrganisation,
+    error: newOrganisationError,
+    status: newOrganisationStatus,
+    loading: loadingNewOrganisation,
+    sendRequest: createOrganisation,
+  } = useFetch<Organisation>("/api/organisations");
+
+  const handleCreateOrganisation = () => {
+    const newOrgData = {
+      organisationName: "New Organisation",
+      organisationCode: "NEWORG",
+      address1: "123 Main St",
+      address2: "Suite 100",
+      suburb: "Central",
+      city: "Metropolis",
+      state: "CA",
+      postCode: "12345",
+      country: "USA",
+      phoneNumber: "123-456-7890",
+      email: "info@neworg.com",
+    };
+    createOrganisation("POST", newOrgData);
+  };
+
+  return (
+    <div>
+      <button onClick={handleCreateOrganisation}>Create Organisation</button>
+      {loadingNewOrganisation && <p>Loading...</p>}
+      {newOrganisationError && <p>Error: {newOrganisationError}</p>}
+      {newOrganisation && <div>{/* Render new organisation */}</div>}
+    </div>
+  );
+};
+
+export default CreateOrganisationComponent;
