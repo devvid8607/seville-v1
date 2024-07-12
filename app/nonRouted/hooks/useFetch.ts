@@ -6,7 +6,13 @@ interface FetchHookResult<T> {
   error: string | null;
   status: number | null;
   loading: boolean;
-  sendRequest: (method?: string, body?: any) => void;
+  sendRequest: (
+    method?: string,
+    body?: any,
+    isGraphQL?: boolean,
+    query?: string,
+    variables?: Record<string, any>
+  ) => void;
 }
 
 const useFetch = <T>(url: string): FetchHookResult<T> => {
@@ -16,18 +22,26 @@ const useFetch = <T>(url: string): FetchHookResult<T> => {
   const [loading, setLoading] = useState(false);
 
   const sendRequest = useCallback(
-    async (method: string = "GET", body: any = null) => {
+    async (
+      method: string = "GET",
+      body: any = null,
+      isGraphQL: boolean = false,
+      query?: string,
+      variables?: Record<string, any>
+    ) => {
       setLoading(true);
       try {
         const options: RequestInit = {
           method,
           headers: {
             "Content-Type": "application/json",
-            "Cache-Control": "no-cache",
+            cache: "no-store",
           },
         };
 
-        if (body) {
+        if (isGraphQL && query) {
+          options.body = JSON.stringify({ query, variables });
+        } else if (body) {
           options.body = JSON.stringify(body);
         }
 
@@ -36,10 +50,10 @@ const useFetch = <T>(url: string): FetchHookResult<T> => {
         const result = await response.json();
 
         if (response.ok) {
-          setData(result);
+          setData(result.data || result);
           setStatus(response.status);
         } else {
-          setError(result.message);
+          setError(result.errors ? result.errors[0].message : result.message);
           setStatus(response.status);
         }
       } catch (error) {

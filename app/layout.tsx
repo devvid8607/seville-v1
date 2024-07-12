@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import ApolloProvider from "./auth/ApolloProvider";
 import AuthProvider from "./auth/Provider";
+import QueryClientProvider from "./providers/QueryClientProvider";
 
 // const inter = Inter({ subsets: ["latin"] });
 

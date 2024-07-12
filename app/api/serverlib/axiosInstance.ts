@@ -1,8 +1,4 @@
-import axios, {
-  AxiosRequestConfig,
-  AxiosResponse,
-  InternalAxiosRequestConfig,
-} from "axios";
+import axios, { InternalAxiosRequestConfig } from "axios";
 
 const apiClient = axios.create({
   baseURL: "https://dev-gateway.seville.studio",

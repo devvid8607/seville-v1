@@ -1,25 +1,41 @@
 // components/Roles.tsx
 import React, { useEffect } from "react";
-import useRoles from "../nonRouted/hooks/useRoles";
 import handleNetworkStatus from "../nonRouted/utils/handleAxiosStatus";
+import useFetch from "../nonRouted/hooks/useFetch";
+import { useRouter } from "next/navigation";
+
+export interface Role {
+  roleId: string;
+  roleName: string;
+  organisationId: string;
+  organisationName: string;
+  active: boolean;
+}
 
 const Roles: React.FC = () => {
+  const router = useRouter();
   const {
     data: roles,
     error: rolesError,
     status: rolesStatus,
     loading: loadingRoles,
     sendRequest: fetchRoles,
-  } = useRoles();
+  } = useFetch<Role[]>("/api/roles");
 
   useEffect(() => {
     fetchRoles();
   }, [fetchRoles]);
 
+  useEffect(() => {
+    if (rolesError && (rolesStatus === 401 || rolesStatus === 400)) {
+      router.push("/auth/signin");
+    }
+  }, [rolesError, rolesStatus, router]);
+
   // Handle network errors
-  if (rolesError && (rolesStatus === 401 || rolesStatus === 400)) {
-    return handleNetworkStatus(rolesStatus);
-  }
+  // if (rolesError && (rolesStatus === 401 || rolesStatus === 400)) {
+  //   return handleNetworkStatus(rolesStatus, router.push);
+  // }
 
   if (loadingRoles) {
     return <p>Loading roles...</p>;

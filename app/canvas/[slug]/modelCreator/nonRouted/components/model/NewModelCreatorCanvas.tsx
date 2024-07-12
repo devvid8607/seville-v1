@@ -1,17 +1,26 @@
 // #region Imports
-import { Box, Typography } from "@mui/material";
-import React, { DragEvent, memo, useCallback, useEffect } from "react";
+import { Box, CircularProgress, Typography } from "@mui/material";
+import React, {
+  DragEvent,
+  memo,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import {
   Background,
   BackgroundVariant,
   Controls,
+  Edge,
   EdgeTypes,
   MiniMap,
   Node,
   NodeTypes,
   Panel,
   ReactFlow,
+  ReactFlowActions,
   ReactFlowInstance,
+  Viewport,
   XYPosition,
   useReactFlow,
 } from "reactflow";
@@ -21,7 +30,10 @@ import { DeleteForeverOutlined } from "@mui/icons-material";
 import { EditableContent } from "../../../../nonRouted/components/EditableContent";
 import SevilleToolbarNode from "../../../../nonRouted/nodes/flowComponents/FlowToolbar";
 import { createSavedModelEdgesFromJSON } from "../../helpers/createSavedModelEdgesFromJSON";
-import { createSavedModelNodesfromJSON } from "../../helpers/createSavedModelNodesfromJSON";
+import {
+  createSavedModelNodefromJSON,
+  createSavedModelNodesfromJSON,
+} from "../../helpers/createSavedModelNodesfromJSON";
 import { HelpDrawer } from "../../../../nonRouted/components/helpDrawer/HelpDrawer";
 import { CanvasFixedRightSideBar } from "../canvasFixedRightSideBar/CanvasFixedRightSideBar";
 
@@ -36,6 +48,7 @@ import {
   saveModelCanvasNodes,
   saveModelEdges,
 } from "../../helpers/saveModelCanvas";
+import { ModelNode } from "./ModelNode";
 // #endregion
 
 // #region types
@@ -60,9 +73,16 @@ export const NewModelCreatorCanvas = memo(
     nodeTypes,
     edgeTypes,
   }: ReactFlowBoxProps) => {
+    const [loading, setLoading] = useState(false);
     // #region ModelNodesStore Imports
     const nodes = useModelNodesStore((state) => state.nodes);
     const edges = useModelNodesStore((state) => state.edges);
+    const getInitialtNodes = useModelNodesStore(
+      (state) => state.getInitialtNodes
+    );
+    // const nodes = useModelNodesStore((state) => state.nodes);
+    const getNodeById = useModelNodesStore((state) => state.getNodeById);
+    const getEdgeById = useModelNodesStore((state) => state.getEdgeById);
     const onNodesChange = useModelNodesStore((state) => state.onNodesChange);
     const onConnect = useModelNodesStore((state) => state.onConnect);
     const onConnectEnd = useModelNodesStore((state) => state.onConnectEnd);
@@ -173,20 +193,148 @@ export const NewModelCreatorCanvas = memo(
     // #endregion
 
     // #region useEffects
+
     useEffect(() => {
-      console.log("in initial user use effect");
+      console.log("in initial user use effect 1");
       useCreateSavedModelNodesFromJSON(savedModelNodes);
     }, [savedModelNodes]);
 
-    useEffect(() => {
-      console.log("in initial user use effect");
-      createSavedModelNodesfromJSON(savedNodes);
-    }, [savedNodes]);
+    // useEffect(() => {
+    //   console.log("in initial user use effect 2");
+    //   createSavedModelNodesfromJSON(savedNodes);
+    // }, [savedNodes]);
+
+    // useEffect(() => {
+    //   createSavedModelEdgesFromJSON(savedEdges);
+    // }, [savedEdges]);
+
+    // useEffect(() => {
+    //   setLoading(true);
+    //   const loadInitialNodesAndEdges = async () => {
+    //     await createSavedModelNodesfromJSON(savedNodes);
+    //     //await createSavedModelEdgesFromJSON(savedEdges);
+    //     setLoading(false);
+    //   };
+    //   loadInitialNodesAndEdges();
+    // }, [savedNodes, savedEdges]);
+    // #endregion
+
+    const [viewport, setViewportState] = useState<Viewport>({
+      x: 0,
+      y: 0,
+      zoom: 1,
+    });
+    const [visibleNodes, setVisibleNodes] = useState<Node[]>([]);
+    const [visibleEdges, setVisibleEdges] = useState<Edge[]>([]);
+
+    const handleViewportChange = useCallback(
+      (vp: Viewport) => {
+        console.log("Viewport changed:", vp);
+        setViewportState(vp);
+        setLoading(true);
+
+        const visible =
+          savedNodes &&
+          savedNodes.filter((node) => {
+            if (
+              node.position.x >= vp.x &&
+              node.position.x <= vp.x + window.innerWidth / vp.zoom &&
+              node.position.y >= vp.y &&
+              node.position.y <= vp.y + window.innerHeight / vp.zoom
+            ) {
+              const nodeExists = getNodeById(node.id);
+              if (!nodeExists) {
+                console.log("creating node", node.id);
+                createSavedModelNodefromJSON(node);
+
+                return node;
+              }
+            }
+          });
+
+        setVisibleNodes((prevVisibleNodes) => [
+          ...prevVisibleNodes,
+          ...visible,
+        ]);
+
+        //for edges
+        const visibleEdges =
+          savedEdges &&
+          savedEdges.filter((edge) => {
+            const sourceNode = getNodeById(edge.source);
+            const targetNode = getNodeById(edge.target);
+
+            if (
+              sourceNode &&
+              targetNode &&
+              sourceNode.position.x >= vp.x &&
+              sourceNode.position.x <= vp.x + window.innerWidth / vp.zoom &&
+              sourceNode.position.y >= vp.y &&
+              sourceNode.position.y <= vp.y + window.innerHeight / vp.zoom &&
+              targetNode.position.x >= vp.x &&
+              targetNode.position.x <= vp.x + window.innerWidth / vp.zoom &&
+              targetNode.position.y >= vp.y &&
+              targetNode.position.y <= vp.y + window.innerHeight / vp.zoom
+            ) {
+              const edgeExists = getEdgeById(edge.id);
+              if (!edgeExists) {
+                console.log("creating edge", edge.id);
+                createSavedModelEdgesFromJSON([edge]);
+
+                return edge;
+              }
+            }
+          });
+
+        setVisibleEdges((prevVisibleEdges) => [
+          ...prevVisibleEdges,
+          ...visibleEdges,
+        ]);
+
+        setLoading(false);
+      },
+      [nodes]
+    );
+
+    const handleOnMove = useCallback(
+      (event, viewport: Viewport) => {
+        handleViewportChange(viewport);
+      },
+      [handleViewportChange]
+    );
 
     useEffect(() => {
-      createSavedModelEdgesFromJSON(savedEdges);
-    }, [savedEdges]);
-    // #endregion
+      handleViewportChange(viewport);
+    }, []);
+
+    useEffect(() => {
+      console.log("nodes changing");
+      setVisibleNodes(nodes);
+    }, [nodes]);
+
+    useEffect(() => {
+      console.log("nodes changing");
+      setVisibleEdges(edges);
+    }, [edges]);
+
+    if (loading) {
+      return (
+        <Box
+          position="absolute"
+          top={0}
+          left={0}
+          right={0}
+          bottom={0}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          bgcolor="rgba(255, 255, 255, 0.8)"
+          zIndex={10}
+        >
+          <CircularProgress />
+        </Box>
+      );
+    }
 
     return (
       <Box ref={wrapperRef} style={{ height: "100vh", width: "100vw" }}>
@@ -194,16 +342,17 @@ export const NewModelCreatorCanvas = memo(
           onInit={onInit}
           nodeTypes={nodeTypes}
           edgeTypes={edgeTypes}
-          nodes={nodes}
-          edges={edges}
+          nodes={visibleNodes}
+          edges={visibleEdges}
           onNodesChange={onNodesChange}
           onDragOver={handleOnDragOver}
           onNodeDrag={onNodeDrag}
-          defaultViewport={defaultViewport}
+          defaultViewport={viewport}
           onConnect={onConnect}
           onConnectStart={onConnectStart}
           onConnectEnd={onConnectEnd}
           onNodeClick={onNodeClick}
+          onMove={handleOnMove}
         >
           <Panel position="top-left">
             <Box display="flex" flexDirection="column" gap={2} mt={2} ml={2}>

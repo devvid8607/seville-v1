@@ -15,6 +15,7 @@ import useModelStore from "../../../store/modelStore/ModelDetailsFromBackendStor
 import propertiesData from "../../../../../nonRouted/dummyData/typeProperties.json";
 import { Box } from "@mui/material";
 import { SmallModelDropdown } from "../../sidebarTabComponents/propertiesTab/components/SmallModelDropDown";
+import useDataTypesStore from "@/app/canvas/[slug]/nonRouted/store/DataTypesStore";
 
 export const AddModelCodeContextMenu = () => {
   // #region store imports
@@ -25,6 +26,10 @@ export const AddModelCodeContextMenu = () => {
       menuPosition: state.menuPosition,
       handleId: state.handleId,
     }));
+
+  const getDataTypeByCode = useDataTypesStore(
+    (state) => state.getDataTypeByCode
+  );
 
   // #region useModelStore imports
   const addModelToStore = useModelStore((state) => state.addModelToStore);
@@ -211,12 +216,14 @@ export const AddModelCodeContextMenu = () => {
             "dataType",
             "model"
           );
-          const properties = (propertiesData as any)["model"]?.Properties || [];
-          updateProperties(
-            currentNodeDataSource,
-            currentAttributeId,
-            properties
-          );
+          //const properties = (propertiesData as any)["model"]?.Properties || [];
+          const properties = getDataTypeByCode("model");
+          if (properties)
+            updateProperties(
+              currentNodeDataSource,
+              currentAttributeId,
+              properties?.properties
+            );
           updatePropertyCurrentValue(
             currentNodeDataSource,
             currentAttributeId,

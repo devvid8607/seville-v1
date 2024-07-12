@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from "react";
 
-import { CodeList } from "../Store/CodeListStore";
+import { CodeList } from "../store/CodeListStore";
 import {
   Box,
   FormControl,

@@ -165,7 +165,7 @@
     {
       "id": "1",
       "nodeType": "modelNode",
-      "position": { "x": 500, "y": 500 },
+      "position": { "x": 14500, "y": 500 },
       "metaData": {
         "dataSourceId": "1",
         "name": "SystemName",
@@ -181,8 +181,97 @@
     }
   ],
 
-  "savedNodes": [],
-  "savedEdges": [],
+  "savedNodes": [
+    {
+      "id": "f0f1230c-8f61-4c1b-8cad-7da141875918",
+      "type": "modelNode",
+      "position": {
+        "x": 900,
+        "y": 500
+      },
+      "dragHandle": ".custom-drag-handle",
+      "data": {
+        "nodeId": "f0f1230c-8f61-4c1b-8cad-7da141875918",
+        "modelDetails": {
+          "friendlyName": "Address",
+          "description": "",
+          "url": "",
+          "dataSourceId": "789"
+        }
+      },
+      "width": 452,
+      "height": 838
+    },
+    {
+      "id": "a8c24a4c-b16b-40fa-a4a1-b85c1b10a9a3",
+      "type": "modelNode",
+      "position": {
+        "x": 2100,
+        "y": 600
+      },
+      "dragHandle": ".custom-drag-handle",
+      "data": {
+        "nodeId": "a8c24a4c-b16b-40fa-a4a1-b85c1b10a9a3",
+        "modelDetails": {
+          "friendlyName": "Person",
+          "description": "",
+          "url": "",
+          "dataSourceId": "555"
+        }
+      },
+      "width": 452,
+      "height": 838
+    },
+    {
+      "id": "a8c24a4c-b16b-40fa-a4a1-b85c1b10449a3",
+      "type": "modelNode",
+      "position": {
+        "x": 4100,
+        "y": 600
+      },
+      "dragHandle": ".custom-drag-handle",
+      "data": {
+        "nodeId": "a8c24a4c-b16b-40fa-a4a1-b85c1b10449a3",
+        "modelDetails": {
+          "friendlyName": "Person",
+          "description": "",
+          "url": "",
+          "dataSourceId": "555"
+        }
+      },
+      "width": 452,
+      "height": 838
+    },
+    {
+      "id": "1c3b59ef-6193-42d5-8bc2-36695c2c8b87",
+      "type": "modelNode",
+      "position": {
+        "x": 2300,
+        "y": 500
+      },
+      "dragHandle": ".custom-drag-handle",
+      "data": {
+        "nodeId": "1c3b59ef-6193-42d5-8bc2-36695c2c8b87",
+        "modelDetails": {
+          "friendlyName": "Customer",
+          "description": "",
+          "url": "",
+          "dataSourceId": "456"
+        }
+      },
+      "width": 465,
+      "height": 454
+    }
+  ],
+  "savedEdges": [
+    {
+      "id": "60890413-7b80-4f39-a6a1-27221227e1e3",
+      "source": "f0f1230c-8f61-4c1b-8cad-7da141875918",
+      "target": "1c3b59ef-6193-42d5-8bc2-36695c2c8b87",
+      "sourceHandle": "handle|nd|f0f1230c-8f61-4c1b-8cad-7da141875918|attr|addr_zip|dt|model",
+      "type": "smoothstep"
+    }
+  ],
 
   "initialSystemNodes": [],
   "modelNodeSchemas": {

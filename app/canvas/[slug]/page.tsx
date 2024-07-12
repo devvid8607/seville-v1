@@ -115,7 +115,7 @@ const CanvasTable: React.FC<{ params: Params }> = ({ params }) => {
         <h1>Canvas Index</h1>
         {slug && <p>Selected Parameter: {slug}</p>}
         {loading ? (
-          <p>Loading...</p>
+          <p>Canvas Loading...</p>
         ) : error ? (
           <p>{error}</p>
         ) : (

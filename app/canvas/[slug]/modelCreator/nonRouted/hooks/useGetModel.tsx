@@ -55,6 +55,4 @@ export const useGetModel = (dataSourceId: string, url: string): void => {
 
     getModel();
   }, [dataSourceId, url]);
-
-  //return [model, loading];
 };

@@ -1,5 +1,7 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 import { fetchWithToken } from "../serverlib/tokenManager";
+
+export const dynamic = "force-dynamic";
 
 export const GET = async (req: NextRequest) => {
   const apiRoute = "GETapi/v1/Organisations/GetOrganisations";

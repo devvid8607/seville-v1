@@ -37,6 +37,7 @@ export type RFState = {
   addEdge: (edge: Edge) => void;
   removeNodeById: (nodeId: string) => void;
   getNodeById: (nodeId: string) => Node | undefined;
+  getEdgeById: (edgeId: string) => Edge | undefined;
   toggleNodeVisibility: (nodeId: string) => void;
   toggleNodeVisibilityAndConnectedEdges: (
     nodeId: string,
@@ -73,6 +74,7 @@ export type RFState = {
   clearAllNodesDataInStore: () => void;
   clearAllEdgedDataInStore: () => void;
   addEdges: (newEdges: Edge[]) => void;
+  getInitialtNodes: () => void;
 };
 
 export const useModelNodesStore = create<RFState>((set, get) => {
@@ -90,7 +92,7 @@ export const useModelNodesStore = create<RFState>((set, get) => {
   const updateProperties = useModelStore.getState().updateProperties;
 
   return {
-    nodes: initialSchemaItems,
+    nodes: [],
     edges: [],
     onNodesChange: (changes: NodeChange[]) => {
       set({
@@ -257,6 +259,11 @@ export const useModelNodesStore = create<RFState>((set, get) => {
       // Search for the node with the given nodeId
       const node = get().nodes.find((node) => node.id === nodeId);
       return node; // This will return the node if found, or undefined if not
+    },
+    getEdgeById: (edgeId) => {
+      // Search for the node with the given nodeId
+      const edge = get().edges.find((edge) => edge.id === edgeId);
+      return edge; // This will return the node if found, or undefined if not
     },
     toggleNodeVisibility: (nodeId: string) => {
       set((state) => ({
@@ -648,6 +655,9 @@ export const useModelNodesStore = create<RFState>((set, get) => {
           ),
         ],
       }));
+    },
+    getInitialtNodes: () => {
+      set({ nodes: initialSchemaItems });
     },
   };
 });

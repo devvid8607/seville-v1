@@ -8,7 +8,7 @@ const handleNetworkStatus = (statusCode: number) => {
 
   // Check if the status code requires a redirect
   // if (statusCode === 401 || statusCode === 400) {
-  //   router.push("/");
+  //   redirect("/auth/signin");
   //   return null;
   // }
 

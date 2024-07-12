@@ -202,7 +202,6 @@
 
 // export default LoginComponent;
 
-"use client";
 import React, { useEffect } from "react";
 import { useSession, signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -230,6 +229,10 @@ const LoginComponent = () => {
   return (
     <div>
       <div>
+        <Link href="/testCanvas">Test Canvas</Link>
+      </div>
+
+      <div style={{ marginTop: 15 }}>
         <Link href="/dashboard">DashBoard - Plain Glide Grid</Link>
       </div>
 

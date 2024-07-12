@@ -1,11 +1,23 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 import { NewModelCreator } from "./nonRouted/components/model/NewModelCreator";
 import useDataTypesStore from "../nonRouted/store/DataTypesStore";
 import useModelBackendStore from "./nonRouted/store/modelStore/ModelBackEndStore";
 import useModelStore from "./nonRouted/store/modelStore/ModelDetailsFromBackendStore";
 import { useModelNodesStore } from "./nonRouted/store/modelStore/ModelNodesStore";
+
+// const DynamicNewModelCreator = dynamic(
+//   () =>
+//     import("./nonRouted/components/model/NewModelCreator").then(
+//       (mod) => mod.NewModelCreator
+//     ),
+//   {
+//     loading: () => <p>Loading NewModelCreator...</p>,
+//     ssr: false,
+//   }
+// );
 
 const ModelFlowWrapper = () => {
   const [loading, setLoading] = useState(true);
@@ -42,10 +54,12 @@ const ModelFlowWrapper = () => {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div>Model Loading...</div>;
   }
 
+  // return <div>model creator</div>;
   return <NewModelCreator />;
+  // return <DynamicNewModelCreator />;
 };
 
 export default ModelFlowWrapper;

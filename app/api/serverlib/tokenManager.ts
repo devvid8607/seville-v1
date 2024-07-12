@@ -45,6 +45,7 @@ export const fetchWithToken = async (
         Authorization: `Bearer ${endpointToken} ${token.access_token}`,
         Cookie: cookieHeader,
         "Cache-Control": "no-cache, no-store, must-revalidate",
+
         Pragma: "no-cache",
         Expires: "0",
       },
