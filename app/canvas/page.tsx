@@ -1,7 +1,7 @@
 import { Box, Button, Typography } from "@mui/material";
 import Link from "next/link";
 import React from "react";
-import NextBreadcrumb from "../nonRouted/components/Breadcrumbs";
+import NextBreadcrumb from "../_lib/_components/Breadcrumbs";
 
 const CanvasIndexPage = () => {
   return (

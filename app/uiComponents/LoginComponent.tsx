@@ -3,9 +3,9 @@
 // import { useSession, signIn } from "next-auth/react";
 // import { useRouter } from "next/navigation";
 // import Link from "next/link";
-// import useOrganisations from "../nonRouted/hooks/useOrganisations";
-// import useRoles from "../nonRouted/hooks/useRoles";
-// import handleNetworkStatus from "../nonRouted/utils/handleAxiosStatus";
+// import useOrganisations from "../lib/hooks/useOrganisations";
+// import useRoles from "../lib/hooks/useRoles";
+// import handleNetworkStatus from "../lib/utils/handleAxiosStatus";
 
 // const LoginComponent = () => {
 //   const { status, data } = useSession();

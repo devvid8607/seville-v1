@@ -2,15 +2,16 @@
 
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
-import { NewModelCreator } from "./nonRouted/components/model/NewModelCreator";
-import useDataTypesStore from "../nonRouted/store/DataTypesStore";
-import useModelBackendStore from "./nonRouted/store/modelStore/ModelBackEndStore";
-import useModelStore from "./nonRouted/store/modelStore/ModelDetailsFromBackendStore";
-import { useModelNodesStore } from "./nonRouted/store/modelStore/ModelNodesStore";
+import { NewModelCreator } from "./_lib/_components/model/NewModelCreator";
+import useDataTypesStore from "../_lib/_store/DataTypesStore";
+import useModelBackendStore from "./_lib/_store/modelStore/ModelBackEndStore";
+import useModelStore from "./_lib/_store/modelStore/ModelDetailsFromBackendStore";
+import { useModelNodesStore } from "./_lib/_store/modelStore/ModelNodesStore";
+import { useRouter, useSearchParams } from "next/navigation";
 
 // const DynamicNewModelCreator = dynamic(
 //   () =>
-//     import("./nonRouted/components/model/NewModelCreator").then(
+//     import("./_lib/_components/model/NewModelCreator").then(
 //       (mod) => mod.NewModelCreator
 //     ),
 //   {
@@ -21,6 +22,12 @@ import { useModelNodesStore } from "./nonRouted/store/modelStore/ModelNodesStore
 
 const ModelFlowWrapper = () => {
   const [loading, setLoading] = useState(true);
+  const searchParams = useSearchParams();
+  const id = searchParams.get("id");
+  const param = searchParams.get("param");
+
+  console.log("id:", id);
+  console.log("param:", param);
 
   const clearAllNodesDataInStore = useModelNodesStore(
     (state) => state.clearAllNodesDataInStore

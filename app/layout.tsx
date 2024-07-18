@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import ApolloProvider from "./auth/ApolloProvider";
 import AuthProvider from "./auth/Provider";
 import QueryClientProvider from "./providers/QueryClientProvider";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools/production";
 
 // const inter = Inter({ subsets: ["latin"] });
 
@@ -19,7 +20,15 @@ export default function RootLayout({
     <html lang="en">
       <AuthProvider>
         <ApolloProvider>
-          <body>{children}</body>
+          <QueryClientProvider>
+            <body>
+              {children}
+              <ReactQueryDevtools
+                initialIsOpen={false}
+                buttonPosition="top-right"
+              />
+            </body>
+          </QueryClientProvider>
         </ApolloProvider>
       </AuthProvider>
     </html>

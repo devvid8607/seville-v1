@@ -177,8 +177,8 @@ export interface GridJsonType {
 // export default TestImportsQuery;
 
 import React, { useState } from "react";
-import useFetch from "../nonRouted/hooks/useFetch";
-import handleNetworkStatus from "../nonRouted/utils/handleAxiosStatus";
+import useFetch from "../_lib/_hooks/useFetch";
+import handleNetworkStatus from "../_lib/_utils/handleAxiosStatus";
 import { useRouter } from "next/navigation";
 
 const TestImportsQuery: React.FC = () => {
