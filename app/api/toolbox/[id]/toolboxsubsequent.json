@@ -1,0 +1,42 @@
+[
+  {
+    "id": 4,
+    "parentId": 1,
+    "name": "GDSN Models",
+    "type": "Category",
+    "hasChildren": true,
+    "children": null,
+    "configuration": null
+  },
+  {
+    "id": 5,
+    "parentId": 1,
+    "name": "PIF Models",
+    "type": "Category",
+    "hasChildren": true,
+    "children": null,
+    "configuration": null
+  },
+  {
+    "id": 6,
+    "parentId": 1,
+    "name": "Employee Model",
+    "type": "Model",
+    "hasChildren": true,
+    "children": null,
+    "configuration": {
+      "entityId": 33,
+      "name": "Employee Model",
+      "friendlyName": "Employee",
+      "parentName": null,
+      "key": true,
+      "locked": false,
+      "notNull": true,
+      "isRemovable": false,
+      "enabled": true,
+      "dataType": "text",
+      "dataSourceId": null,
+      "dataSourceName": null
+    }
+  }
+]

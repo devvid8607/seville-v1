@@ -6,6 +6,7 @@ import CodeListNode from "../../../../_lib/_nodes/codeListNode/CodeListNode";
 import CustomEdge from "../edges/ButtonEdge";
 import { ModelNode } from "./ModelNode";
 import { NewModelCreatorCanvas } from "./NewModelCreatorCanvas";
+import FlowtoolBox from "@/app/canvas/[slug]/_lib/_nodes/flowtoolbox/FlowtoolBox";
 
 // const DynamicNewModelCreatorCanvas = dynamic(
 //   () =>
@@ -24,6 +25,7 @@ export const NewModelCreator = () => {
     () => ({
       modelNode: ModelNode,
       codeListNode: CodeListNode,
+      flowtoolbox: FlowtoolBox,
     }),
     []
   );

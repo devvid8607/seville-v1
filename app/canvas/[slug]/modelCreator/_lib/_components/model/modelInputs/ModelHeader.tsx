@@ -4,7 +4,7 @@ import { Box, IconButton, TextField, Tooltip, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { getAttributeIdFromHandle } from "../../../_helpers/createModelData";
-import { createModelNode } from "../../../_helpers/createModelNode";
+import { createModelNode } from "@/app/canvas/[slug]/flowComponents/_lib/_helpers/createModelNode";
 import useModelBackendStore from "../../../_store/modelStore/ModelBackEndStore";
 import useModelStore from "../../../_store/modelStore/ModelDetailsFromBackendStore";
 import { useModelNodesStore } from "../../../_store/modelStore/ModelNodesStore";
@@ -115,13 +115,13 @@ export const ModelHeader: React.FC<ModelHeaderProps> = ({
   );
   // #endregion
 
-  const { modelNodeSchemas } = useModelBackendStore();
+  // const { modelNodeSchemas } = useModelBackendStore();
   // #endregion
 
   // #region state vars
   let model = models.find((model) => model.modelId === modelId);
-  const IconComponent =
-    MuiIcons[modelNodeSchemas.icon as keyof typeof MuiIcons];
+  // const IconComponent =
+  //   MuiIcons[modelNodeSchemas.icon as keyof typeof MuiIcons];
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [tempFriendlyName, setTempFriendlyName] = useState<string>(
     model?.modelFriendlyName || ""
@@ -316,8 +316,7 @@ export const ModelHeader: React.FC<ModelHeaderProps> = ({
       <Box onClick={handleModelHeaderSingleClick}>
         <Box
           sx={{
-            backgroundColor:
-              model && model.isClone ? "#F0F3FF" : modelNodeSchemas.headerColor,
+            backgroundColor: model && model.isClone ? "#F0F3FF" : "#F0F3FF",
             borderBottom: "1px solid #aaa",
             height: "auto",
             pt: 2,
@@ -348,7 +347,7 @@ export const ModelHeader: React.FC<ModelHeaderProps> = ({
                 ml: 1,
               }}
             >
-              <IconComponent />
+              <MuiIcons.SchemaOutlined />
             </Box>
             {isEditing ? (
               <TextField

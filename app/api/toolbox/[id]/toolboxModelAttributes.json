@@ -1,0 +1,68 @@
+[
+  {
+    "id": 4234,
+    "parentId": 6,
+    "name": "Employee ID",
+    "type": "attribute",
+    "hasChildren": false,
+    "children": null,
+    "configuration": {
+      "entityId": 55,
+      "name": "Employee ID",
+      "friendlyName": "Employee ID",
+      "parentName": "Employee",
+      "key": true,
+      "locked": false,
+      "notNull": true,
+      "isRemovable": false,
+      "enabled": true,
+      "dataType": "text",
+      "dataSourceId": null,
+      "dataSourceName": null
+    }
+  },
+  {
+    "id": 453,
+    "parentId": 6,
+    "name": "Employee Salary",
+    "type": "attribute",
+    "hasChildren": false,
+    "children": null,
+    "configuration": {
+      "entityId": 3454,
+      "name": "Employee Salary",
+      "friendlyName": "Employee Salary",
+      "parentName": "Employee",
+      "key": true,
+      "locked": false,
+      "notNull": true,
+      "isRemovable": false,
+      "enabled": true,
+      "dataType": "text",
+      "dataSourceId": null,
+      "dataSourceName": null
+    }
+  },
+  {
+    "id": 567,
+    "parentId": 6,
+    "name": "Employee Address",
+    "type": "attribute",
+    "hasChildren": false,
+    "children": null,
+    "configuration": {
+      "entityId": 3454,
+      "name": "Employee Address",
+      "friendlyName": "Employee Address",
+      "parentName": "Employee",
+      "key": true,
+      "locked": false,
+      "notNull": true,
+      "isRemovable": false,
+      "enabled": true,
+      "dataType": "text",
+      "dataSourceId": "789",
+      "dataSourceName": "Address"
+    }
+  }
+]

@@ -5,7 +5,7 @@ import React from "react";
 import { v4 as uuidv4 } from "uuid";
 import { useTabStore } from "../../../../../_lib/_store/TabStateManagmentStore";
 import { getAttributeIdFromHandle } from "../../../_helpers/createModelData";
-import { createModelNode } from "../../../_helpers/createModelNode";
+import { createModelNode } from "@/app/canvas/[slug]/flowComponents/_lib/_helpers/createModelNode";
 import useModelStore from "../../../_store/modelStore/ModelDetailsFromBackendStore";
 import { useModelNodesStore } from "../../../_store/modelStore/ModelNodesStore";
 // import { useFlowNodeStore } from "../../../store/";

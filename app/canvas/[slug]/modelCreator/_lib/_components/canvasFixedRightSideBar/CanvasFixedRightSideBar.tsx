@@ -3,11 +3,12 @@ import { Box, IconButton, Slide, Tab, Tabs, Typography } from "@mui/material";
 
 import React from "react";
 import useFlowModelBackendStore from "../../_store/modelStore/ModelBackEndStore";
-import { ModelPropertiesTab } from "../sidebarTabComponents/propertiesTab/ModelPropertiesTab";
-import { ModelDataTab } from "../sidebarTabComponents/dataTab/ModelDataTab";
+
+import { ModelPropertiesTab } from "@/app/canvas/[slug]/_lib/_components/sidebarTabComponents/propertiesTab/ModelPropertiesTab";
+import { ModelDataTab } from "@/app/canvas/[slug]/_lib/_components/sidebarTabComponents/dataTab/ModelDataTab";
 import { useTabStore } from "../../../../_lib/_store/TabStateManagmentStore";
 import { TabOption, TabPanelProps } from "./types/SideBarTypes";
-import { CanvasLevelPropertiesTab } from "../sidebarTabComponents/CanvasLevelPropertiesTab";
+import { CanvasLevelPropertiesTab } from "@/app/canvas/[slug]/_lib/_components/sidebarTabComponents/CanvasLevelPropertiesTab";
 
 export const CanvasFixedRightSideBar: React.FC = () => {
   const {
@@ -24,11 +25,11 @@ export const CanvasFixedRightSideBar: React.FC = () => {
     showNodeContextMenu: state.showNodeContextMenu,
   }));
 
-  const { modelNodeSchemas } = useFlowModelBackendStore();
+  // const { modelNodeSchemas } = useFlowModelBackendStore();
 
   let sidebarTabOptions;
 
-  sidebarTabOptions = modelNodeSchemas.config.sidebarTabOptions;
+  sidebarTabOptions = ["home", "properties", "data"];
 
   const tabComponentsLookup: Record<TabOption, () => JSX.Element> = {
     properties: ModelPropertiesTab,

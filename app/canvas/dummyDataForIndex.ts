@@ -1,6 +1,6 @@
 export const modelIndexData = [
   {
-    id: 1,
+    id: "1",
     name: "Model1",
     friendlyName: "Model One",
     description: "Description of Model One",
@@ -10,7 +10,7 @@ export const modelIndexData = [
     dateModified: "26/03/2024",
   },
   {
-    id: 2,
+    id: "2",
     name: "Model2",
     friendlyName: "Model Two",
     description: "Description of Model Two",
@@ -19,12 +19,11 @@ export const modelIndexData = [
     dateCreated: "25/03/2024",
     dateModified: "26/03/2024",
   },
-  // Add more models as needed
 ];
 
 export const validationSetData = [
   {
-    id: 1,
+    id: "1",
     name: "ValidationSet1",
     friendlyName: "Validation Set One",
     description: "Description of Validation Set One",
@@ -34,7 +33,7 @@ export const validationSetData = [
     dateModified: "26/03/2024",
   },
   {
-    id: 2,
+    id: "2",
     name: "ValidationSet2",
     friendlyName: "Validation Set Two",
     description: "Description of Validation Set Two",
@@ -47,7 +46,7 @@ export const validationSetData = [
 
 export const logicCreatorData = [
   {
-    id: 1,
+    id: "1",
     name: "LogicCreator1",
     friendlyName: "Logic Creator One",
     description: "Description of Logic Creator One",
@@ -57,7 +56,7 @@ export const logicCreatorData = [
     dateModified: "26/03/2024",
   },
   {
-    id: 2,
+    id: "2",
     name: "LogicCreator2",
     friendlyName: "Logic Creator Two",
     description: "Description of Logic Creator Two",

@@ -255,6 +255,10 @@ const LoginComponent = () => {
       <div style={{ marginTop: 15 }}>
         <Link href="/canvas">Canvas</Link>
       </div>
+
+      <div style={{ marginTop: 15 }}>
+        <Link href="/canvasBuilder"> New Canvas</Link>
+      </div>
       <div>
         <p>Email: {data?.user.email}</p>
         <p>First Name: {data?.user.firstName}</p>

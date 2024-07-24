@@ -9,16 +9,22 @@ import {
 import { fetchModelFromAPI } from "../../_hooks/useGetModel";
 import { ModelBody } from "./modelInputs/ModelBody";
 import { ModelHeader } from "./modelInputs/ModelHeader";
-import { DropTypes } from "../../_types/TreeTypes";
+import { DropTypes } from "@/app/canvas/[slug]/_lib/_components/sidebarTabComponents/dataTab/customTreeView/sevilleTreeTypes/TreeTypes";
 import useModelStore, {
   Model,
 } from "../../_store/modelStore/ModelDetailsFromBackendStore";
+import { useFetchModelById } from "../../_queries/useModelQueries";
 
 export const ModelNode = memo(({ data }: { data: any }) => {
   // #region state variables
   const { modelDetails } = data;
   const [loading, setLoading] = useState(true);
   const [localModel, setLocalModel] = useState<Model | null>(null);
+  const {
+    data: fetchedModel,
+    error,
+    isLoading,
+  } = useFetchModelById(modelDetails.dataSourceId);
   //#endregion
 
   // #region useModelStore imports
@@ -27,33 +33,61 @@ export const ModelNode = memo(({ data }: { data: any }) => {
   const addAttributeToModel = useModelStore(
     (state) => state.addAttributeToModel
   );
+  const storedModel = getModelById(modelDetails.dataSourceId);
   //#endregion
 
   // #region useeffect
+  // useEffect(() => {
+  //   const getModel = async () => {
+  //     setLoading(true);
+  //     let foundModel = getModelById(modelDetails.dataSourceId);
+  //     // alert(foundModel);
+  //     if (!foundModel || foundModel === undefined) {
+  //       foundModel = await fetchModelFromAPI(
+  //         modelDetails.dataSourceId,
+  //         modelDetails.url
+  //       );
+  //       if (foundModel) {
+  //         addModelToStore(foundModel);
+  //       } else {
+  //         foundModel = createModelData(modelDetails);
+  //         addModelToStore(foundModel);
+  //       }
+  //     }
+
+  //     setLocalModel(foundModel);
+  //     setLoading(false);
+  //   };
+
+  //   getModel();
+  // }, [modelDetails.dataSourceId, modelDetails.url, data]);
+
+  // useEffect(() => {
+  //   if (model) {
+  //     setLocalModel(model);
+  //   } else if (error) {
+  //     const newModel = createModelData(modelDetails);
+  //     addModelToStore(newModel);
+  //     setLocalModel(newModel);
+  //   }
+  // }, [model, error, modelDetails]);
+
+  console.log("stored model", storedModel);
   useEffect(() => {
-    const getModel = async () => {
-      setLoading(true);
-      let foundModel = getModelById(modelDetails.dataSourceId);
-      // alert(foundModel);
-      if (!foundModel || foundModel === undefined) {
-        foundModel = await fetchModelFromAPI(
-          modelDetails.dataSourceId,
-          modelDetails.url
-        );
-        if (foundModel) {
-          addModelToStore(foundModel);
-        } else {
-          foundModel = createModelData(modelDetails);
-          addModelToStore(foundModel);
-        }
-      }
-
-      setLocalModel(foundModel);
+    if (!storedModel && fetchedModel) {
+      setLocalModel(fetchedModel);
+      addModelToStore(fetchedModel);
       setLoading(false);
-    };
-
-    getModel();
-  }, [modelDetails.dataSourceId, modelDetails.url, data]);
+    } else if (storedModel) {
+      setLocalModel(storedModel);
+      setLoading(false);
+    } else if (error) {
+      const newModel = createModelData(modelDetails);
+      addModelToStore(newModel);
+      setLocalModel(newModel);
+      setLoading(false);
+    }
+  }, [storedModel, fetchedModel, error, modelDetails, addModelToStore]);
   // #endregion
 
   // #region evenHandlers
@@ -121,8 +155,8 @@ export const ModelNode = memo(({ data }: { data: any }) => {
         boxShadow: "0px 1px 3px 0px rgba(0, 0, 0, 0.12)",
         p: 2,
         backgroundColor: "#ffffff",
-        filter: loading ? "blur(3px)" : "none",
-        pointerEvents: loading ? "none" : "auto",
+        // filter: loading ? "blur(3px)" : "none",
+        // pointerEvents: loading ? "none" : "auto",
       }}
     >
       <Handle

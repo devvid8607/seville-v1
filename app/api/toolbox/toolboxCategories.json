@@ -1,0 +1,29 @@
+[
+  {
+    "id": "db43b9e2-77c8-4fe0-b9a5-887f0379e5d3",
+    "name": "Models",
+    "code": "model",
+    "description": "Components with schema",
+    "icon": "",
+    "color": "",
+    "subCategories": []
+  },
+  {
+    "id": "db43b9e2-77c8-4fe0-b9a5-887f0379e4g9",
+    "name": "Datatypes",
+    "code": "datatype",
+    "description": "Components with schema",
+    "icon": "",
+    "color": "",
+    "subCategories": []
+  },
+  {
+    "id": "db43b9e2-77c8-4fe0-b9a5-887f0379e5d4",
+    "name": "Code Lists",
+    "code": "codelist",
+    "description": "Components with schema",
+    "icon": "",
+    "color": "",
+    "subCategories": []
+  }
+]

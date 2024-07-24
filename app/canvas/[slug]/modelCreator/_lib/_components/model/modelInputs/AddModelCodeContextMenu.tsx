@@ -10,11 +10,12 @@ import {
   getNodeIDFromHandle,
 } from "../../../_helpers/createModelData";
 import { useModelNodesStore } from "../../../_store/modelStore/ModelNodesStore";
-import { createModelNode } from "../../../_helpers/createModelNode";
+import { createModelNode } from "@/app/canvas/[slug]/flowComponents/_lib/_helpers/createModelNode";
+
 import useModelStore from "../../../_store/modelStore/ModelDetailsFromBackendStore";
 import propertiesData from "../../../../../_lib/dummyData/typeProperties.json";
 import { Box } from "@mui/material";
-import { SmallModelDropdown } from "../../sidebarTabComponents/propertiesTab/components/SmallModelDropDown";
+import { SmallModelDropdown } from "@/app/canvas/[slug]/_lib/_components/sidebarTabComponents/propertiesTab/components/SmallModelDropDown";
 import useDataTypesStore from "@/app/canvas/[slug]/_lib/_store/DataTypesStore";
 
 export const AddModelCodeContextMenu = () => {

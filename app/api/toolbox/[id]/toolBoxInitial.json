@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "parentId": null,
+    "name": "Models",
+    "type": "Category",
+    "hasChildren": true,
+    "children": null,
+    "configuration": null
+  },
+  {
+    "id": 2,
+    "parentId": null,
+    "name": "Code Lists",
+    "type": "Category",
+    "hasChildren": true,
+    "children": null,
+    "configuration": null
+  },
+  {
+    "id": 3,
+    "parentId": null,
+    "name": "Additional Category",
+    "type": "Category",
+    "hasChildren": true,
+    "children": null,
+    "configuration": null
+  }
+]

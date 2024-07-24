@@ -1,5 +1,4 @@
-import { ListItem } from "../components/sidebarTabComponents/propertiesTab/components/RecursiveDropdownv3";
-
+import { ListItem } from "../../../_lib/_components/sidebarTabComponents/propertiesTab/components/RecursiveDropdownv3";
 export function findLastChildWithProperties(data: ListItem[]): any[] | null {
   let lastProperties = null;
 

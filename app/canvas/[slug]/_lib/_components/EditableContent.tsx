@@ -1,7 +1,7 @@
 import { Box, TextField, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import useModelBackendStore from "../../modelCreator/_lib/_store/modelStore/ModelBackEndStore";
-import { canvasHeader } from "../../modelCreator/_lib/_types/SevilleSchema";
+import { canvasHeader } from "../../flowComponents/_lib/_types/SevilleSchema";
 // import useFlowBackendStore from "../newValueChangesFlow/FlowStore/FlowBackEndStore";
 // import { useLocation } from "react-router-dom";
 

@@ -1,0 +1,26 @@
+[
+  {
+    "id": "db43b9e2-77c8-4fe0-b9a5-887f0379e5d3",
+    "name": "WorkInProgress",
+    "description": "Components with schema",
+    "icon": "",
+    "color": "",
+    "subCategories": []
+  },
+  {
+    "id": "db43b9e2-77c8-4fe0-b9a5-887f0379e4g9",
+    "name": "Validation Set",
+    "description": "Components with schema",
+    "icon": "",
+    "color": "",
+    "subCategories": []
+  },
+  {
+    "id": "db43b9e2-77c8-4fe0-b9a5-887f0379e5d4",
+    "name": "System Nodes",
+    "description": "Components with schema",
+    "icon": "",
+    "color": "",
+    "subCategories": []
+  }
+]

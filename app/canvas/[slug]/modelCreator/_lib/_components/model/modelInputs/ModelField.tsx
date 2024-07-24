@@ -20,7 +20,7 @@ import {
   iconLookup,
   IconLookup,
 } from "../../../../../_lib/_constants/IconConstants";
-import { createModelNode } from "../../../_helpers/createModelNode";
+import { createModelNode } from "@/app/canvas/[slug]/flowComponents/_lib/_helpers/createModelNode";
 
 import useModelStore from "../../../_store/modelStore/ModelDetailsFromBackendStore";
 import { useModelNodesStore } from "../../../_store/modelStore/ModelNodesStore";

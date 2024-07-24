@@ -1,0 +1,1419 @@
+{
+  "header": {
+    "canvasName": "ValidationSet",
+    "canvasDesc": "test desc",
+    "canvasId": "234324-23423-23432",
+    "createdBy": "admin",
+    "modifiedBy": "admin",
+    "dateCreated": "",
+    "dateModified": ""
+  },
+  "unUsed": [
+    {
+      "id": "flowOutputSelector",
+      "type": "flowOutputSelectorNode",
+      "position": { "x": 1500, "y": 150 },
+      "data": { "position": "top-right", "component": "FlowOutputSelector" },
+      "dragHandle": ".custom-drag-handle"
+    },
+    {
+      "id": "flowOutputSelectorTest",
+      "type": "flowOutputSelectorNodeTest",
+      "position": { "x": 1900, "y": 150 },
+      "data": { "position": "top-right", "component": "FlowOutputSelector" },
+      "dragHandle": ".custom-drag-handle"
+    },
+    {
+      "id": "flowDataSelector",
+      "type": "flowDataSelectorNode",
+      "position": { "x": 2500, "y": 50 },
+      "data": { "position": "top-right", "component": "FlowDataSelector" },
+      "dragHandle": ".custom-drag-handle"
+    },
+    {
+      "id": "1334454400",
+      "nodeType": "logicOutputNode",
+      "position": { "x": 10, "y": 200 },
+      "metaData": {
+        "dataSourceId": "4565464",
+        "name": "Output Node",
+        "friendlyName": "Model-OutputNode",
+        "description": "This is my intial o/p model",
+        "createdBy": "admin",
+        "modifiedBy": "admin",
+        "dateCreated": "25/03/2024",
+        "dateModified": "25/03/2024",
+        "url": "",
+        "sourcePage": "validationSet"
+      }
+    }
+  ],
+  "initialSystemNodes": [
+    {
+      "id": "flowNodeSelector",
+      "type": "flowNodeSelectorNode",
+      "position": { "x": 50, "y": 650 },
+      "data": {
+        "position": "top-left",
+        "component": "FlowItemSelector",
+        "modelDetails": {
+          "name": "Item Selector",
+          "friendlyName": "Item Selector",
+          "description": "This is an Item Selector",
+          "createdBy": "admin",
+          "modifiedBy": "admin",
+          "dateCreated": "25/03/2024",
+          "dateModified": "25/03/2024"
+        }
+      },
+      "dragHandle": ".custom-drag-handle",
+      "hidden": false
+    },
+    {
+      "id": "347333324",
+      "type": "contextDataNode",
+      "position": { "x": 2750, "y": 250 },
+      "dragHandle": ".custom-drag-handle",
+      "hidden": false,
+      "data": {
+        "modelDetails": {
+          "name": "Context Data Node",
+          "friendlyName": "Context Data Node",
+          "description": "Context Data Node",
+          "createdBy": "admin",
+          "modifiedBy": "admin",
+          "dateCreated": "25/03/2024",
+          "dateModified": "25/03/2024"
+        }
+      }
+    },
+    {
+      "id": "13344",
+      "type": "validationOutputNode",
+      "position": { "x": 10, "y": 200 },
+      "data": {
+        "modelDetails": {
+          "name": "validationOutputNode",
+          "friendlyName": "Validation Output Node",
+          "description": "Validation Output Node",
+          "createdBy": "admin",
+          "modifiedBy": "admin",
+          "dateCreated": "25/03/2024",
+          "dateModified": "25/03/2024"
+        }
+      }
+    }
+  ],
+  "initialUserNodes": [
+    {
+      "id": "133",
+      "nodeType": "inputNode",
+      "position": { "x": 650, "y": 200 },
+      "metaData": {
+        "dataSourceId": "123",
+        "name": "Input Node",
+        "friendlyName": "Address",
+        "description": "This is my intial model",
+        "url": "/api/Models/",
+        "createdBy": "admin",
+        "modifiedBy": "admin",
+        "dateCreated": "25/03/2024",
+        "dateModified": "25/03/2024",
+        "sourcePage": "validationSet"
+      }
+    },
+
+    {
+      "id": "87224544",
+      "nodeType": "ruleNode",
+      "position": { "x": 2300, "y": 200 },
+      "metaData": {
+        "dataSourceId": "",
+        "name": "Rule Node",
+        "friendlyName": "Rule Node",
+        "description": "This is my intial rule model",
+        "createdBy": "admin",
+        "modifiedBy": "admin",
+        "dateCreated": "25/03/2024",
+        "dateModified": "25/03/2024",
+        "url": "",
+        "sourcePage": "validationSet",
+        "rules": [
+          {
+            "id": "ruleId1",
+            "name": "Rule Name 1",
+
+            "nodesData": [
+              {
+                "id": "1715563301407",
+                "position": {
+                  "x": 885,
+                  "y": 918.3333333333334
+                },
+                "schemaId": "seville:utility:cleanNode",
+                "path": [["1715563301407"]],
+                "userProvidedName": "placeholder",
+                "parentIteratorNode": null,
+                "inputs": [
+                  {
+                    "id": 0,
+                    "values": []
+                  },
+                  {
+                    "id": 1,
+                    "values": []
+                  },
+                  {
+                    "id": 2,
+                    "values": []
+                  }
+                ],
+                "outputs": [
+                  {
+                    "id": "0",
+                    "value": "1715563301407"
+                  },
+                  {
+                    "id": "1",
+                    "value": "1715563301407",
+                    "name": "op singleValue"
+                  },
+                  {
+                    "id": "2",
+                    "value": "1715563301407",
+                    "name": "op complexValue"
+                  }
+                ]
+              },
+              {
+                "id": "1715563302532",
+                "position": {
+                  "x": 1793.3333333333335,
+                  "y": 1016.6666666666667
+                },
+                "schemaId": "seville:utility:cleanNode",
+                "path": [["1715563301407", "1715563302532"]],
+                "userProvidedName": "placeholder",
+                "parentIteratorNode": null,
+                "inputs": [
+                  {
+                    "id": 0,
+                    "values": []
+                  },
+                  {
+                    "id": 1,
+                    "values": []
+                  },
+                  {
+                    "id": 2,
+                    "values": []
+                  }
+                ],
+                "outputs": [
+                  {
+                    "id": "0",
+                    "value": "1715563302532"
+                  },
+                  {
+                    "id": "1",
+                    "value": "1715563302532",
+                    "name": "op singleValue"
+                  },
+                  {
+                    "id": "2",
+                    "value": "1715563302532",
+                    "name": "op complexValue"
+                  }
+                ]
+              }
+            ],
+
+            "edgesData": [
+              {
+                "zIndex": 5,
+                "source": "1715563301407",
+                "sourceHandle": "b",
+                "target": "1715563302532",
+                "targetHandle": "a",
+                "type": "sevilleDeletableEdge",
+                "id": "reactflow__edge-1715563301407b-1715563302532a"
+              }
+            ],
+            "feedbackType": "warning",
+            "industries": [],
+            "feedbackMessage": "message",
+            "description": "desc",
+            "isUpdated": false,
+            "isDeleted": false,
+            "isActiveRule": true
+          },
+          {
+            "id": "ruleId2",
+            "name": "Rule Name 2",
+
+            "nodesData": [
+              {
+                "id": "1715563302532",
+                "position": {
+                  "x": 1793.3333333333335,
+                  "y": 1016.6666666666667
+                },
+                "schemaId": "seville:utility:cleanNode",
+                "path": [["1715563302532"]],
+                "userProvidedName": "placeholder",
+                "parentIteratorNode": null,
+                "inputs": [
+                  {
+                    "id": 0,
+                    "values": []
+                  },
+                  {
+                    "id": 1,
+                    "values": []
+                  },
+                  {
+                    "id": 2,
+                    "values": []
+                  }
+                ],
+                "outputs": [
+                  {
+                    "id": "0",
+                    "value": "1715563302532"
+                  },
+                  {
+                    "id": "1",
+                    "value": "1715563302532",
+                    "name": "op singleValue"
+                  },
+                  {
+                    "id": "2",
+                    "value": "1715563302532",
+                    "name": "op complexValue"
+                  }
+                ]
+              }
+            ],
+            "edgesData": [],
+            "feedbackType": "warning",
+            "industries": [],
+            "feedbackMessage": "message",
+            "description": "desc",
+            "isUpdated": false,
+            "isDeleted": false,
+            "isActiveRule": false
+          }
+        ]
+      }
+    }
+  ],
+  "propertiesConfig": {
+    "sidebarTabOptions": ["home", "properties"]
+  },
+
+  "unused": [
+    {
+      "id": "flowModelSelector",
+      "type": "flowModelSelector",
+      "position": { "x": 700, "y": 450 },
+      "dragHandle": ".custom-drag-handle",
+      "data": {}
+    },
+    {
+      "id": "flowCanvasFixedRightSideBar",
+      "type": "flowCanvasFixedRightSideBar",
+      "position": { "x": 500, "y": 350 },
+      "data": {}
+    },
+    {
+      "id": 66,
+      "schemaId": "seville:utility:ifNode",
+      "userProvidedName": "if node test",
+      "nodeType": "flowNode",
+      "position": { "x": 1500, "y": 500 },
+      "inputs": [
+        {
+          "id": 0,
+          "value": ""
+        },
+        {
+          "id": 1,
+          "values": [
+            {
+              "id": "a6889c61-a095-4cc5-a1ba-576c68dc8c41",
+              "valueOne": [
+                {
+                  "id": 3443,
+                  "name": "SingleValue Item",
+                  "icon": "RefreshOutlined",
+                  "error": false,
+                  "source": "dataSelectorNode",
+                  "values": null
+                }
+              ],
+              "condition": "greaterThan",
+              "valueTwo": {
+                "textValue": "3243432"
+              },
+
+              "logic": ""
+            }
+          ]
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "id": "flowNodeSelector",
+      "type": "stickyPanel",
+      "position": { "x": 10, "y": 150 },
+      "data": { "position": "top-left", "component": "FlowItemSelector" },
+      "dragHandle": ".custom-drag-handle",
+      "hidden": false
+    },
+    {
+      "id": "flowDataSelector",
+      "type": "stickyPanel",
+      "position": { "x": 1000, "y": 50 },
+      "data": { "position": "top-right", "component": "FlowDataSelector" },
+      "dragHandle": ".custom-drag-handle"
+    },
+    {
+      "id": "flowOutputSelector",
+      "type": "stickyPanel",
+      "position": { "x": 1500, "y": 150 },
+      "data": { "position": "top-right", "component": "FlowOutputSelector" },
+      "dragHandle": ".custom-drag-handle"
+    },
+    {
+      "schemaId": "seville:model:modelNode",
+      "name": "Model1",
+      "nodeType": "flowModelSelector",
+      "helpText": "This is a help text",
+      "description": "Model Node",
+      "icon": "StorageOutlined",
+      "deprecated": false,
+      "headerColor": "rgba(181, 66, 252, 0.15)",
+      "config": {
+        "sidebarTabOptions": ["properties", "data"]
+      }
+    },
+    {
+      "id": 45575,
+      "schemaId": "seville:utility:cleanNode",
+      "userProvidedName": "test",
+      "nodeType": "flowNode",
+      "position": { "x": 600, "y": 500 },
+
+      "inputs": [
+        {
+          "id": 0,
+          "values": ""
+        },
+        {
+          "id": 1,
+          "values": [
+            {
+              "id": "123",
+              "name": "Employee.modelist",
+              "error": false,
+              "typeError": false,
+              "values": null,
+              "parentId": "123",
+              "droppedId": "123.652eb9fd-1c92-4299-a239-24c19ce6799f",
+              "doSelfNodeCheck": false,
+              "doPreviousOutputCheck": false,
+              "doInputModelCheck": true,
+              "dropType": "List",
+              "selector": {
+                "expanded": ["123.652eb9fd-1c92-4299-a239-24c19ce6799f"],
+                "selected": [
+                  "123.652eb9fd-1c92-4299-a239-24c19ce6799f.cust_name"
+                ]
+              },
+              "childDataType": "model"
+            }
+          ]
+        }
+      ],
+      "outputs": [
+        {
+          "id": 0,
+          "label": "Output1 - singleValue",
+          "name": "test"
+        }
+      ]
+    },
+    {
+      "schemaId": "seville:utility:joinNode",
+      "name": "Join Node",
+      "categoryId": "db43b9e2-77c8-4fe0-b9a5-887f0379e5d3",
+      "nodeType": "flowNode",
+      "helpText": "This is a help text",
+      "description": "Text Input",
+      "icon": "AddCircleOutline",
+      "deprecated": false,
+      "defaultNodes": null,
+      "headerColor": "rgba(151, 220, 4, 0.25)",
+      "userProvidedName": "placeholder",
+      "favorited": true,
+      "inputs": [
+        {
+          "id": 0,
+          "type": "header",
+          "label": "Join Node",
+          "description": "this goes on help text",
+          "icon": "AddCircleOutline",
+          "allowedDataTypes": [],
+          "placeholder": "",
+          "visible": true
+        },
+        {
+          "id": 1,
+          "type": "dropdown",
+          "label": "Method",
+          "icon": "AddCircleOutline",
+          "placeholder": "",
+          "visible": true,
+          "description": "Test Dropdown",
+          "config": {
+            "fromAPI": false,
+            "apiValue": "",
+            "def": "Test1",
+            "options": [
+              {
+                "option": "Test 1",
+                "value": "Test1"
+              },
+              {
+                "option": "Test 2",
+                "value": "Test2"
+              },
+              {
+                "option": "Test 3",
+                "value": "Test3"
+              }
+            ]
+          }
+        },
+        {
+          "id": 2,
+          "type": "textFieldButtonGroup",
+          "label": "Add Thread",
+          "description": "",
+          "icon": "",
+          "placeholder": "",
+          "visible": true
+        }
+      ],
+      "outputs": [
+        {
+          "id": "0",
+          "kind": "header",
+          "label": "Output",
+          "description": "This goes on help text",
+          "icon": "",
+          "placeholder": "",
+          "visible": true,
+          "source": "nodeOutputs"
+        },
+        {
+          "id": "1",
+          "kind": "generic",
+          "label": "Output1 - singleValue",
+          "description": "Description",
+          "icon": "AddCircleOutline",
+          "placeholder": "",
+          "visible": true,
+          "allowedDatatypes": ["singleValue"],
+          "nodeType": "flowOutputSelectorNode",
+          "name": "op singleValue",
+          "source": "nodeOutputs"
+        }
+      ]
+    },
+    {
+      "id": "1715554088452",
+      "position": {
+        "x": 1451.6666666666667,
+        "y": 600
+      },
+      "schemaId": "seville:utility:addNode",
+      "path": [["1715554088452"]],
+      "userProvidedName": "placeholder",
+      "parentIteratorNode": null,
+      "inputs": [
+        {
+          "id": 0,
+          "values": []
+        },
+        {
+          "id": 1,
+          "values": [
+            {
+              "textValue": "34554"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "values": [
+            {
+              "id": "123",
+              "name": "Employee.Employee Department",
+              "icon": "AddOutlined",
+              "error": false,
+              "typeError": false,
+              "values": null,
+              "parentId": "123",
+              "droppedId": "123.emp_dept",
+              "doSelfNodeCheck": false,
+              "doPreviousOutputCheck": false,
+              "doInputModelCheck": true,
+              "dropType": "Model",
+              "selector": {
+                "expanded": [],
+                "selected": []
+              },
+              "childDataType": null,
+              "isFlareItem": false
+            }
+          ]
+        }
+      ],
+      "outputs": [
+        {
+          "id": "0",
+          "value": "1715554088452"
+        },
+        {
+          "id": "1",
+          "value": "1715554088452",
+          "name": "op singleValue"
+        },
+        {
+          "id": "2",
+          "value": "1715554088452",
+          "name": "op complexValue"
+        }
+      ]
+    },
+    {
+      "id": "1715554231847",
+      "position": {
+        "x": 2281.666666666667,
+        "y": 865
+      },
+      "schemaId": "seville:utility:sortNode",
+      "path": [["1715554088452", "1715554231847"]],
+      "userProvidedName": "placeholder",
+      "parentIteratorNode": null,
+      "inputs": [
+        {
+          "id": 0,
+          "values": []
+        },
+        {
+          "id": 1,
+          "values": [
+            {
+              "id": "1715554088452",
+              "name": "234324.ParentOutput1",
+              "icon": "AddCircleOutline",
+              "error": false,
+              "typeError": false,
+              "values": null,
+              "parentId": "1715554088452",
+              "droppedId": "1",
+              "doSelfNodeCheck": true,
+              "doPreviousOutputCheck": true,
+              "doInputModelCheck": false,
+              "dropType": "Output",
+              "selector": {
+                "expanded": [],
+                "selected": []
+              },
+              "isFlareItem": false
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "values": []
+        }
+      ],
+      "outputs": [
+        {
+          "id": "0",
+          "value": "1715554231847",
+          "name": "op singleValue"
+        }
+      ]
+    },
+    {
+      "zIndex": 5,
+      "source": "1715554088452",
+      "sourceHandle": "b",
+      "target": "1715554231847",
+      "targetHandle": "a",
+      "type": "sevilleDeletableEdge",
+      "id": "reactflow__edge-1715554088452b-1715554231847a"
+    },
+    {
+      "id": "1715554231847",
+      "position": {
+        "x": 2281.666666666667,
+        "y": 865
+      },
+      "schemaId": "seville:utility:sortNode",
+      "path": [["1715554088452", "1715554231847"]],
+      "userProvidedName": "placeholder",
+      "parentIteratorNode": null,
+      "inputs": [
+        {
+          "id": 0,
+          "values": []
+        },
+        {
+          "id": 1,
+          "values": [
+            {
+              "id": "1715554088452",
+              "name": "234324.ParentOutput1",
+              "icon": "AddCircleOutline",
+              "error": false,
+              "typeError": false,
+              "values": null,
+              "parentId": "1715554088452",
+              "droppedId": "1",
+              "doSelfNodeCheck": true,
+              "doPreviousOutputCheck": true,
+              "doInputModelCheck": false,
+              "dropType": "Output",
+              "selector": {
+                "expanded": [],
+                "selected": []
+              },
+              "isFlareItem": false
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "values": []
+        }
+      ],
+      "outputs": [
+        {
+          "id": "0",
+          "value": "1715554231847",
+          "name": "op singleValue"
+        }
+      ]
+    }
+  ],
+  "saveEdges": [],
+
+  "savedNodes": [],
+
+  "schemas": [
+    {
+      "schemaId": "seville:utility:cleanNode",
+      "name": "Clean Node",
+      "categoryId": "db43b9e2-77c8-4fe0-b9a5-887f0379e5d3",
+      "nodeType": "flowNode",
+      "helpText": "This is a help text",
+      "description": "Drag for Clean Node",
+      "icon": "AddCircleOutline",
+      "deprecated": false,
+      "defaultNodes": null,
+      "headerColor": "rgba(151, 220, 4, 0.25)",
+      "userProvidedName": "placeholder",
+      "favorited": true,
+      "inputs": [
+        {
+          "id": 0,
+          "type": "header",
+          "label": "Input",
+          "description": "This goes on help text",
+          "icon": "AddCircleOutline",
+          "placeholder": "",
+          "visible": true,
+          "config": {}
+        },
+        {
+          "id": 1,
+          "type": "newDroppable",
+          "label": "Complex Droppable",
+          "description": "",
+          "icon": "AddCircleOutline",
+          "placeholder": "Complex Droppable",
+          "visible": true,
+          "config": {
+            "allowedDataTypes": {
+              "dropType": ["complexValue"],
+              "edgeType": null
+            },
+            "allowHardCoding": true,
+            "kind": "text",
+            "allowMultipleDrop": false,
+            "selector": true,
+            "showFlareDrawer": true
+          }
+        },
+
+        {
+          "id": 2,
+          "type": "dropDownButtonGroup",
+          "label": "Add Criteria",
+          "description": "",
+          "icon": "",
+          "placeholder": "",
+          "visible": true,
+          "options": [
+            {
+              "option": "Test 1",
+              "value": "Test1"
+            },
+            {
+              "option": "Test 2",
+              "value": "Test2"
+            },
+            {
+              "option": "Test 3",
+              "value": "Test3"
+            },
+            {
+              "option": "Test 4",
+              "value": "Test4"
+            }
+          ]
+        }
+      ],
+      "outputs": [
+        {
+          "id": "0",
+          "kind": "header",
+          "label": "Output",
+          "description": "This goes on help text",
+          "icon": "",
+          "placeholder": "",
+          "visible": true,
+          "source": "nodeOutputs"
+        },
+        {
+          "id": "1",
+          "kind": "generic",
+          "label": "ParentOutput1",
+          "description": "Description",
+          "icon": "AddCircleOutline",
+          "placeholder": "",
+          "visible": true,
+          "allowedDatatypes": ["singleValue"],
+          "name": "op singleValue",
+          "source": "nodeOutputs"
+        },
+        {
+          "id": "2",
+          "kind": "generic",
+          "label": "ParentOutput2",
+          "description": "Description",
+          "icon": "AddCircleOutline",
+          "placeholder": "",
+          "visible": true,
+          "allowedDatatypes": ["complexValue"],
+          "name": "op complexValue",
+          "source": "nodeOutputs",
+          "children": [
+            {
+              "id": 3,
+              "kind": "generic",
+              "label": "ChildOutput1",
+              "description": "Description",
+              "icon": "AddCircleOutline",
+              "placeholder": "",
+              "visible": true,
+              "allowedDatatypes": ["singleValue"],
+              "name": "op child 1 singleValue",
+              "source": "nodeOutputs"
+            },
+            {
+              "id": 4,
+              "kind": "generic",
+              "label": "ChildOutput2",
+              "description": "Description",
+              "icon": "AddCircleOutline",
+              "placeholder": "",
+              "visible": true,
+              "allowedDatatypes": ["singleValue"],
+              "name": "op child 2 singleValue",
+              "source": "nodeOutputs"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "schemaId": "seville:utility:listCleanNode",
+      "name": "List Clean Node",
+      "categoryId": "db43b9e2-77c8-4fe0-b9a5-887f0379e5d3",
+      "nodeType": "flowNode",
+      "helpText": "This is a help text",
+      "description": "Drag for List Clean Node",
+      "icon": "AddCircleOutline",
+      "deprecated": false,
+      "defaultNodes": null,
+      "headerColor": "rgba(151, 220, 4, 0.25)",
+      "userProvidedName": "placeholder",
+      "favorited": true,
+      "inputs": [
+        {
+          "id": 0,
+          "type": "header",
+          "label": "Input",
+          "description": "This goes on help text",
+          "icon": "AddCircleOutline",
+          "placeholder": "",
+          "visible": true,
+          "config": {}
+        },
+        {
+          "id": 1,
+          "type": "newDroppable",
+          "label": "List Droppable",
+          "description": "",
+          "icon": "AddCircleOutline",
+          "placeholder": "List Droppable",
+          "visible": true,
+          "config": {
+            "allowedDataTypes": {
+              "dropType": ["listValue"],
+              "edgeType": null
+            },
+            "allowHardCoding": true,
+            "kind": "text",
+            "allowMultipleDrop": false,
+            "selector": true,
+            "showFlareDrawer": true
+          }
+        },
+
+        {
+          "id": 2,
+          "type": "dropDownButtonGroup",
+          "label": "Add Criteria",
+          "description": "",
+          "icon": "",
+          "placeholder": "",
+          "visible": true,
+          "options": [
+            {
+              "option": "Test 1",
+              "value": "Test1"
+            },
+            {
+              "option": "Test 2",
+              "value": "Test2"
+            },
+            {
+              "option": "Test 3",
+              "value": "Test3"
+            },
+            {
+              "option": "Test 4",
+              "value": "Test4"
+            }
+          ]
+        }
+      ],
+      "outputs": [
+        {
+          "id": "0",
+          "kind": "header",
+          "label": "Output",
+          "description": "This goes on help text",
+          "icon": "",
+          "placeholder": "",
+          "visible": true,
+          "source": "nodeOutputs"
+        },
+        {
+          "id": "1",
+          "kind": "generic",
+          "label": "ParentOutput1",
+          "description": "Description",
+          "icon": "AddCircleOutline",
+          "placeholder": "",
+          "visible": true,
+          "allowedDatatypes": ["singleValue"],
+          "name": "op singleValue",
+          "source": "nodeOutputs"
+        },
+        {
+          "id": "2",
+          "kind": "generic",
+          "label": "ParentOutput2",
+          "description": "Description",
+          "icon": "AddCircleOutline",
+          "placeholder": "",
+          "visible": true,
+          "allowedDatatypes": ["complexValue"],
+          "name": "op complexValue",
+          "source": "nodeOutputs",
+          "children": [
+            {
+              "id": 3,
+              "kind": "generic",
+              "label": "ChildOutput1",
+              "description": "Description",
+              "icon": "AddCircleOutline",
+              "placeholder": "",
+              "visible": true,
+              "allowedDatatypes": ["singleValue"],
+              "name": "op child 1 singleValue",
+              "source": "nodeOutputs"
+            },
+            {
+              "id": 4,
+              "kind": "generic",
+              "label": "ChildOutput2",
+              "description": "Description",
+              "icon": "AddCircleOutline",
+              "placeholder": "",
+              "visible": true,
+              "allowedDatatypes": ["singleValue"],
+              "name": "op child 2 singleValue",
+              "source": "nodeOutputs"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "schemaId": "seville:utility:addNode",
+      "name": "Add Node",
+      "categoryId": "db43b9e2-77c8-4fe0-b9a5-887f0379e5d3",
+      "nodeType": "flowNode",
+      "helpText": "This is a help text",
+      "description": "Drag for Add Node",
+      "icon": "AddCircleOutline",
+      "deprecated": false,
+      "defaultNodes": null,
+      "headerColor": "rgba(151, 220, 4, 0.25)",
+      "userProvidedName": "placeholder",
+      "favorited": true,
+      "inputs": [
+        {
+          "id": 0,
+          "type": "header",
+          "label": "Input",
+          "description": "This goes on help text",
+          "icon": "AddCircleOutline",
+          "placeholder": "",
+          "visible": true,
+          "config": {}
+        },
+        {
+          "id": 1,
+          "type": "newDroppable",
+          "label": "Single/Number/Hardcoded",
+          "description": "",
+          "icon": "AddCircleOutline",
+          "placeholder": "Single value droppable input",
+          "visible": true,
+          "config": {
+            "allowedDataTypes": {
+              "dropType": ["singleValue"],
+              "edgeType": null
+            },
+            "allowHardCoding": true,
+            "kind": "number",
+            "allowMultipleDrop": true,
+            "showFlareDrawer": true
+          }
+        },
+        {
+          "id": 2,
+          "type": "newDroppable",
+          "label": "Single/Number/Hardcoded",
+          "description": "",
+          "icon": "",
+          "placeholder": "Single value droppable input",
+          "visible": true,
+          "config": {
+            "allowedDataTypes": {
+              "dropType": ["singleValue"],
+              "edgeType": null
+            },
+            "allowHardCoding": true,
+            "kind": "file",
+            "allowMultipleDrop": false,
+            "showFlareDrawer": true
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "id": "0",
+          "kind": "header",
+          "label": "Output",
+          "description": "This goes on help text",
+          "icon": "",
+          "placeholder": "",
+          "visible": true,
+          "source": "nodeOutputs"
+        },
+        {
+          "id": "1",
+          "kind": "generic",
+          "label": "ParentOutput1",
+          "description": "Description",
+          "icon": "AddCircleOutline",
+          "placeholder": "",
+          "visible": true,
+          "allowedDatatypes": ["singleValue"],
+          "name": "op singleValue",
+          "source": "nodeOutputs"
+        },
+        {
+          "id": "2",
+          "kind": "generic",
+          "label": "ParentOutput2",
+          "description": "Description",
+          "icon": "AddCircleOutline",
+          "placeholder": "",
+          "visible": true,
+          "allowedDatatypes": ["complexValue"],
+          "name": "op complexValue",
+          "source": "nodeOutputs",
+          "children": [
+            {
+              "id": 3,
+              "kind": "generic",
+              "label": "ChildOutput1",
+              "description": "Description",
+              "icon": "AddCircleOutline",
+              "placeholder": "",
+              "visible": true,
+              "allowedDatatypes": ["singleValue"],
+              "name": "op child 1 singleValue",
+              "source": "nodeOutputs"
+            },
+            {
+              "id": 4,
+              "kind": "generic",
+              "label": "ChildOutput2",
+              "description": "Description",
+              "icon": "AddCircleOutline",
+              "placeholder": "",
+              "visible": true,
+              "allowedDatatypes": ["singleValue"],
+              "name": "op child 2 singleValue",
+              "source": "nodeOutputs"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "schemaId": "seville:utility:sortNode",
+      "name": "Sort Node",
+      "categoryId": "db43b9e2-77c8-4fe0-b9a5-887f0379e5d3",
+      "favorited": true,
+      "nodeType": "flowNode",
+      "helpText": "This is a help text",
+      "description": "Text Input",
+      "icon": "AddCircleOutline",
+      "subcategory": "c0ce9ef9-7a15-4432-8408-4cb077ea6659",
+      "deprecated": false,
+      "defaultNodes": null,
+      "headerColor": "rgba(151, 220, 4, 0.25)",
+      "userProvidedName": "placeholder",
+      "inputs": [
+        {
+          "id": 0,
+          "type": "header",
+          "label": "Sort Node",
+          "description": "this goes on help text",
+          "icon": "AddCircleOutline",
+          "placeholder": "",
+          "visible": true
+        },
+        {
+          "id": 1,
+          "type": "newDroppable",
+          "label": "Input",
+          "description": "This is a desc.",
+          "icon": "AddCircleOutline",
+          "placeholder": "Single value droppable input",
+          "visible": true,
+          "config": {
+            "allowedDataTypes": {
+              "dropType": ["singleValue"],
+              "edgeType": null
+            },
+            "allowHardCoding": false,
+            "allowMultipleDrop": true,
+            "showFlareDrawer": true
+          }
+        },
+        {
+          "id": 2,
+          "type": "dropDownButtonGroup",
+          "label": "Add Criteria",
+          "description": "",
+          "icon": "",
+          "placeholder": "",
+          "visible": true,
+          "options": [
+            {
+              "option": "Test 1",
+              "value": "Test1"
+            },
+            {
+              "option": "Test 2",
+              "value": "Test2"
+            },
+            {
+              "option": "Test 3",
+              "value": "Test3"
+            },
+            {
+              "option": "Test 4",
+              "value": "Test4"
+            }
+          ]
+        }
+      ],
+      "outputs": [
+        {
+          "id": "0",
+          "allowedDatatypes": ["singleValue"],
+          "nodeType": "flowOutputSelectorNode",
+          "label": "Output1 - singleValue",
+          "name": "op singleValue",
+          "icon": "AddCircleOutline",
+          "kind": "generic",
+          "description": "Description"
+        }
+      ]
+    },
+
+    {
+      "schemaId": "seville:utility:startNode",
+      "name": "Start Node",
+      "categoryId": "db43b9e2-77c8-4fe0-b9a5-887f0379e5d4",
+      "nodeType": "flowStartNode",
+      "helpText": null,
+      "description": null,
+      "icon": null,
+      "deprecated": false,
+      "defaultNodes": null,
+      "headerColor": null,
+      "userProvidedName": null,
+      "favorited": true,
+      "inputs": null,
+      "outputs": null
+    },
+    {
+      "schemaId": "seville:utility:endNode",
+      "name": "End Node",
+      "categoryId": "db43b9e2-77c8-4fe0-b9a5-887f0379e5d4",
+      "nodeType": "flowEndNode",
+      "helpText": null,
+      "description": null,
+      "icon": null,
+      "deprecated": false,
+      "defaultNodes": null,
+      "headerColor": null,
+      "userProvidedName": null,
+      "favorited": true,
+      "inputs": null,
+      "outputs": null
+    },
+    {
+      "schemaId": "seville:utility:iteratorForNode",
+      "name": "For Node",
+      "categoryId": "db43b9e2-77c8-4fe0-b9a5-887f0379e5d3",
+      "nodeType": "flowIteratorNode",
+      "helpText": "This is a help text",
+      "description": "Drag for For Node",
+      "icon": "AddCircleOutline",
+      "deprecated": false,
+      "defaultNodes": [
+        {
+          "schemaId": "seville:utility:startNode",
+          "position": { "x": 100, "y": 400 }
+        },
+        {
+          "schemaId": "seville:utility:endNode",
+          "position": { "x": 400, "y": 400 }
+        }
+      ],
+      "headerColor": "rgba(245, 40, 145, 0.2)",
+      "userProvidedName": "placeholder",
+      "favorited": true,
+      "subType": "for",
+      "inputs": [
+        {
+          "id": 0,
+          "type": "header",
+          "label": "For",
+          "description": "xxxx",
+          "icon": "AddCircleOutline",
+          "placeholder": "",
+          "visible": true
+        },
+        {
+          "id": 1,
+          "type": "iteratorInputGroup",
+          "label": "",
+          "description": "",
+          "icon": "",
+          "placeholder": "",
+          "visible": true,
+          "config": {}
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "schemaId": "seville:utility:iteratorForEachNode",
+      "name": "ForEach Node",
+      "categoryId": "db43b9e2-77c8-4fe0-b9a5-887f0379e5d3",
+      "nodeType": "flowIteratorNode",
+      "helpText": "This is a help text",
+      "description": "Text Input",
+      "icon": "RefreshOutlined",
+      "deprecated": false,
+      "defaultNodes": [
+        {
+          "schemaId": "seville:utility:startNode",
+          "position": { "x": 100, "y": 400 }
+        },
+        {
+          "schemaId": "seville:utility:endNode",
+          "position": { "x": 400, "y": 400 }
+        }
+      ],
+      "headerColor": "rgba(245, 40, 145, 0.2)",
+      "userProvidedName": "placeholder",
+      "favorited": true,
+      "subType": "foreach",
+      "inputs": [
+        {
+          "id": 0,
+          "type": "header",
+          "label": "ForEach",
+          "description": "xxxx",
+          "icon": "AddCircleOutline",
+          "allowedDataTypes": [],
+          "placeholder": "",
+          "visible": true
+        },
+        {
+          "id": 1,
+          "type": "iteratorInputGroup",
+          "label": "",
+          "description": "",
+          "icon": "",
+          "placeholder": "",
+          "visible": true
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "schemaId": "seville:utility:iteratorWhileNode",
+      "name": "While Node",
+      "categoryId": "db43b9e2-77c8-4fe0-b9a5-887f0379e5d3",
+      "nodeType": "flowIteratorNode",
+      "helpText": "This is a help text",
+      "description": "Text Input",
+      "icon": "RefreshOutlined",
+      "deprecated": false,
+      "defaultNodes": [
+        {
+          "schemaId": "seville:utility:startNode",
+          "position": { "x": 100, "y": 400 }
+        },
+        {
+          "schemaId": "seville:utility:endNode",
+          "position": { "x": 400, "y": 400 }
+        }
+      ],
+      "headerColor": "rgba(245, 40, 145, 0.2)",
+      "userProvidedName": "placeholder",
+      "favorited": true,
+      "subType": "while",
+      "inputs": [
+        {
+          "id": 0,
+          "type": "header",
+          "label": "While",
+          "description": "xxxx",
+          "icon": "AddCircleOutline",
+          "allowedDataTypes": [],
+          "placeholder": "",
+          "visible": true
+        },
+        {
+          "id": 1,
+          "type": "iteratorInputGroup",
+          "label": "",
+          "description": "",
+          "icon": "",
+          "placeholder": "",
+          "visible": true
+        }
+      ],
+      "outputs": []
+    },
+    {
+      "schemaId": "seville:utility:ifNode",
+      "name": "If Node",
+      "categoryId": "db43b9e2-77c8-4fe0-b9a5-887f0379e5d3",
+      "favorited": true,
+      "nodeType": "flowNode",
+      "helpText": "This is a help text",
+      "description": "Text Input",
+      "icon": "AddCircleOutline",
+      "deprecated": false,
+      "defaultNodes": null,
+      "headerColor": "rgba(151, 220, 4, 0.25)",
+      "userProvidedName": "placeholder",
+      "inputs": [
+        {
+          "id": 0,
+          "type": "header",
+          "label": "If",
+          "description": "xxxx",
+          "icon": "AddCircleOutline",
+          "placeholder": "",
+          "visible": true
+        },
+        {
+          "id": 1,
+          "type": "ifInputGroup",
+          "label": "",
+          "description": "",
+          "icon": "",
+          "placeholder": "",
+          "visible": true
+        }
+      ],
+      "outputs": [
+        {
+          "id": "0",
+          "allowedDatatypes": ["singleValue"],
+          "nodeType": "flowOutputSelectorNode",
+          "label": "Output1 - singleValue",
+          "name": "op singleValue",
+          "icon": "AddCircleOutline",
+          "kind": "generic",
+          "description": "Description"
+        }
+      ]
+    }
+  ]
+}

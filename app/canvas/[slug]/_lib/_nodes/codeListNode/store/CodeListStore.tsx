@@ -15,7 +15,6 @@ export interface CodeList {
 
 interface CodeListState {
   codeLists: CodeList[];
-
   getCodeById: (codeListId: string) => CodeList | undefined;
 }
 

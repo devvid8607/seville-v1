@@ -2,7 +2,7 @@ import { create } from "zustand";
 
 import modelDetails from "../../dummyData/modelDetails.json";
 import { v4 as uuidv4 } from "uuid";
-import { FieldType } from "../../types/FieldType";
+import { FieldType } from "../../_types/FieldType";
 
 // Assuming this is your initial data
 
@@ -234,7 +234,7 @@ interface ModelStore {
 
 // Define your store
 const useModelStore = create<ModelStore>((set, get) => ({
-  models: initialModels,
+  models: [],
   inputModelId: null,
   // Implementations for the methods defined in ModelStore
   addModelToStore: (newModel) =>

@@ -3,18 +3,20 @@ import { Node } from "reactflow";
 import { useModelNodesStore } from "../_store/modelStore/ModelNodesStore";
 
 export const createSavedModelNodesfromJSON = async (savedNodes: Node[]) => {
-  savedNodes.forEach((savedNode) => {
-    const newNode = {
-      id: savedNode.id,
-      type: savedNode.type,
-      position: savedNode.position,
-      dragHandle: ".custom-drag-handle",
-      data: savedNode.data,
-      width: savedNode.width,
-    };
+  savedNodes &&
+    savedNodes.length > 0 &&
+    savedNodes.forEach((savedNode) => {
+      const newNode = {
+        id: savedNode.id,
+        type: savedNode.type,
+        position: savedNode.position,
+        dragHandle: ".custom-drag-handle",
+        data: savedNode.data,
+        width: savedNode.width,
+      };
 
-    useModelNodesStore.getState().addNode(newNode);
-  });
+      useModelNodesStore.getState().addNode(newNode);
+    });
   await new Promise((resolve) => setTimeout(resolve, 3000));
 };
 

@@ -115,6 +115,9 @@ export const NewModelCreatorCanvas = memo(
     const fetchInitialSchema = useModelBackendStore(
       (state) => state.fetchInitialSchema
     );
+    const initialSchemaItems = useModelBackendStore(
+      (state) => state.initialSchemaItems
+    );
     const { header } = useModelBackendStore();
     // #endregion
 
@@ -213,14 +216,17 @@ export const NewModelCreatorCanvas = memo(
 
     // #region useEffects
 
-    // useEffect(() => {
-    //   console.log("in initial user use effect 2");
-    //   createSavedModelNodesfromJSON(savedNodes);
-    // }, [savedNodes]);
+    useEffect(() => {
+      createSavedModelNodesfromJSON(savedNodes);
+    }, [savedNodes]);
 
-    // useEffect(() => {
-    //   createSavedModelEdgesFromJSON(savedEdges);
-    // }, [savedEdges]);
+    useEffect(() => {
+      createSavedModelEdgesFromJSON(savedEdges);
+    }, [savedEdges]);
+
+    useEffect(() => {
+      createSavedModelNodesfromJSON(initialSchemaItems);
+    }, [initialSchemaItems]);
 
     // useEffect(() => {
     //   setLoading(true);
@@ -240,15 +246,15 @@ export const NewModelCreatorCanvas = memo(
     // });
     const [visibleNodes, setVisibleNodes] = useState<Node[]>([]);
     const [visibleEdges, setVisibleEdges] = useState<Edge[]>([]);
-    const [initialRenderComplete, setInitialRenderComplete] = useState(false);
+    // const [initialRenderComplete, setInitialRenderComplete] = useState(false);
     const [loading, setLoading] = useState(false);
 
-    useEffect(() => {
-      if (id === "newModel") {
-        console.log("in initial user use effect 1");
-        useCreateSavedModelNodesFromJSON(savedModelNodes);
-      }
-    }, [savedModelNodes, id]);
+    // useEffect(() => {
+    //   if (id === "newModel") {
+    //     console.log("in initial user use effect 1");
+    //     useCreateSavedModelNodesFromJSON(savedModelNodes);
+    //   }
+    // }, [savedModelNodes, id]);
 
     useEffect(() => {
       console.log("nodes changing");
@@ -260,116 +266,116 @@ export const NewModelCreatorCanvas = memo(
       setVisibleEdges(edges);
     }, [edges]);
 
-    useEffect(() => {
-      const updateVisibleNodes = () => {
-        if (!wrapperRef.current) return;
+    // useEffect(() => {
+    //   const updateVisibleNodes = () => {
+    //     if (!wrapperRef.current) return;
 
-        const boundingRect = wrapperRef.current.getBoundingClientRect();
-        console.log("calling update visible nodes", boundingRect);
-        const visibleNodes =
-          savedNodes &&
-          savedNodes.filter((node) => {
-            const nodeX = node.position.x * zoom;
-            const nodeY = node.position.y * zoom;
-            if (
-              nodeX >= x &&
-              nodeX <= x + boundingRect.width &&
-              nodeY >= y &&
-              nodeY <= y + boundingRect.height
-            ) {
-              const nodeExists = getNodeById(node.id);
-              if (!nodeExists) {
-                console.log("creating node", node.id);
-                createSavedModelNodefromJSON(node);
-                return node;
-              }
-            }
-          });
+    //     const boundingRect = wrapperRef.current.getBoundingClientRect();
+    //     console.log("calling update visible nodes", boundingRect);
+    //     const visibleNodes =
+    //       savedNodes &&
+    //       savedNodes.filter((node) => {
+    //         const nodeX = node.position.x * zoom;
+    //         const nodeY = node.position.y * zoom;
+    //         if (
+    //           nodeX >= x &&
+    //           nodeX <= x + boundingRect.width &&
+    //           nodeY >= y &&
+    //           nodeY <= y + boundingRect.height
+    //         ) {
+    //           const nodeExists = getNodeById(node.id);
+    //           if (!nodeExists) {
+    //             console.log("creating node", node.id);
+    //             createSavedModelNodefromJSON(node);
+    //             return node;
+    //           }
+    //         }
+    //       });
 
-        setVisibleNodes((prevVisibleNodes) => [
-          ...prevVisibleNodes,
-          ...visibleNodes.filter(
-            (node) => !prevVisibleNodes.some((n) => n.id === node.id)
-          ),
-        ]);
+    //     setVisibleNodes((prevVisibleNodes) => [
+    //       ...prevVisibleNodes,
+    //       ...visibleNodes.filter(
+    //         (node) => !prevVisibleNodes.some((n) => n.id === node.id)
+    //       ),
+    //     ]);
 
-        const visibleEdges2 = savedEdges?.filter((edge) => {
-          const sourceNode = getNodeById(edge.source);
-          const targetNode = getNodeById(edge.target);
+    //     const visibleEdges2 = savedEdges?.filter((edge) => {
+    //       const sourceNode = getNodeById(edge.source);
+    //       const targetNode = getNodeById(edge.target);
 
-          if (sourceNode && targetNode) {
-            const sourceNodeX = sourceNode.position.x * zoom;
-            const sourceNodeY = sourceNode.position.y * zoom;
-            const targetNodeX = targetNode.position.x * zoom;
-            const targetNodeY = targetNode.position.y * zoom;
+    //       if (sourceNode && targetNode) {
+    //         const sourceNodeX = sourceNode.position.x * zoom;
+    //         const sourceNodeY = sourceNode.position.y * zoom;
+    //         const targetNodeX = targetNode.position.x * zoom;
+    //         const targetNodeY = targetNode.position.y * zoom;
 
-            if (
-              sourceNodeX >= x &&
-              sourceNodeX <= x + boundingRect.width &&
-              sourceNodeY >= y &&
-              sourceNodeY <= y + boundingRect.height &&
-              targetNodeX >= x &&
-              targetNodeX <= x + boundingRect.width &&
-              targetNodeY >= y &&
-              targetNodeY <= y + boundingRect.height
-            ) {
-              console.log("Edge is within viewport:", edge.id);
-              if (!getEdgeById(edge.id)) {
-                console.log("Creating edge", edge.id);
-                createSavedModelEdgesFromJSON([edge]);
-              }
-              return true; // Edge is within viewport
-            }
-          }
-          return false; // Edge is not within viewport
-        });
+    //         if (
+    //           sourceNodeX >= x &&
+    //           sourceNodeX <= x + boundingRect.width &&
+    //           sourceNodeY >= y &&
+    //           sourceNodeY <= y + boundingRect.height &&
+    //           targetNodeX >= x &&
+    //           targetNodeX <= x + boundingRect.width &&
+    //           targetNodeY >= y &&
+    //           targetNodeY <= y + boundingRect.height
+    //         ) {
+    //           console.log("Edge is within viewport:", edge.id);
+    //           if (!getEdgeById(edge.id)) {
+    //             console.log("Creating edge", edge.id);
+    //             createSavedModelEdgesFromJSON([edge]);
+    //           }
+    //           return true; // Edge is within viewport
+    //         }
+    //       }
+    //       return false; // Edge is not within viewport
+    //     });
 
-        setVisibleEdges((prevVisibleEdges) => [
-          ...prevVisibleEdges,
-          ...visibleEdges2.filter(
-            (edge) => !prevVisibleEdges.some((n) => n.id === edge.id)
-          ),
-        ]);
+    //     setVisibleEdges((prevVisibleEdges) => [
+    //       ...prevVisibleEdges,
+    //       ...visibleEdges2.filter(
+    //         (edge) => !prevVisibleEdges.some((n) => n.id === edge.id)
+    //       ),
+    //     ]);
 
-        setInitialRenderComplete(true);
-        // updateOtherNodes();
-      };
+    //     setInitialRenderComplete(true);
+    //     // updateOtherNodes();
+    //   };
 
-      if (id !== "newModel") {
-        updateVisibleNodes();
-      }
-    }, [id]);
+    //   if (id !== "newModel") {
+    //     updateVisibleNodes();
+    //   }
+    // }, [id]);
 
-    useEffect(() => {
-      // if (initialRenderComplete) {
-      //   setLoading(true);
-      //   // const timer = setTimeout(() => {
-      //   //   updateOtherNodes();
-      //   //   updateOtherEdges();
-      //   //   setLoading(false);
-      //   // }, 1000);
+    // useEffect(() => {
+    //   // if (initialRenderComplete) {
+    //   //   setLoading(true);
+    //   //   // const timer = setTimeout(() => {
+    //   //   //   updateOtherNodes();
+    //   //   //   updateOtherEdges();
+    //   //   //   setLoading(false);
+    //   //   // }, 1000);
 
-      //   // return () => clearTimeout(timer);
-      //   const updateAll = async () => {
-      //     await Promise.all([updateOtherNodes(), updateOtherEdges()]);
-      //     setLoading(false);
-      //   };
+    //   //   // return () => clearTimeout(timer);
+    //   //   const updateAll = async () => {
+    //   //     await Promise.all([updateOtherNodes(), updateOtherEdges()]);
+    //   //     setLoading(false);
+    //   //   };
 
-      //   updateAll();
-      // }
-      if (initialRenderComplete) {
-        setLoading(true);
+    //   //   updateAll();
+    //   // }
+    //   if (initialRenderComplete) {
+    //     setLoading(true);
 
-        const updateAll = async () => {
-          await Promise.all([updateOtherNodes(), updateOtherEdges()]);
-          setLoading(false);
-        };
+    //     const updateAll = async () => {
+    //       await Promise.all([updateOtherNodes(), updateOtherEdges()]);
+    //       setLoading(false);
+    //     };
 
-        const timer = setTimeout(updateAll, 5000);
+    //     const timer = setTimeout(updateAll, 5000);
 
-        return () => clearTimeout(timer);
-      }
-    }, [initialRenderComplete]);
+    //     return () => clearTimeout(timer);
+    //   }
+    // }, [initialRenderComplete]);
     // #endregion
     // const handleMoveEnd = () => {
     //   if (!wrapperRef.current) return;
@@ -430,8 +436,8 @@ export const NewModelCreatorCanvas = memo(
         style={{
           height: "100vh",
           width: "100vw",
-          filter: loading ? "blur(3px)" : "none",
-          pointerEvents: loading ? "none" : "auto",
+          // filter: loading ? "blur(3px)" : "none",
+          // pointerEvents: loading ? "none" : "auto",
         }}
       >
         {loading && (
@@ -470,16 +476,16 @@ export const NewModelCreatorCanvas = memo(
         >
           <Panel position="top-left">
             <Box display="flex" flexDirection="column" gap={2} mt={2} ml={2}>
-              <NextBreadcrumb
+              {/* <NextBreadcrumb
                 homeElement={<Typography>Home</Typography>}
                 separator={<span> / </span>}
                 capitalizeLinks={true}
-              />
-              <EditableContent
+              /> */}
+              {/* <EditableContent
                 onShowProperties={handleShowProperties}
                 header={header}
                 onUpdateHeader={handleUpdateHeader}
-              />
+              /> */}
             </Box>
           </Panel>
 
