@@ -21,6 +21,7 @@ const FlowToolBoxBody: React.FC = () => {
       updateNodeChildren: state.updateNodeChildren,
     })
   );
+  console.log("toolbox items", toolboxItems);
   const [currentNodeId, setCurrentNodeId] = useState<string | null>(null);
   const { data: fetchedData, error: fetchError } = useGetToolboxDataById(
     currentNodeId || ""
@@ -45,6 +46,7 @@ const FlowToolBoxBody: React.FC = () => {
     return categories.map((category) => ({
       id: category.id,
       parentId: category.parentId ?? null,
+      treeType: category.type ?? null,
       parentName: null,
       title: category.name ?? null,
       name: category.name ?? null,

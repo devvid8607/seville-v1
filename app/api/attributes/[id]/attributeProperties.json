@@ -1,0 +1,64 @@
+{
+  "id": "454",
+  "properties": [
+    {
+      "id": "1",
+      "type": "number",
+      "label": "Default",
+      "tooltip": "Default Value",
+      "placeholder": "Default Value",
+      "visible": true,
+      "required": false,
+      "enabled": true,
+      "size": "small",
+      "defaultValue": "",
+      "currentValue": "5",
+      "propertyName": "defaultValue",
+      "config": {
+        "step": "1",
+        "minValue": "5",
+        "maxValue": "100",
+        "errorMessage": "Number not in range (5-100)"
+      }
+    },
+    {
+      "id": "2",
+      "type": "number",
+      "label": "Max Value",
+      "tooltip": "Maximum Value of the field",
+      "placeholder": "Enter a maximum value",
+      "visible": true,
+      "required": true,
+      "enabled": true,
+      "size": "small",
+      "defaultValue": "20",
+      "currentValue": "10",
+      "propertyName": "maxValue",
+      "config": {
+        "step": "1",
+        "minValue": "5",
+        "maxValue": "100",
+        "errorMessage": "Number not in range (5-100)"
+      }
+    },
+    {
+      "id": "3",
+      "type": "number",
+      "label": "Min Value",
+      "tooltip": "Minimum value of the field",
+      "placeholder": "Enter a minimum value",
+      "visible": true,
+      "required": true,
+      "enabled": true,
+      "size": "small",
+      "defaultValue": "50",
+      "currentValue": "15",
+      "propertyName": "minValue",
+      "config": {
+        "minValue": "5",
+        "maxValue": "100",
+        "errorMessage": "Number not in range (5-100)"
+      }
+    }
+  ]
+}

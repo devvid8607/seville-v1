@@ -1,0 +1,276 @@
+[
+  {
+    "id": "1",
+    "code": "text",
+    "name": "Text",
+    "isRecursive": false,
+    "icon": "AbcOutlined",
+    "properties": [
+      {
+        "id": "1",
+        "type": "text",
+        "label": "Default",
+        "tooltip": "Default Value",
+        "placeholder": "Default Value",
+        "visible": true,
+        "required": false,
+        "enabled": true,
+        "size": "small",
+        "defaultValue": "",
+        "currentValue": "",
+        "propertyName": "defaultValue",
+        "config": {
+          "minLength": "5",
+          "maxLength": "100",
+          "errorMessage": "Length not in range (5-100)"
+        }
+      },
+      {
+        "id": "2",
+        "type": "number",
+        "label": "Max Length",
+        "tooltip": "Maximum length of the field",
+        "placeholder": "Enter a maximum length",
+        "visible": true,
+        "required": true,
+        "size": "small",
+        "enabled": true,
+        "defaultValue": "20",
+        "currentValue": "",
+        "propertyName": "maxLength",
+        "config": {
+          "step": "1",
+          "minValue": "5",
+          "maxValue": "100",
+          "errorMessage": "Number not in range (5-100)"
+        }
+      },
+      {
+        "id": "3",
+        "type": "number",
+        "label": "Min Length",
+        "tooltip": "Minimum length of the field",
+        "placeholder": "Enter a minimum length",
+        "visible": true,
+        "required": true,
+        "enabled": true,
+        "size": "small",
+        "defaultValue": "50",
+        "currentValue": "",
+        "propertyName": "minLength",
+        "config": {
+          "minValue": "5",
+          "maxValue": "100",
+          "errorMessage": "Number not in range (5-100)"
+        }
+      },
+      {
+        "id": "4",
+        "type": "text",
+        "label": "Pattern",
+        "tooltip": "Regex Pattern",
+        "placeholder": "Enter a regex patter",
+        "visible": true,
+        "required": false,
+        "enabled": true,
+        "size": "small",
+        "defaultValue": "",
+        "currentValue": "",
+        "propertyName": "regexPattern",
+        "config": {
+          "minValue": "5",
+          "maxValue": "100",
+          "errorMessage": "Length not in range (5-100)"
+        }
+      }
+    ]
+  },
+  {
+    "id": "2",
+    "code": "number",
+    "name": "Number",
+    "icon": "NumbersOutlined",
+    "isRecursive": false,
+    "properties": [
+      {
+        "id": "1",
+        "type": "number",
+        "label": "Default",
+        "tooltip": "Default Value",
+        "placeholder": "Default Value",
+        "visible": true,
+        "required": false,
+        "enabled": true,
+        "size": "small",
+        "defaultValue": "",
+        "currentValue": "",
+        "propertyName": "defaultValue",
+        "config": {
+          "step": "1",
+          "minValue": "5",
+          "maxValue": "100",
+          "errorMessage": "Number not in range (5-100)"
+        }
+      },
+      {
+        "id": "2",
+        "type": "number",
+        "label": "Max Value",
+        "tooltip": "Maximum Value of the field",
+        "placeholder": "Enter a maximum value",
+        "visible": true,
+        "required": true,
+        "enabled": true,
+        "size": "small",
+        "defaultValue": "20",
+        "currentValue": "",
+        "propertyName": "maxValue",
+        "config": {
+          "step": "1",
+          "minValue": "5",
+          "maxValue": "100",
+          "errorMessage": "Number not in range (5-100)"
+        }
+      },
+      {
+        "id": "3",
+        "type": "number",
+        "label": "Min Value",
+        "tooltip": "Minimum value of the field",
+        "placeholder": "Enter a minimum value",
+        "visible": true,
+        "required": true,
+        "enabled": true,
+        "size": "small",
+        "defaultValue": "50",
+        "currentValue": "",
+        "propertyName": "minValue",
+        "config": {
+          "minValue": "5",
+          "maxValue": "100",
+          "errorMessage": "Number not in range (5-100)"
+        }
+      }
+    ]
+  },
+  {
+    "id": "3",
+    "code": "boolean",
+    "name": "Boolean",
+    "icon": "ToggleOffOutlined",
+    "isRecursive": false,
+    "properties": [
+      {
+        "id": "1",
+        "type": "dropdown",
+        "label": "Default",
+        "tooltip": "Default Value",
+        "placeholder": "",
+        "visible": true,
+        "required": true,
+        "enabled": true,
+        "size": "small",
+        "defaultValue": "true",
+        "currentValue": "",
+        "propertyName": "defaultValue",
+        "config": {
+          "options": [
+            { "id": "true", "label": "Yes" },
+            { "id": "false", "label": "No" }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "4",
+    "code": "model",
+    "name": "Model",
+    "icon": "SchemaOutlined",
+    "isRecursive": false,
+    "properties": [
+      {
+        "id": "1",
+        "type": "modeldropdown",
+        "label": "Default",
+        "tooltip": "Default Value",
+        "placeholder": "",
+        "visible": true,
+        "required": true,
+        "enabled": true,
+        "size": "small",
+        "defaultValue": "",
+        "currentValue": "",
+        "propertyName": "defaultValue",
+
+        "config": {
+          "options": [
+            { "id": "123", "label": "Employee" },
+            { "id": "456", "label": "Customer" },
+            { "id": "789", "label": "Address" }
+          ],
+          "fromApi": false,
+          "ApiURL": ""
+        }
+      }
+    ]
+  },
+  {
+    "id": "5",
+    "code": "list",
+    "name": "List of",
+    "icon": "DataArrayOutlined",
+    "isRecursive": true,
+    "properties": [
+      {
+        "id": "1",
+        "type": "listdropdown",
+        "label": "List Data Type",
+        "tooltip": "Default Value",
+        "placeholder": "",
+        "visible": true,
+        "required": true,
+        "enabled": true,
+        "size": "small",
+        "defaultValue": "",
+        "currentValue": "",
+        "currentListValues": [],
+        "propertyName": "defaultValue",
+        "config": {
+          "options": [],
+          "fromApi": false,
+          "ApiURL": ""
+        }
+      }
+    ]
+  },
+  {
+    "id": "6",
+    "code": "codeList",
+    "name": "Code List",
+    "icon": "DataArrayOutlined",
+    "isRecursive": false,
+    "properties": [
+      {
+        "id": "1",
+        "type": "codeListDropdown",
+        "label": "Code Lists",
+        "tooltip": "Default Value",
+        "placeholder": "",
+        "visible": true,
+        "required": true,
+        "enabled": true,
+        "size": "small",
+        "defaultValue": "",
+        "currentValue": "",
+        "propertyName": "defaultValue",
+        "config": {
+          "options": [
+            { "id": "1", "label": "Country Code List" },
+            { "id": "2", "label": "Currency Code List" }
+          ]
+        }
+      }
+    ]
+  }
+]

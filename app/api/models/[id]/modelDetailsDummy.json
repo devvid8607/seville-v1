@@ -796,5 +796,31 @@
         "icon": "HomeOutlined"
       }
     ]
+  },
+  {
+    "modelId": "12366",
+    "modelName": "Employee dummy",
+    "modelFriendlyName": "Employee fn",
+    "modelDesc": "Emp description",
+    "url": "string",
+    "createdBy": "string",
+    "modifiedBy": "string",
+    "dateCreated": "string",
+    "dateModified": "string",
+    "attributes": [
+      {
+        "id": "emp_id",
+        "name": "Employee ID",
+        "friendlyName": "Employee ID",
+        "description": "id of employees",
+        "key": true,
+        "locked": false,
+        "notNull": true,
+        "isRemovable": false,
+        "enabled": true,
+        "dataType": "text",
+        "icon": "ABCOutlined"
+      }
+    ]
   }
 ]

@@ -1,17 +1,30 @@
-import { Box, Divider, Typography } from "@mui/material";
+import { Box, Divider, Typography, useScrollTrigger } from "@mui/material";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { useTabStore } from "../../../../../_lib/_store/TabStateManagmentStore";
 import { getAttributeIdFromHandle } from "../../../_helpers/createModelData";
 import { createModelNode } from "@/app/canvas/[slug]/flowComponents/_lib/_helpers/createModelNode";
-import useModelStore from "../../../_store/modelStore/ModelDetailsFromBackendStore";
+import useModelStore, {
+  Model,
+} from "../../../_store/modelStore/ModelDetailsFromBackendStore";
 import { useModelNodesStore } from "../../../_store/modelStore/ModelNodesStore";
 // import { useFlowNodeStore } from "../../../store/";
-import { Node } from "reactflow";
+import { Node, useEdges } from "reactflow";
 // import { validateAllNodesModelInputs } from "../../../Helpers/Canvas/CanvasValidation";
 import { findLastChildWithProperties } from "../../../_helpers/helperFunction";
+import { useToolboxStore } from "@/app/canvas/[slug]/_lib/_nodes/flowtoolbox/store/FlowToolBoxStore";
+import {
+  ToolBoxType,
+  ToolboxCategory,
+} from "../../../_queries/useToolBoxQueries";
+import { queryClient } from "@/app/providers/QueryClientProvider";
+import {
+  fetchModelById,
+  handleModelSelection,
+} from "../../../_queries/useModelQueries";
+import { useAllModelsStore } from "../../../_store/modelStore/AllModelsStore";
 
 interface ContextMenuProps {
   mouseX: number | null;
@@ -38,6 +51,11 @@ interface ContextMenuProps {
 
 //   return lastProperties;
 // }
+
+type CombinedItem = {
+  id: string;
+  name: string;
+};
 
 export const ModelNodeContextMenu: React.FC<ContextMenuProps> = ({
   mouseX,
@@ -76,12 +94,18 @@ export const ModelNodeContextMenu: React.FC<ContextMenuProps> = ({
       updatePropertyCurrentListValues: state.updatePropertyCurrentListValues,
     }));
   const models = useModelStore((state) => state.models);
+  const addModelToStore = useModelStore((state) => state.addModelToStore);
   //#endregion
   //#region usetabstore
   const replaceModelContextMenuSource = useTabStore(
     (state) => state.replaceModelContextMenuSource
   );
   const setSliderOpen = useTabStore((state) => state.setSliderOpen);
+  //#endregion
+
+  //#region toolbox imports
+  const getItemsByType = useToolboxStore((state) => state.getItemsByType);
+  const toolboxItems = useToolboxStore((state) => state.toolboxItems);
   //#endregion
   //#endregion
 
@@ -103,7 +127,7 @@ export const ModelNodeContextMenu: React.FC<ContextMenuProps> = ({
 
   if (!currentNode || currentNode === null) return;
 
-  const handleReplace = (
+  const handleReplace = async (
     e: React.MouseEvent<HTMLLIElement>,
     selectedModelId: string
   ) => {
@@ -118,29 +142,15 @@ export const ModelNodeContextMenu: React.FC<ContextMenuProps> = ({
       currentNode
     ) {
       //starting to replace the model
-      const selectedModel = getModelById(selectedModelId);
-      if (!selectedModel) return;
-
-      // if (sourcePage === "validationSet") {
-      //   console.log("sourcePage is ", sourcePage);
-      //   const newNodeId = uuidv4();
-      //   const newNode = createModelNode(
-      //     newNodeId,
-      //     selectedModel.modelId,
-      //     selectedModel.modelName,
-      //     "inputNode",
-      //     undefined,
-      //     currentNode?.position,
-      //     sourcePage
-      //   );
-      //   addFlowNode(newNode);
-      //   if (currentNode) removeFlowNode(currentNode.id);
-      //   validateAllNodesModelInputs(selectedModel.modelId);
-      // } else if (currentNode) {
+      let selectedModel = getModelById(selectedModelId);
+      if (!selectedModel) {
+        //return;
+        selectedModel = await handleModelSelection(selectedModelId);
+      }
 
       const { connectingEdge, sourceHandleId, sourceNode } =
         getSourceNodeAndHandleByTargetNodeId(currentNode.id);
-      if (connectingEdge && sourceHandleId && sourceNode) {
+      if (connectingEdge && sourceHandleId && sourceNode && selectedModel) {
         removeEdge(connectingEdge.id);
         removeNodeAndDescendants(currentNode.id);
         const sourceDataSourceId = sourceNode?.data.modelDetails.dataSourceId;
@@ -224,7 +234,7 @@ export const ModelNodeContextMenu: React.FC<ContextMenuProps> = ({
             }
           }
         }
-      } else {
+      } else if (selectedModel) {
         // alert("only single node");
         removeNodeAndDescendants(currentNode.id);
         const newNodeId = uuidv4();
@@ -237,8 +247,7 @@ export const ModelNodeContextMenu: React.FC<ContextMenuProps> = ({
           undefined,
           currentNode.position
         );
-        console.log(`newNode:`, newNode); // Log the new node object to verify its properties
-
+        console.log(`newNode:`, newNode);
         addNode(newNode);
       }
       // }
@@ -246,6 +255,41 @@ export const ModelNodeContextMenu: React.FC<ContextMenuProps> = ({
 
     handleClose();
   };
+  // const [combinedModels, setCombinedModels] = useState<CombinedItem[]>([]);
+  // useEffect(() => {
+  //   const modelsFromModelStore = models.map((model) => ({
+  //     id: model.modelId,
+  //     name: model.modelName,
+  //   }));
+
+  //   const modelsFromToolboxStore = getItemsByType(ToolboxCategory.Model).map(
+  //     (item) => ({
+  //       id: item.configuration.entityId,
+  //       name: item.name,
+  //     })
+  //   );
+
+  //   const combinedMap: Record<string, CombinedItem> = {};
+
+  //   modelsFromToolboxStore.forEach((item) => {
+  //     combinedMap[item.id] = item;
+  //   });
+
+  //   modelsFromModelStore.forEach((item) => {
+  //     combinedMap[item.id] = item; // This will overwrite if the id already exists
+  //   });
+
+  //   const combined = Object.values(combinedMap);
+  //   setCombinedModels(combined);
+  // }, [models, toolboxItems, getItemsByType]);
+  const allModels = useAllModelsStore((state) => state.allModels);
+  const fetchAndSetAllModels = useAllModelsStore(
+    (state) => state.fetchAndSetAllModels
+  );
+
+  useEffect(() => {
+    if (allModels.length === 0) fetchAndSetAllModels();
+  }, [allModels]);
 
   return (
     <Box>
@@ -283,14 +327,19 @@ export const ModelNodeContextMenu: React.FC<ContextMenuProps> = ({
           </Typography>
         </MenuItem>
         <Divider />
-        {models.map((model) => (
-          <MenuItem
-            key={model.modelId}
-            onClick={(e) => handleReplace(e, model.modelId)}
-          >
-            {model.modelName}
-          </MenuItem>
-        ))}
+
+        {allModels.length > 0 ? (
+          allModels.map((model) => (
+            <MenuItem
+              key={model.id}
+              onClick={(e) => handleReplace(e, model.id)}
+            >
+              {model.name}
+            </MenuItem>
+          ))
+        ) : (
+          <div>Loading...</div>
+        )}
       </Menu>
     </Box>
   );

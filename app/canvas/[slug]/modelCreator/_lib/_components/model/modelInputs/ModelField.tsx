@@ -30,6 +30,9 @@ import { HandleWrapper } from "./HandleWrapper";
 import React, { useState } from "react";
 import useDataTypesStore from "../../../../../_lib/_store/DataTypesStore";
 import { getAttributeIdFromHandle } from "../../../_helpers/createModelData";
+import { useFetchModelById } from "../../../_queries/useModelQueries";
+import { useFetchCodeById } from "../../../_queries/useCodeListQueries";
+import { useCodeListStore } from "@/app/canvas/[slug]/_lib/_nodes/codeListNode/store/CodeListStore";
 
 export const ModelField = memo(
   ({
@@ -64,12 +67,16 @@ export const ModelField = memo(
     const [dragPosition, setDragPosition] = useState<"above" | "below" | null>(
       null
     );
+
+    const [dependentModel, setDependentModel] = useState<string | null>(null);
+    const [dependentCode, setDependentCode] = useState<string | null>(null);
     // #endregion
 
     // #region store imports
     // #region usemodelstore imports
     const getModelById = useModelStore((state) => state.getModelById);
     const getAttributeById = useModelStore((state) => state.getAttributeById);
+    const addModelToStore = useModelStore((state) => state.addModelToStore);
     const updateAttributeValueOfAModel = useModelStore(
       (state) => state.updateAttributeValueOfAModel
     );
@@ -82,6 +89,7 @@ export const ModelField = memo(
     );
     const reorderAttributes = useModelStore((state) => state.reorderAttributes);
     const removeAttribute = useModelStore((state) => state.removeAttribute);
+    const addCodeList = useCodeListStore((state) => state.addCodeList);
     // #endregion
 
     // #region usetabstore imports
@@ -129,13 +137,22 @@ export const ModelField = memo(
       const selectedTypeData = storeDataTypes.find(
         (type) => type.code === dataType
       );
+      console.log("selected datatype", selectedTypeData);
       const properties = selectedTypeData?.properties || [];
+      console.log("selected properties", properties);
+      console.log("adding properties to model", modelId);
+      console.log("adding properties to attribute id", id);
       useModelStore.getState().addAttributeProperties(modelId, id, properties);
       setAttributeId(id);
       setModelId(modelId);
       const propid = findPropertyIdByType(modelId, id, "modeldropdown");
+      // console.log("prop id", propid);
       if (propid && dataSourceId)
         updatePropertyCurrentValue(modelId, id, propid, dataSourceId);
+      const codepropid = findPropertyIdByType(modelId, id, "codeListDropdown");
+      console.log("prop id", codepropid);
+      if (codepropid && dataSourceId)
+        updatePropertyCurrentValue(modelId, id, codepropid, dataSourceId);
     };
 
     const toggleShowModel = (handleId: string) => {
@@ -308,9 +325,42 @@ export const ModelField = memo(
     // #endregion
 
     // #region useeffect
+
+    const { data, error } = useFetchModelById(dependentModel!);
+    const { data: codeData, error: codeerror } = useFetchCodeById(
+      dependentCode!
+    );
+
+    useEffect(() => {
+      if (data) {
+        addModelToStore(data);
+        console.log("Model added to the store:", data);
+      }
+    }, [data]);
+
+    useEffect(() => {
+      if (codeData) {
+        addCodeList(codeData);
+        console.log("code added to the store:", codeData);
+      }
+    }, [codeData]);
+
     useEffect(() => {
       updateNodeInternals(nodeId);
     }, [nodeId, field, modelId]);
+
+    useEffect(() => {
+      if (field.dataType === "model" && field.dataSourceId) {
+        setDependentModel(field.dataSourceId);
+      } else setDependentModel(null);
+    }, [field]);
+
+    useEffect(() => {
+      if (field.dataType === "codeList" && field.dataSourceId) {
+        setDependentCode(field.dataSourceId);
+      } else setDependentCode(null);
+    }, [field]);
+
     // #endregion
 
     return (

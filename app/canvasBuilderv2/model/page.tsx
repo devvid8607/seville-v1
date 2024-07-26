@@ -15,77 +15,24 @@ import {
 } from "@mui/material";
 import EditOutlined from "@mui/icons-material/EditOutlined";
 import NextBreadcrumb from "@/app/_lib/_components/Breadcrumbs";
-import CreateFlowItemModal from "@/app/canvas/[slug]/_lib/_components/createFlowItemModal/CreateFlowItemModal";
 import {
   useCreateModel,
-  useCreateModelAndFetchCanvas,
   useFetchModels,
 } from "@/app/canvas/[slug]/modelCreator/_lib/_queries/useModelQueries";
+import CreateFlowItemModal from "@/app/canvas/[slug]/_lib/_components/createFlowItemModal/CreateFlowItemModal";
 import { useRouter } from "next/navigation";
-import { useCanvasData } from "@/app/canvas/[slug]/modelCreator/_lib/_queries/useCanvasQueries";
-import useModelBackendStore from "@/app/canvas/[slug]/modelCreator/_lib/_store/modelStore/ModelBackEndStore";
-import { useModelNodesStore } from "@/app/canvas/[slug]/modelCreator/_lib/_store/modelStore/ModelNodesStore";
-import useModelStore from "@/app/canvas/[slug]/modelCreator/_lib/_store/modelStore/ModelDetailsFromBackendStore";
-import { useFetchDatatypes } from "@/app/canvas/[slug]/modelCreator/_lib/_queries/useDatatypesQueries";
-import useDataTypesStore from "@/app/canvas/[slug]/_lib/_store/DataTypesStore";
-
-interface CanvasIndexItem {
-  id: string;
-  name: string;
-  friendlyName: string;
-  description: string;
-  createdBy: string;
-  modifiedBy: string;
-  dateCreated: string;
-  dateModified: string;
-}
 
 const ModelIndex = () => {
-  const [openDialog, setOpenDialog] = useState(false);
-  const router = useRouter();
-  const [selectedItem, setSelectedItem] = useState<CanvasIndexItem | null>(
-    null
-  );
-  const [localModelId, setLocalModelId] = useState<string | null>("");
-
-  const { mutation } = useCreateModel();
-  const setAllValues = useModelBackendStore((state) => state.setAllValues);
-  const setDataTypes = useDataTypesStore((state) => state.setDataTypes);
-
-  const { clearAllEdgedDataInStore, clearAllNodesDataInStore } =
-    useModelNodesStore((state) => ({
-      clearAllEdgedDataInStore: state.clearAllEdgedDataInStore,
-      clearAllNodesDataInStore: state.clearAllNodesDataInStore,
-    }));
-  const clearModels = useModelStore((state) => state.clearModels);
-
   const {
     data: models,
     error: fetchModelError,
     isLoading: isFetchModelLoading,
     isError: isfetchModelError,
   } = useFetchModels();
-
-  const {
-    data: datatypes,
-    error: fetchDatatypeError,
-    isLoading: isFetchDatatypeLoading,
-    isError: isfetchDatatypeError,
-  } = useFetchDatatypes();
-
-  const {
-    data: canvasData,
-    isLoading,
-    isError,
-    error,
-    refetch,
-  } = useCanvasData("dummyuser", localModelId);
-
-  const handleEdit = (item: CanvasIndexItem) => {
-    setSelectedItem(item);
-    setLocalModelId(item.id);
-    if (item !== null) refetch();
-  };
+  const [openDialog, setOpenDialog] = useState(false);
+  const { mutation, modelId } = useCreateModel();
+  const [localModelId, setLocalModelId] = useState<string | null>("");
+  const router = useRouter();
 
   const handleNewModelClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -103,55 +50,20 @@ const ModelIndex = () => {
   }) => {
     setOpenDialog(false);
     console.log("Creating new model with:", data);
-
-    mutation.mutate(data, {
-      onSuccess: (data) => {
-        setLocalModelId(data.id);
-      },
-    });
+    mutation.mutate(data);
   };
 
   useEffect(() => {
-    if (datatypes) {
-      console.log("fetched datatypes", datatypes);
-      setDataTypes(datatypes);
+    if (modelId) {
+      setLocalModelId(modelId);
     }
-  }, [datatypes]);
+  }, [modelId]);
 
   useEffect(() => {
-    if (canvasData) {
-      setOpenDialog(false);
-      console.log("Canvas Data:", canvasData);
-      clearAllEdgedDataInStore();
-      clearAllNodesDataInStore();
-      clearModels();
-      setAllValues({
-        header: canvasData.canvasData.header,
-        savedNodes: canvasData.canvasData.visibleNodes,
-        savedEdges: canvasData.canvasData.visibleEdges,
-        initialSchemaItems: canvasData.canvasData.systemNodes,
-      });
-      router.push(`/canvasBuilder/model/${localModelId}`);
+    if (localModelId) {
+      router.push(`/canvasBuilderv2/model/${localModelId}`);
     }
-  }, [canvasData, localModelId, router]);
-
-  if (isFetchModelLoading || isLoading || isFetchModelLoading) {
-    return <CircularProgress />;
-  }
-
-  if (isfetchModelError || isError || isfetchDatatypeError) {
-    return (
-      <Typography color="error">
-        Error fetching models:
-        {fetchModelError
-          ? fetchModelError.message
-          : isError
-          ? error.message
-          : ""}
-      </Typography>
-    );
-  }
-
+  }, [localModelId, router]);
   return (
     <>
       <Box display="flex" flexDirection="column" gap={2} mt={2} ml={2}>
@@ -207,7 +119,7 @@ const ModelIndex = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {models &&
+                {models && models.length > 0 ? (
                   models.map((item) => (
                     <TableRow key={item.id}>
                       <TableCell>{item.id}</TableCell>
@@ -219,11 +131,14 @@ const ModelIndex = () => {
                       <TableCell>{item.dateModified}</TableCell>
                       <TableCell>
                         <IconButton color="primary">
-                          <EditOutlined onClick={() => handleEdit(item)} />
+                          <EditOutlined />
                         </IconButton>
                       </TableCell>
                     </TableRow>
-                  ))}
+                  ))
+                ) : (
+                  <CircularProgress />
+                )}
               </TableBody>
             </Table>
           </TableContainer>

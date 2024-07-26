@@ -1,0 +1,28 @@
+[
+  {
+    "id": 101,
+    "parentId": 3,
+    "name": "Text",
+    "type": "dataType",
+    "hasChildren": false,
+    "children": null,
+    "configuration": {
+      "dataType": "text",
+      "dataSourceId": 657,
+      "dataSourceName": "Text"
+    }
+  },
+  {
+    "id": 102,
+    "parentId": 3,
+    "name": "Number",
+    "type": "dataType",
+    "hasChildren": false,
+    "children": null,
+    "configuration": {
+      "dataType": "number",
+      "dataSourceId": 658,
+      "dataSourceName": "Number"
+    }
+  }
+]

@@ -343,7 +343,10 @@ const useModelStore = create<ModelStore>((set, get) => ({
       models: state.models.map((model) => {
         if (model.modelId === modelId) {
           const updatedAttributes = model.attributes.map((attribute) => {
-            if (attribute.id === attributeId && !attribute.properties) {
+            if (
+              attribute.id === attributeId &&
+              (!attribute.properties || attribute.properties.length === 0)
+            ) {
               return { ...attribute, properties: newProperties };
             }
             return attribute;
@@ -354,6 +357,7 @@ const useModelStore = create<ModelStore>((set, get) => ({
       }),
     }));
   },
+
   getAttributeProperties: (modelId, attributeId) => {
     const model = get().models.find((model) => model.modelId === modelId);
     if (!model) return undefined; // Model not found

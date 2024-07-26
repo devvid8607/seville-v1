@@ -1,6 +1,6 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 
-import { CodeList } from "../store/CodeListStore";
+import { CodeList, useCodeListStore } from "../store/CodeListStore";
 import {
   Box,
   FormControl,
@@ -17,7 +17,6 @@ import {
   TableRow,
 } from "@mui/material";
 import codeListData from "../../../../_lib/dummyData/CodeListData.json";
-
 interface CodeBodyProps {
   dataSourceId: string;
   url: string;
@@ -37,16 +36,38 @@ export const CodeBody: React.FC<CodeBodyProps> = ({
 
   const [selectedKey, setSelectedKey] = useState("");
   const [selectedValue, setSelectedValue] = useState("");
-  const matchedCodeList = useMemo(
-    () =>
-      codeListData.codeListData.find((codeList) => codeList.id === model.id),
-    [model]
-  );
+  const [localCode, setLocalCode] = useState<CodeList>();
+
+  // const matchedCodeList = useMemo(
+  //   () =>
+  //     codeListData.codeListData.find((codeList) => codeList.id === model.id),
+  //   [model]
+  // );
+
+  const getCodeById = useCodeListStore((state) => state.getCodeById);
+  const fetchCodeById = useCodeListStore((state) => state.fetchCodeById);
+
+  useEffect(() => {
+    const fetchcodedetails = async () => {
+      const code = getCodeById(model.id);
+      if (!code) {
+        await fetchCodeById(model.id);
+        const updatedCodeList = getCodeById(model.id);
+        if (updatedCodeList) {
+          setLocalCode(updatedCodeList);
+        }
+      } else {
+        setLocalCode(code);
+      }
+    };
+
+    fetchcodedetails();
+  }, []);
 
   // Extracting the keys from the first object to use as column headers
-  if (!matchedCodeList) {
-    return <div>No data found for the selected model.</div>;
-  }
+  // if (!matchedCodeList) {
+  //   return <div>No data found for the selected model.</div>;
+  // }
   const handleKeyChange = (event: SelectChangeEvent) => {
     setSelectedKey(event.target.value);
     setSelectedValue("");
@@ -55,6 +76,8 @@ export const CodeBody: React.FC<CodeBodyProps> = ({
   const handleValueChange = (event: SelectChangeEvent) => {
     setSelectedValue(event.target.value);
   };
+
+  if (!localCode) return <div>Loading..</div>;
 
   return (
     <>
@@ -68,7 +91,7 @@ export const CodeBody: React.FC<CodeBodyProps> = ({
             label="Key"
             onChange={handleKeyChange}
           >
-            {matchedCodeList.properties.map((prop) => (
+            {localCode.properties.map((prop) => (
               <MenuItem key={prop.id} value={prop.name}>
                 {prop.name}
               </MenuItem>
@@ -86,7 +109,7 @@ export const CodeBody: React.FC<CodeBodyProps> = ({
             onChange={handleValueChange}
             disabled={!selectedKey}
           >
-            {matchedCodeList.properties.map((prop) => (
+            {localCode.properties.map((prop) => (
               <MenuItem key={prop.id} value={prop.name}>
                 {prop.name}
               </MenuItem>
@@ -98,22 +121,26 @@ export const CodeBody: React.FC<CodeBodyProps> = ({
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>ID</TableCell>
-              <TableCell align="right">Code</TableCell>
-              <TableCell align="right">Description</TableCell>
+              <TableCell>Id</TableCell>
+              <TableCell>Columns</TableCell>
+              {/* <TableCell align="right">Code</TableCell>
+              <TableCell align="right">Description</TableCell> */}
             </TableRow>
           </TableHead>
           <TableBody>
-            {matchedCodeList.data.map((row) => (
+            {localCode.properties.map((row) => (
               <TableRow
-                key={row.Id}
+                key={row.id}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell component="th" scope="row">
-                  {row.Id}
+                  {row.id}
                 </TableCell>
-                <TableCell align="right">{row.Code}</TableCell>
-                <TableCell align="right">{row.Description}</TableCell>
+                <TableCell component="th" scope="row">
+                  {row.name}
+                </TableCell>
+                {/* <TableCell align="right">{row.Code}</TableCell>
+                <TableCell align="right">{row.Description}</TableCell> */}
               </TableRow>
             ))}
           </TableBody>

@@ -59,6 +59,8 @@ export const StaticProperties: React.FC = () => {
     storeDataTypes: state.dataTypes,
   }));
 
+  console.log("store datatypes", storeDataTypes);
+
   //#endregion
 
   //#region state vars and useeffect

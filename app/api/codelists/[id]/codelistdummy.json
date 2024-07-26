@@ -1,0 +1,107 @@
+[
+  {
+    "id": "1",
+    "name": "Country of Origin",
+    "properties": [
+      {
+        "id": "1",
+        "name": "Id"
+      },
+      {
+        "id": "2",
+        "name": "Code"
+      },
+      {
+        "id": "3",
+        "name": "Description"
+      }
+    ],
+    "data": [
+      {
+        "Id": "US",
+        "Code": "001",
+        "Description": "United States"
+      },
+      {
+        "Id": "CA",
+        "Code": "002",
+        "Description": "Canada"
+      },
+      {
+        "Id": "UK",
+        "Code": "003",
+        "Description": "United Kingdom"
+      }
+    ]
+  },
+  {
+    "id": "2",
+    "name": "Currency",
+    "properties": [
+      {
+        "id": "1",
+        "name": "Id"
+      },
+      {
+        "id": "2",
+        "name": "Code"
+      },
+      {
+        "id": "3",
+        "name": "Description"
+      }
+    ],
+    "data": [
+      {
+        "Id": "USD",
+        "Code": "840",
+        "Description": "US Dollar"
+      },
+      {
+        "Id": "EUR",
+        "Code": "978",
+        "Description": "Euro"
+      },
+      {
+        "Id": "GBP",
+        "Code": "826",
+        "Description": "British Pound"
+      }
+    ]
+  },
+  {
+    "id": "987",
+    "name": "dummy code list",
+    "properties": [
+      {
+        "id": "1",
+        "name": "Id"
+      },
+      {
+        "id": "2",
+        "name": "Code"
+      },
+      {
+        "id": "3",
+        "name": "Description"
+      }
+    ],
+    "data": [
+      {
+        "Id": "US",
+        "Code": "001",
+        "Description": "United States"
+      },
+      {
+        "Id": "CA",
+        "Code": "002",
+        "Description": "Canada"
+      },
+      {
+        "Id": "UK",
+        "Code": "003",
+        "Description": "United Kingdom"
+      }
+    ]
+  }
+]

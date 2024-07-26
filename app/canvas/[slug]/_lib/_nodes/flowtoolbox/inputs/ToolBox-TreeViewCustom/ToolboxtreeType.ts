@@ -10,6 +10,7 @@ export enum DropTypes {
 
 export type ToolBoxTreeDataType = {
   id: string;
+  treeType: string; //type from the toolbox tree
   parentId: null | string;
   parentName: null | string;
   title: string;

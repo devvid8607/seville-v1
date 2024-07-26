@@ -3,7 +3,7 @@
     "id": 1,
     "parentId": null,
     "name": "Models",
-    "type": "Category",
+    "type": "category",
     "hasChildren": true,
     "children": null,
     "configuration": null
@@ -12,7 +12,7 @@
     "id": 2,
     "parentId": null,
     "name": "Code Lists",
-    "type": "Category",
+    "type": "category",
     "hasChildren": true,
     "children": null,
     "configuration": null
@@ -20,8 +20,17 @@
   {
     "id": 3,
     "parentId": null,
+    "name": "Datatypes",
+    "type": "category",
+    "hasChildren": true,
+    "children": null,
+    "configuration": null
+  },
+  {
+    "id": 4,
+    "parentId": null,
     "name": "Additional Category",
-    "type": "Category",
+    "type": "category",
     "hasChildren": true,
     "children": null,
     "configuration": null

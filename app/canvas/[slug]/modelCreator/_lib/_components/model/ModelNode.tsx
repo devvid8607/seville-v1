@@ -3,6 +3,9 @@ import React, { memo, useEffect, useState } from "react";
 import { Handle, Position } from "reactflow";
 import {
   createAttributeDataWithDataTypeParameters,
+  createAttributeForModel,
+  createCodeListAttributeForModel,
+  createDataTypeAttributeForModel,
   createListAttributeDataWithParameters,
   createModelData,
 } from "../../_helpers/createModelData";
@@ -14,6 +17,9 @@ import useModelStore, {
   Model,
 } from "../../_store/modelStore/ModelDetailsFromBackendStore";
 import { useFetchModelById } from "../../_queries/useModelQueries";
+import { ToolboxCategory } from "../../_queries/useToolBoxQueries";
+import { fetchAndSetAttributeProperties } from "../../_queries/AttributeQueries";
+import { useToolboxStore } from "@/app/canvas/[slug]/_lib/_nodes/flowtoolbox/store/FlowToolBoxStore";
 
 export const ModelNode = memo(({ data }: { data: any }) => {
   // #region state variables
@@ -25,6 +31,7 @@ export const ModelNode = memo(({ data }: { data: any }) => {
     error,
     isLoading,
   } = useFetchModelById(modelDetails.dataSourceId);
+  const getParentEntityId = useToolboxStore((state) => state.getParentEntityId);
   //#endregion
 
   // #region useModelStore imports
@@ -112,25 +119,64 @@ export const ModelNode = memo(({ data }: { data: any }) => {
 
       if (
         nodeJSON &&
-        nodeJSON.dropType &&
-        nodeJSON.dropType === DropTypes.Model
+        nodeJSON.treeType &&
+        (nodeJSON.treeType === ToolboxCategory.Attribute ||
+          nodeJSON.treeType === ToolboxCategory.Model) &&
+        targetModelId
       ) {
-        // console.log("text ", nodeJSON);
-        // console.log("dropped on", targetModelId);
-        if (nodeJSON && targetModelId && nodeJSON.parentId != targetModelId) {
-          const newAttribute = createListAttributeDataWithParameters(nodeJSON);
-          // console.log("newAttribute", newAttribute);
-          addAttributeToModel(targetModelId, newAttribute);
-        }
+        const newAttribute = createAttributeForModel(nodeJSON);
+        addAttributeToModel(targetModelId, newAttribute);
+        const parentEntityId = getParentEntityId(nodeJSON.id);
+        if (parentEntityId)
+          fetchAndSetAttributeProperties(
+            parentEntityId,
+            nodeJSON.configuration.entityId
+          );
       } else if (
         nodeJSON &&
-        nodeJSON.dropType &&
-        nodeJSON.dropType === DropTypes.DataType
+        nodeJSON.treeType &&
+        nodeJSON.treeType === ToolboxCategory.DataType &&
+        targetModelId
       ) {
-        const newAttribute =
-          createAttributeDataWithDataTypeParameters(nodeJSON);
-        if (targetModelId) addAttributeToModel(targetModelId, newAttribute);
+        const newAttribute = createDataTypeAttributeForModel(nodeJSON);
+        addAttributeToModel(targetModelId, newAttribute);
+        const parentEntityId = getParentEntityId(nodeJSON.id);
+        if (parentEntityId)
+          fetchAndSetAttributeProperties(
+            parentEntityId,
+            nodeJSON.configuration.entityId
+          );
+      } else if (
+        nodeJSON &&
+        nodeJSON.treeType &&
+        nodeJSON.treeType === ToolboxCategory.CodeList &&
+        targetModelId
+      ) {
+        const newAttribute = createCodeListAttributeForModel(nodeJSON);
+        console.log("newAttribute", newAttribute);
+        addAttributeToModel(targetModelId, newAttribute);
       }
+
+      //commented to change drop based on new structure
+      // if (
+      //   nodeJSON &&
+      //   nodeJSON.dropType &&
+      //   nodeJSON.dropType === DropTypes.Model
+      // ) {
+      //   if (nodeJSON && targetModelId && nodeJSON.parentId != targetModelId) {
+      //     const newAttribute = createListAttributeDataWithParameters(nodeJSON);
+      //     // console.log("newAttribute", newAttribute);
+      //     addAttributeToModel(targetModelId, newAttribute);
+      //   }
+      // } else if (
+      //   nodeJSON &&
+      //   nodeJSON.dropType &&
+      //   nodeJSON.dropType === DropTypes.DataType
+      // ) {
+      //   const newAttribute =
+      //     createAttributeDataWithDataTypeParameters(nodeJSON);
+      //   if (targetModelId) addAttributeToModel(targetModelId, newAttribute);
+      // }
     }
 
     // const dataTypeObject = event.dataTransfer.getData("dataTypeObj");

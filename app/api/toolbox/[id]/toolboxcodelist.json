@@ -1,0 +1,18 @@
+[
+  {
+    "id": 154,
+    "parentId": 10,
+    "name": "UNSPSC Codes",
+    "type": "codeList",
+    "hasChildren": false,
+    "children": null,
+    "configuration": {
+      "entityId": 1,
+      "name": "gdsn_unspsc_codes",
+      "friendlyName": "Product UNSPSC Code",
+      "dataType": "codeList",
+      "dataSourceId": 987,
+      "dataSourceName": "UNSPSC Codes List"
+    }
+  }
+]

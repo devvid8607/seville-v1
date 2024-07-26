@@ -1,4 +1,5 @@
 import {
+  CircularProgress,
   FormControl,
   InputLabel,
   MenuItem,
@@ -8,6 +9,7 @@ import {
 } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import useModelStore from "@/app/canvas/[slug]/modelCreator/_lib/_store/modelStore/ModelDetailsFromBackendStore";
+import { useAllModelsStore } from "@/app/canvas/[slug]/modelCreator/_lib/_store/modelStore/AllModelsStore";
 
 export type SmallModelDropdownProps = {
   id: string;
@@ -44,7 +46,14 @@ export const SmallModelDropdown: React.FC<SmallModelDropdownProps> = ({
   const [selectedValue, setSelectedValue] = useState(
     currentValue ? currentValue : defaultValue ? defaultValue : ""
   );
-  const models = useModelStore((state) => state.models);
+  const allModels = useAllModelsStore((state) => state.allModels);
+  const fetchAndSetAllModels = useAllModelsStore(
+    (state) => state.fetchAndSetAllModels
+  );
+
+  useEffect(() => {
+    if (allModels.length === 0) fetchAndSetAllModels();
+  }, [allModels]);
 
   useEffect(() => {
     setSelectedValue(
@@ -71,11 +80,17 @@ export const SmallModelDropdown: React.FC<SmallModelDropdownProps> = ({
         displayEmpty
         inputProps={{ "aria-label": placeholder }}
       >
-        {models.map((model) => (
-          <MenuItem key={model.modelId} value={model.modelId}>
-            {model.modelFriendlyName}
-          </MenuItem>
-        ))}
+        {allModels && allModels.length > 0 ? (
+          allModels.map((model) => (
+            <MenuItem key={model.id} value={model.id}>
+              {model.name}
+            </MenuItem>
+          ))
+        ) : (
+          <div>
+            <CircularProgress />
+          </div>
+        )}
       </Select>
     </FormControl>
   );

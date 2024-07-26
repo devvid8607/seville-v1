@@ -7,6 +7,8 @@ import {
   TextFieldProps,
 } from "@mui/material";
 import React, { useState, useEffect } from "react";
+import { useCodeListStore } from "../../../../_nodes/codeListNode/store/CodeListStore";
+import { useAllCodesStore } from "@/app/canvas/[slug]/modelCreator/_lib/_store/modelStore/AllCodeListStore";
 
 type SmallDropdownProps = {
   id: string;
@@ -42,6 +44,15 @@ export const CodeListDropdown: React.FC<SmallDropdownProps> = ({
     currentValue ? currentValue : defaultValue ? defaultValue : ""
   );
 
+  const allcodes = useAllCodesStore((state) => state.allCodes);
+  const fetchAndSetAllCodes = useAllCodesStore(
+    (state) => state.fetchAndSetAllCodes
+  );
+
+  useEffect(() => {
+    if (allcodes.length === 0) fetchAndSetAllCodes();
+  }, [allcodes]);
+
   useEffect(() => {
     setSelectedValue(
       currentValue ? currentValue : defaultValue ? defaultValue : ""
@@ -64,9 +75,9 @@ export const CodeListDropdown: React.FC<SmallDropdownProps> = ({
         displayEmpty
         inputProps={{ "aria-label": placeholder }}
       >
-        {options.map((option) => (
+        {allcodes.map((option) => (
           <MenuItem key={option.id} value={option.id}>
-            {option.label}
+            {option.name}
           </MenuItem>
         ))}
       </Select>

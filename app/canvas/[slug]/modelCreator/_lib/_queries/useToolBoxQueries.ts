@@ -4,10 +4,11 @@ import { apiGet } from "@/app/helpers/apiClient";
 import { CanvasIndexItem } from "./useModelQueries";
 
 export enum ToolboxCategory {
-  Model = "Model",
-  CodeList = "CodeList",
-  DataType = "DataType",
-  Category = "Category",
+  Model = "model",
+  CodeList = "codeList",
+  DataType = "dataType",
+  Category = "category",
+  Attribute = "attribute",
 }
 
 export interface ToolBoxType {

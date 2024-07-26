@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
-import { FieldType } from "../types/FieldType";
-import { MetaDataType } from "../types/ModelTypes";
-import { AddNewModelType } from "../types/AddNewModelType";
+import { FieldType } from "../_types/FieldType";
+import { MetaDataType } from "../_types/ModelTypes";
+import { AddNewModelType } from "../_types/AddNewModelType";
 
 export const createModelData = (modelDetails?: MetaDataType) => {
   let newFields: FieldType[] = [];
@@ -235,4 +235,64 @@ export const getDataTypeFromHandle = (
   }
   // Return null if the data type isn't found
   return null;
+};
+
+/////new methods added based on the new tree structure from backend
+export const createAttributeForModel = (newModelValue: any) => {
+  console.log("newModelValue", newModelValue);
+  return {
+    id: uuidv4(),
+    name: newModelValue.name,
+    friendlyName: newModelValue.configuration.friendlyName,
+    description: newModelValue.description || "",
+    key: newModelValue.configuration.key || false,
+    locked: newModelValue.configuration.locked || false,
+    notNull: newModelValue.configuration.notNull || false,
+    isRemovable: newModelValue.configuration.isRemovable || true,
+    enabled: newModelValue.configuration.enabled || true,
+    dataType: newModelValue.configuration.dataType,
+    dataSourceFriendlyName: newModelValue.configuration.dataSourceName ?? null,
+    dataSourceId: newModelValue.configuration.dataSourceId
+      ? newModelValue.configuration.dataSourceId
+      : null,
+    properties: newModelValue.configuration.properties ?? [],
+    childDataType: newModelValue.childDataType || "",
+  };
+};
+
+export const createDataTypeAttributeForModel = (datatype: any) => {
+  console.log("datatype", datatype);
+  return {
+    id: uuidv4(),
+    name: `Sample ${datatype.name}`,
+    friendlyName: `Sample ${datatype.name}`,
+    description: "",
+    key: false,
+    locked: false,
+    notNull: false,
+    isRemovable: true,
+    enabled: true,
+    dataType: datatype.configuration.dataType,
+    properties: datatype.configuration.properties ?? [],
+  };
+};
+
+export const createCodeListAttributeForModel = (newModelValue: any) => {
+  return {
+    id: uuidv4(),
+    name: newModelValue.name,
+    friendlyName: newModelValue.configuration.friendlyName,
+    description: newModelValue.description || "",
+    key: false,
+    locked: false,
+    notNull: false,
+    isRemovable: true,
+    enabled: true,
+    dataType: newModelValue.configuration.dataType,
+    properties: newModelValue.configuration.properties ?? [],
+    dataSourceFriendlyName: newModelValue.configuration.dataSourceName ?? null,
+    dataSourceId: newModelValue.configuration.dataSourceId
+      ? newModelValue.configuration.dataSourceId
+      : null,
+  };
 };

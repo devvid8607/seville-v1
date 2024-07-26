@@ -1,0 +1,40 @@
+[
+  {
+    "id": 423354,
+    "parentId": 567,
+    "type": "attribute",
+    "name": "Address ID",
+    "hasChildren": false,
+    "children": null,
+    "configuration": {
+      "entityId": 454,
+      "name": "Address ID",
+      "friendlyName": "Address ID",
+      "parentName": "Address",
+      "key": true,
+      "locked": false,
+      "notNull": true,
+      "isRemovable": false,
+      "enabled": true,
+      "dataType": "text",
+      "dataSourceId": null,
+      "dataSourceName": null
+    }
+  },
+  {
+    "id": 55,
+    "parentId": 567,
+    "type": "attribute",
+    "name": "Country of Origin",
+    "hasChildren": false,
+    "children": null,
+    "configuration": {
+      "entityId": 444,
+      "name": "Country of Origin",
+      "friendlyName": "Country of Origin",
+      "dataType": "codeList",
+      "dataSourceName": "Country of Origin",
+      "dataSourceId": "1"
+    }
+  }
+]

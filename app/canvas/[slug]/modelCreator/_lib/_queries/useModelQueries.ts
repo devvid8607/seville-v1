@@ -5,6 +5,7 @@ import { modelIndexData } from "@/app/canvas/dummyDataForIndex";
 import { useState } from "react";
 import { loadCanvas, loadCanvasDummy, useCanvasData } from "./useCanvasQueries";
 import { Model } from "../_store/modelStore/ModelDetailsFromBackendStore";
+import { queryClient } from "@/app/providers/QueryClientProvider";
 
 interface NewModelData {
   name: string;
@@ -132,6 +133,31 @@ export const useFetchModelById = (modelId: string) => {
   return useQuery<Model, Error>({
     queryKey: ["models", modelId],
     queryFn: () => fetchModelById(modelId),
+    enabled: !!modelId,
   });
 };
+
 //#endregion
+
+export const handleModelSelection = async (
+  selectedModelId: string
+): Promise<Model | undefined> => {
+  if (!selectedModelId) {
+    return undefined;
+  }
+
+  try {
+    const fetchedModel = await queryClient.fetchQuery({
+      queryKey: ["models", selectedModelId],
+      queryFn: () => fetchModelById(selectedModelId),
+    });
+
+    if (fetchedModel) {
+      return fetchedModel;
+    }
+  } catch (error) {
+    console.error("Error fetching model:", error);
+  }
+
+  return undefined;
+};
