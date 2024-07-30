@@ -1,8 +1,8 @@
 import { Box, Grid, Paper, Typography } from "@mui/material";
 import React, { useCallback } from "react";
 // import useModelNodeDataStore from "../../Store/SevilleModelNodeStore";
-import useModelStore from "@/app/canvas/[slug]/modelCreator/_lib/_store/modelStore/ModelDetailsFromBackendStore";
-import { useModelNodesStore } from "@/app/canvas/[slug]/modelCreator/_lib/_store/modelStore/ModelNodesStore";
+import useModelStore from "@/app/canvasBuilderv2/model/_lib/_store/modelStore/ModelDetailsFromBackendStore";
+import { useModelNodesStore } from "@/app/canvasBuilderv2/model/_lib/_store/modelStore/ModelNodesStore";
 import { useTabStore } from "../../../_store/TabStateManagmentStore";
 import RecursiveDropdownv3 from "./components/RecursiveDropdownv3";
 import { SmallCheckbox } from "./components/SmallCheckBox";

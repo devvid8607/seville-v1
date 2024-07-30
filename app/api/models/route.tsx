@@ -13,10 +13,14 @@ export const GET = async (req: NextRequest) => {
 
 //this is used to create a model using the user given inputs like name, description , template etc
 export const POST = async (req: NextRequest) => {
-  const apiRoute = "POSTapi/v1/Models/CreateModel";
-  const endpoint = "/identity/api/v1/Models/CreateModel";
   const body = await req.json();
-  return fetchWithToken(req, endpoint, apiRoute, "POST", body);
+  console.log("body", body);
+  const returnDataDummy = { id: "dummy-model-id" };
+  return NextResponse.json(returnDataDummy);
+  // const apiRoute = "POSTapi/v1/Models/CreateModel";
+  // const endpoint = "/identity/api/v1/Models/CreateModel";
+  // const body = await req.json();
+  // return fetchWithToken(req, endpoint, apiRoute, "POST", body);
 };
 
 export const PUT = async (req: NextRequest) => {

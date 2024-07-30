@@ -1,0 +1,34 @@
+{
+  "header": {
+    "canvasName": "EmployeeModelVersion1",
+    "canvasDesc": "This is canvas desc",
+    "canvasId": "234324-23423-23432",
+    "createdBy": "admin",
+    "modifiedBy": "admin",
+    "dateCreated": "",
+    "dateModified": ""
+  },
+  "visibleNodes": [],
+  "systemNodes": [
+    {
+      "id": "toolboxNode",
+      "type": "flowtoolbox",
+      "position": { "x": 50, "y": 750 },
+      "data": {
+        "position": "top-left",
+        "component": "flowtoolboxcomponent",
+        "modelDetails": {
+          "name": "ToolBox",
+          "friendlyName": "ToolBox",
+          "description": "Tool box",
+          "createdBy": "admin",
+          "modifiedBy": "admin",
+          "dateCreated": "25/03/2024",
+          "dateModified": "25/03/2024"
+        }
+      },
+      "dragHandle": ".custom-drag-handle",
+      "hidden": false
+    }
+  ]
+}

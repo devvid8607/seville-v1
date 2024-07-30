@@ -7,8 +7,7 @@ import {
   TextFieldProps,
 } from "@mui/material";
 import React, { useState, useEffect } from "react";
-import { useCodeListStore } from "../../../../_nodes/codeListNode/store/CodeListStore";
-import { useAllCodesStore } from "@/app/canvas/[slug]/modelCreator/_lib/_store/modelStore/AllCodeListStore";
+import { useAllCodesStore } from "@/app/canvasBuilderv2/model/_lib/_store/modelStore/AllCodeListStore";
 
 type SmallDropdownProps = {
   id: string;

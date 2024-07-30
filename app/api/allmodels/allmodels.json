@@ -1,14 +1,22 @@
 [
   {
-    "id": "345",
-    "name": "Model1"
+    "id": "1",
+    "name": "Model1",
+    "friendlyName": "Model One",
+    "description": "Description of Model One",
+    "createdBy": "admin",
+    "modifiedBy": "admin",
+    "dateCreated": "25/03/2024",
+    "dateModified": "26/03/2024"
   },
   {
-    "id": "3445",
-    "name": "Model2"
-  },
-  {
-    "id": "343345",
-    "name": "Model3"
+    "id": "2",
+    "name": "Model2",
+    "friendlyName": "Model Two",
+    "description": "Description of Model Two",
+    "createdBy": "admin",
+    "modifiedBy": "admin",
+    "dateCreated": "25/03/2024",
+    "dateModified": "26/03/2024"
   }
 ]

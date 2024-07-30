@@ -27,9 +27,9 @@ import { SmallSlider } from "./SmallSlider";
 import { SmallSwitch } from "./SmallSwitch";
 import { SmallTextField } from "./SmallTextField";
 import { SmallToggleButton } from "./SmallToggleButton";
-import { useModelNodesStore } from "@/app/canvas/[slug]/modelCreator/_lib/_store/modelStore/ModelNodesStore";
+import { useModelNodesStore } from "@/app/canvasBuilderv2/model/_lib/_store/modelStore/ModelNodesStore";
 import { useTabStore } from "../../../../_store/TabStateManagmentStore";
-import useModelStore from "@/app/canvas/[slug]/modelCreator/_lib/_store/modelStore/ModelDetailsFromBackendStore";
+import useModelStore from "@/app/canvasBuilderv2/model/_lib/_store/modelStore/ModelDetailsFromBackendStore";
 import { CodeListDropdown } from "./CodeListDropdown";
 import { useCodeListStore } from "../../../../_nodes/codeListNode/store/CodeListStore";
 export type SmallListDropdownProps = {

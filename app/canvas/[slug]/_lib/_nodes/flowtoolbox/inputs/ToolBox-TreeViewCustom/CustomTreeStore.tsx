@@ -8,10 +8,14 @@ interface CustomTreeStore {
   collapseAll: () => void;
   allNodeIds: string[];
   setAllNodeIds: (ids: string[]) => void;
+  clearAllExpandedNodes: () => void;
+  loadingNodes: Record<string, boolean>;
+  setNodeLoading: (nodeId: string, loading: boolean) => void;
 }
 
 const useToolBoxCustomTreeStore = create<CustomTreeStore>((set) => ({
   allNodeIds: [],
+  loadingNodes: {},
   setAllNodeIds: (ids) => set({ allNodeIds: ids }),
   expandedNodes: {},
   toggleNode: (id: string) =>
@@ -37,6 +41,11 @@ const useToolBoxCustomTreeStore = create<CustomTreeStore>((set) => ({
       return { expandedNodes: allExpanded };
     }),
   collapseAll: () => set({ expandedNodes: {} }),
+  clearAllExpandedNodes: () => set({ expandedNodes: {} }),
+  setNodeLoading: (nodeId, loading) =>
+    set((state) => ({
+      loadingNodes: { ...state.loadingNodes, [nodeId]: loading },
+    })),
 }));
 
 export default useToolBoxCustomTreeStore;

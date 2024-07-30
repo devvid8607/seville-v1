@@ -1,5 +1,5 @@
 import { useEffect, useMemo } from "react";
-import useModelStore from "@/app/canvas/[slug]/modelCreator/_lib/_store/modelStore/ModelDetailsFromBackendStore";
+import useModelStore from "@/app/canvasBuilderv2/model/_lib/_store/modelStore/ModelDetailsFromBackendStore";
 import {
   transformDataTypesToTreeData,
   transformModelsToTreeData,

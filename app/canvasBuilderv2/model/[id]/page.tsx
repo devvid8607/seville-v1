@@ -1,14 +1,13 @@
 "use client";
-import NextBreadcrumb from "@/app/_lib/_components/Breadcrumbs";
 import useDataTypesStore from "@/app/canvas/[slug]/_lib/_store/DataTypesStore";
-import { NewModelCreator } from "@/app/canvas/[slug]/modelCreator/_lib/_components/model/NewModelCreator";
-import { useCanvasData } from "@/app/canvas/[slug]/modelCreator/_lib/_queries/useCanvasQueries";
-import { useFetchDatatypes } from "@/app/canvas/[slug]/modelCreator/_lib/_queries/useDatatypesQueries";
-import useModelBackendStore from "@/app/canvas/[slug]/modelCreator/_lib/_store/modelStore/ModelBackEndStore";
-import useModelStore from "@/app/canvas/[slug]/modelCreator/_lib/_store/modelStore/ModelDetailsFromBackendStore";
-import { useModelNodesStore } from "@/app/canvas/[slug]/modelCreator/_lib/_store/modelStore/ModelNodesStore";
-import { Typography } from "@mui/material";
-import React, { useEffect } from "react";
+
+import { useEffect, useState } from "react";
+import { useCanvasData } from "../_lib/_queries/useCanvasQueries";
+import { useModelNodesStore } from "../_lib/_store/modelStore/ModelNodesStore";
+import useModelStore from "../_lib/_store/modelStore/ModelDetailsFromBackendStore";
+import useModelBackendStore from "../_lib/_store/modelStore/ModelBackEndStore";
+import { useFetchDatatypes } from "../_lib/_queries/useDatatypesQueries";
+import { NewModelCreator } from "../_lib/_components/model/NewModelCreator";
 interface ModelCreatorPageProps {
   params: {
     id: string;
@@ -31,6 +30,7 @@ const ModelCanvas = ({ params }: ModelCreatorPageProps) => {
   const clearModels = useModelStore((state) => state.clearModels);
   const setAllValues = useModelBackendStore((state) => state.setAllValues);
   const setDataTypes = useDataTypesStore((state) => state.setDataTypes);
+  const [loading, setLoading] = useState(false);
 
   const {
     data: datatypes,
@@ -45,10 +45,9 @@ const ModelCanvas = ({ params }: ModelCreatorPageProps) => {
       setDataTypes(datatypes);
     }
   }, [datatypes]);
-
+  console.log("Canvas Data:", canvasData);
   useEffect(() => {
     if (canvasData) {
-      console.log("Canvas Data:", canvasData);
       clearAllEdgedDataInStore();
       clearAllNodesDataInStore();
       clearModels();
@@ -60,15 +59,29 @@ const ModelCanvas = ({ params }: ModelCreatorPageProps) => {
       });
     }
   }, [canvasData]);
+
+  const handleRefetch = async () => {
+    setLoading(true);
+    console.log("refetching data");
+    await refetch();
+    console.log("finished refetching data", canvasData);
+    if (canvasData) {
+      clearAllEdgedDataInStore();
+      clearAllNodesDataInStore();
+      clearModels();
+      setAllValues({
+        header: canvasData.canvasData.header,
+        savedNodes: canvasData.canvasData.visibleNodes,
+        savedEdges: canvasData.canvasData.visibleEdges,
+        initialSchemaItems: canvasData.canvasData.systemNodes,
+      });
+      setLoading(false);
+    }
+  };
+
   return (
     <div>
-      <NextBreadcrumb
-        homeElement={<Typography>Home</Typography>}
-        separator={<span> / </span>}
-        capitalizeLinks={true}
-      />
-
-      <NewModelCreator />
+      <NewModelCreator refetchCanvasData={handleRefetch} loading={loading} />
     </div>
   );
 };

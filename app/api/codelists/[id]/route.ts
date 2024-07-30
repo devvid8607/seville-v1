@@ -7,7 +7,8 @@ export const GET = async (
 ) => {
   const { id } = params;
   const code = codedata.find((code) => code.id === id);
-  return NextResponse.json(code);
+  if (code) return NextResponse.json(code);
+  else return NextResponse.json({ error: "Code not found" }, { status: 404 });
   //   const apiRoute = `GETapi/v1/Models/GetModel/${id}`;
   //   const endpoint = `/identity/api/v1/Models/GetModel/${id}`;
   //   return fetchWithToken(req, endpoint, apiRoute);

@@ -2,7 +2,7 @@ import { create } from "zustand";
 import {
   ToolBoxType,
   ToolboxCategory,
-} from "@/app/canvas/[slug]/modelCreator/_lib/_queries/useToolBoxQueries";
+} from "@/app/canvasBuilderv2/model/_lib/_queries/useToolBoxQueries";
 
 interface ToolboxState {
   toolboxItems: ToolBoxType[];

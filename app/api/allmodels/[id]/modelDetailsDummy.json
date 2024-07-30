@@ -822,31 +822,5 @@
         "icon": "ABCOutlined"
       }
     ]
-  },
-  {
-    "modelId": "1",
-    "modelName": " dummy",
-    "modelFriendlyName": "dummy",
-    "modelDesc": "dummy",
-    "url": "string",
-    "createdBy": "string",
-    "modifiedBy": "string",
-    "dateCreated": "string",
-    "dateModified": "string",
-    "attributes": [
-      {
-        "id": "emp_id",
-        "name": "dummy",
-        "friendlyName": "dummy",
-        "description": "id of employees",
-        "key": true,
-        "locked": false,
-        "notNull": true,
-        "isRemovable": false,
-        "enabled": true,
-        "dataType": "text",
-        "icon": "ABCOutlined"
-      }
-    ]
   }
 ]

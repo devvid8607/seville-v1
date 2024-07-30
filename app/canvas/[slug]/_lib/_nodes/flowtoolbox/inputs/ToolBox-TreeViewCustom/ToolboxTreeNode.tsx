@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, IconButton, Collapse } from "@mui/material";
+import { Box, IconButton, Collapse, CircularProgress } from "@mui/material";
 import { ChevronRightOutlined, ExpandMoreOutlined } from "@mui/icons-material";
 import useToolBoxCustomTreeStore from "./CustomTreeStore";
 import { ToolBoxTreeDataType } from "./ToolboxtreeType";
@@ -14,13 +14,23 @@ const ToolBoxTreeNode: React.FC<TreeNodeProps> = ({ node, fetchChildren }) => {
   const expandedNodes = useToolBoxCustomTreeStore(
     (state) => state.expandedNodes
   );
+  const setNodeLoading = useToolBoxCustomTreeStore(
+    (state) => state.setNodeLoading
+  );
   const toggleNode = useToolBoxCustomTreeStore((state) => state.toggleNode);
+  const loading = useToolBoxCustomTreeStore(
+    (state) => state.loadingNodes[id] || false
+  );
 
   const open = expandedNodes[node.id] || false;
 
   const handleToggle = async (nodeId: string) => {
     if (!open && haschildren && children.length === 0) {
+      setNodeLoading(nodeId, true);
+      //inducing delay to show loading
+      await new Promise((resolve) => setTimeout(resolve, 500));
       await fetchChildren(nodeId);
+      setNodeLoading(nodeId, false);
     }
     toggleNode(nodeId);
   };
@@ -57,6 +67,7 @@ const ToolBoxTreeNode: React.FC<TreeNodeProps> = ({ node, fetchChildren }) => {
           )}
           {title}
         </Box>
+        {loading && <CircularProgress size={20} />}
       </Box>
       <Collapse in={open} timeout="auto" unmountOnExit>
         {children.length > 0 && (

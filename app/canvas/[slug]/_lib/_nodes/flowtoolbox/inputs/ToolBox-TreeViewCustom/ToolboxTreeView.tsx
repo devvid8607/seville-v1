@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box, IconButton, List, TextField, Tooltip } from "@mui/material";
 
 import { ToolBoxTreeDataType } from "./ToolboxtreeType";
@@ -14,11 +14,16 @@ interface TreeViewProps {
 const ToolboxTreeView: React.FC<TreeViewProps> = ({ data, fetchChildren }) => {
   const [searchTerm, setSearchTerm] = useState("");
 
-  const { expandAll, collapseAll } = useToolBoxCustomTreeStore();
+  const { expandAll, collapseAll, clearAllExpandedNodes } =
+    useToolBoxCustomTreeStore();
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
   };
+
+  useEffect(() => {
+    clearAllExpandedNodes();
+  }, []);
 
   return (
     <>
@@ -30,15 +35,16 @@ const ToolboxTreeView: React.FC<TreeViewProps> = ({ data, fetchChildren }) => {
           onChange={handleSearchChange}
           size="small"
           sx={{ width: "auto" }} // Adjust width as necessary
+          disabled
         />
         <Box display="flex" flexDirection="row">
           <Tooltip title="Expand All" placement="top">
-            <IconButton onClick={expandAll}>
+            <IconButton onClick={expandAll} disabled>
               <AddBox color="primary" />
             </IconButton>
           </Tooltip>
           <Tooltip title="Collapse All" placement="top">
-            <IconButton onClick={collapseAll}>
+            <IconButton onClick={collapseAll} disabled>
               <IndeterminateCheckBox color="primary" />
             </IconButton>
           </Tooltip>

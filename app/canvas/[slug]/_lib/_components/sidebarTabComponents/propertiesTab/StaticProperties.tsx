@@ -12,13 +12,13 @@ import {
 } from "@mui/material";
 import React, { useCallback, useState, useEffect } from "react";
 import { useTabStore } from "../../../_store/TabStateManagmentStore";
-import useModelStore from "@/app/canvas/[slug]/modelCreator/_lib/_store/modelStore/ModelDetailsFromBackendStore";
+import useModelStore from "@/app/canvasBuilderv2/model/_lib/_store/modelStore/ModelDetailsFromBackendStore";
 // import dataTypeDataDromJSON from "../../SidebarTabComponents/PropertiesTab/Data/DataTypes.json";
 import { IconLookup, iconLookup } from "../../../_constants/IconConstants";
-import { FieldType } from "@/app/canvas/[slug]/modelCreator/_lib/_types/FieldType";
+import { FieldType } from "@/app/canvasBuilderv2/model/_lib/_types/FieldType";
 import { ModelPropertiesContent } from "./ModelPropertiesContent";
 import useDataTypesStore from "../../../_store/DataTypesStore";
-import { useModelNodesStore } from "@/app/canvas/[slug]/modelCreator/_lib/_store/modelStore/ModelNodesStore";
+import { useModelNodesStore } from "@/app/canvasBuilderv2/model/_lib/_store/modelStore/ModelNodesStore";
 
 export const StaticProperties: React.FC = () => {
   //#region store imports
@@ -285,7 +285,7 @@ export const StaticProperties: React.FC = () => {
               <Typography variant="body2">Deletable</Typography>
               <Checkbox
                 checked={attribute?.isRemovable || false}
-                // onChange={handleCheckboxChange}
+                onChange={handleCheckboxChange}
                 name="isRemovable"
                 disabled={attribute?.locked}
               />

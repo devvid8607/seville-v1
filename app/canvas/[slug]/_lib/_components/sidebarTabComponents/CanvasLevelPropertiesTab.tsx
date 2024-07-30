@@ -1,11 +1,11 @@
 import { Box, Paper, TextField, Typography } from "@mui/material";
 import React, { useState, useEffect } from "react";
-import useModelBackendStore from "../../../modelCreator/_lib/_store/modelStore/ModelBackEndStore";
+import useModelBackendStore from "@/app/canvasBuilderv2/model/_lib/_store/modelStore/ModelBackEndStore";
 export const CanvasLevelPropertiesTab = () => {
   const { header, updateHeader, updateHeaderDescription } =
     useModelBackendStore();
-  const [canvasName, setCanvasName] = useState(header.canvasName || "");
-  const [canvasDesc, setCanvasDesc] = useState(header.canvasDesc || "");
+  const [canvasName, setCanvasName] = useState(header?.canvasName || "");
+  const [canvasDesc, setCanvasDesc] = useState(header?.canvasDesc || "");
 
   const handleCanvasNameChange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -28,9 +28,9 @@ export const CanvasLevelPropertiesTab = () => {
   };
 
   useEffect(() => {
-    setCanvasName(header.canvasName || "");
-    setCanvasDesc(header.canvasDesc || "");
-  }, [header.canvasName, header.canvasDesc]);
+    setCanvasName(header?.canvasName || "");
+    setCanvasDesc(header?.canvasDesc || "");
+  }, [header?.canvasName, header?.canvasDesc]);
   return (
     <Box>
       <Typography variant="body1" pb={2}>
@@ -79,7 +79,7 @@ export const CanvasLevelPropertiesTab = () => {
             size="small"
             disabled
             variant="outlined"
-            value={header.canvasId}
+            value={header?.canvasId}
             label="System Id"
             sx={{
               input: {
@@ -95,7 +95,7 @@ export const CanvasLevelPropertiesTab = () => {
             required
             disabled
             size="small"
-            value={header.createdBy}
+            value={header?.createdBy}
             variant="outlined"
             label="Created By"
             sx={{
@@ -111,7 +111,7 @@ export const CanvasLevelPropertiesTab = () => {
             required
             disabled
             size="small"
-            value={header.modifiedBy}
+            value={header?.modifiedBy}
             variant="outlined"
             label="Modified By"
             sx={{
@@ -127,7 +127,7 @@ export const CanvasLevelPropertiesTab = () => {
             required
             disabled
             size="small"
-            value={header.dateCreated}
+            value={header?.dateCreated}
             variant="outlined"
             label="Created On"
             sx={{
@@ -143,7 +143,7 @@ export const CanvasLevelPropertiesTab = () => {
             required
             disabled
             size="small"
-            value={header.dateModified}
+            value={header?.dateModified}
             variant="outlined"
             label="Modified On"
             sx={{

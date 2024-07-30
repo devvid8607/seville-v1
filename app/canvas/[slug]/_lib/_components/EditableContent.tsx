@@ -1,7 +1,7 @@
 import { Box, TextField, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import useModelBackendStore from "../../modelCreator/_lib/_store/modelStore/ModelBackEndStore";
-import { canvasHeader } from "../../flowComponents/_lib/_types/SevilleSchema";
+import useModelBackendStore from "@/app/canvasBuilderv2/model/_lib/_store/modelStore/ModelBackEndStore";
+import { canvasHeader } from "../_types/canvasHeader";
 // import useFlowBackendStore from "../newValueChangesFlow/FlowStore/FlowBackEndStore";
 // import { useLocation } from "react-router-dom";
 
@@ -9,7 +9,7 @@ type EditableContentProps = {
   onShowProperties: (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => void;
-  header: canvasHeader;
+  header: canvasHeader | null;
   onUpdateHeader: (newHeader: { canvasName: string }) => void;
 };
 
@@ -19,7 +19,7 @@ export const EditableContent: React.FC<EditableContentProps> = ({
   onUpdateHeader,
 }) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [text, setText] = useState(header.canvasName || "Edit Me");
+  const [text, setText] = useState(header?.canvasName || "Edit Me");
 
   const updateHeader = useModelBackendStore((state) => state.updateHeader);
 
@@ -45,8 +45,8 @@ export const EditableContent: React.FC<EditableContentProps> = ({
   };
 
   useEffect(() => {
-    setText(header.canvasName || "Edit Me");
-  }, [header.canvasName]);
+    setText(header?.canvasName || "Edit Me");
+  }, [header?.canvasName]);
 
   return (
     <Box onClick={onShowProperties}>

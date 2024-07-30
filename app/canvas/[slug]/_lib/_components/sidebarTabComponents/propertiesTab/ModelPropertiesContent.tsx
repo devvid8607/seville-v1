@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useTabStore } from "../../../_store/TabStateManagmentStore";
-import useModelStore from "@/app/canvas/[slug]/modelCreator/_lib/_store/modelStore/ModelDetailsFromBackendStore";
+import useModelStore from "@/app/canvasBuilderv2/model/_lib/_store/modelStore/ModelDetailsFromBackendStore";
 import { Box, Paper, TextField, Typography } from "@mui/material";
 
 export const ModelPropertiesContent = () => {

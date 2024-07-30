@@ -2,11 +2,11 @@ import {
   ToolBoxType,
   useFetchToolbox,
   useGetToolboxDataById,
-} from "@/app/canvas/[slug]/modelCreator/_lib/_queries/useToolBoxQueries";
+} from "@/app/canvasBuilderv2/model/_lib/_queries/useToolBoxQueries";
 import { useToolboxStore } from "../store/FlowToolBoxStore";
 import { useEffect, useMemo, useState } from "react";
 
-import { Box } from "@mui/material";
+import { Box, CircularProgress } from "@mui/material";
 
 import ToolboxTreeView from "./ToolBox-TreeViewCustom/ToolboxTreeView";
 import { ToolBoxTreeDataType } from "./ToolBox-TreeViewCustom/ToolboxtreeType";
@@ -60,13 +60,18 @@ const FlowToolBoxBody: React.FC = () => {
     }));
   };
 
-  const treeData = useMemo(
-    () => transformCategoriesToTreeData(toolboxItems),
-    [toolboxItems]
-  );
+  const treeData = useMemo(() => {
+    const transformedData = transformCategoriesToTreeData(toolboxItems);
+    console.log("Transformed Tree Data:", transformedData);
+    return transformedData;
+  }, [toolboxItems]);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        <CircularProgress />
+      </div>
+    );
   }
 
   if (error) {
@@ -75,7 +80,6 @@ const FlowToolBoxBody: React.FC = () => {
 
   const handleFetchChildren = async (nodeId: string) => {
     setCurrentNodeId(nodeId);
-    // await new Promise((resolve) => setTimeout(resolve, 1000));
   };
 
   return (

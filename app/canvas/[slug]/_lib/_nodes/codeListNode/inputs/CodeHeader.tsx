@@ -4,9 +4,9 @@ import React from "react";
 import * as MuiIcons from "@mui/icons-material";
 import { useCodeListStore } from "../store/CodeListStore";
 
-import { CodeNodeContextMenu } from "../../../../modelCreator/_lib/_components/nodes/codeListNode/inputs/CodeNodeContextMenu";
+import { CodeNodeContextMenu } from "@/app/canvasBuilderv2/model/_lib/_components/nodes/codeListNode/inputs/CodeNodeContextMenu";
 import { useCodeUIStore } from "../store/CodeUIStore";
-import { useModelNodesStore } from "../../../../modelCreator/_lib/_store/modelStore/ModelNodesStore";
+import { useModelNodesStore } from "@/app/canvasBuilderv2/model/_lib/_store/modelStore/ModelNodesStore";
 import { Edge } from "reactflow";
 
 interface CodeHeaderProps {

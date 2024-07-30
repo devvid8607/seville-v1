@@ -14,13 +14,14 @@ import {
   CircularProgress,
 } from "@mui/material";
 import EditOutlined from "@mui/icons-material/EditOutlined";
-import NextBreadcrumb from "@/app/_lib/_components/Breadcrumbs";
-import {
-  useCreateModel,
-  useFetchModels,
-} from "@/app/canvas/[slug]/modelCreator/_lib/_queries/useModelQueries";
+
 import CreateFlowItemModal from "@/app/canvas/[slug]/_lib/_components/createFlowItemModal/CreateFlowItemModal";
 import { useRouter } from "next/navigation";
+import {
+  CanvasIndexItem,
+  useCreateModel,
+  useFetchModels,
+} from "./_lib/_queries/useModelQueries";
 
 const ModelIndex = () => {
   const {
@@ -32,6 +33,7 @@ const ModelIndex = () => {
   const [openDialog, setOpenDialog] = useState(false);
   const { mutation, modelId } = useCreateModel();
   const [localModelId, setLocalModelId] = useState<string | null>("");
+  const [isEditing, setIsEditing] = useState(false);
   const router = useRouter();
 
   const handleNewModelClick = (e: React.MouseEvent) => {
@@ -53,6 +55,11 @@ const ModelIndex = () => {
     mutation.mutate(data);
   };
 
+  const handleEdit = (item: CanvasIndexItem) => {
+    setIsEditing(true);
+    setLocalModelId(item.id);
+  };
+
   useEffect(() => {
     if (modelId) {
       setLocalModelId(modelId);
@@ -61,18 +68,13 @@ const ModelIndex = () => {
 
   useEffect(() => {
     if (localModelId) {
+      setIsEditing(false);
       router.push(`/canvasBuilderv2/model/${localModelId}`);
     }
   }, [localModelId, router]);
+
   return (
     <>
-      <Box display="flex" flexDirection="column" gap={2} mt={2} ml={2}>
-        <NextBreadcrumb
-          homeElement={<Typography>Home</Typography>}
-          separator={<span> / </span>}
-          capitalizeLinks={true}
-        />
-      </Box>
       <Box
         sx={{
           display: "flex",
@@ -131,7 +133,7 @@ const ModelIndex = () => {
                       <TableCell>{item.dateModified}</TableCell>
                       <TableCell>
                         <IconButton color="primary">
-                          <EditOutlined />
+                          <EditOutlined onClick={() => handleEdit(item)} />
                         </IconButton>
                       </TableCell>
                     </TableRow>

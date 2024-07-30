@@ -8,8 +8,8 @@ import {
   TextFieldProps,
 } from "@mui/material";
 import React, { useState, useEffect } from "react";
-import useModelStore from "@/app/canvas/[slug]/modelCreator/_lib/_store/modelStore/ModelDetailsFromBackendStore";
-import { useAllModelsStore } from "@/app/canvas/[slug]/modelCreator/_lib/_store/modelStore/AllModelsStore";
+
+import { useAllModelsStore } from "@/app/canvasBuilderv2/model/_lib/_store/modelStore/AllModelsStore";
 
 export type SmallModelDropdownProps = {
   id: string;

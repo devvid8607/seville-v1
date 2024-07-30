@@ -1,0 +1,84 @@
+{
+  "header": {
+    "canvasName": "EmployeeModelVersion1",
+    "canvasDesc": "This is canvas desc",
+    "canvasId": "234324-23423-23432",
+    "createdBy": "admin",
+    "modifiedBy": "admin",
+    "dateCreated": "",
+    "dateModified": ""
+  },
+  "visibleNodes": [
+    {
+      "id": "f0f1230c-8f61-4c1b-8cad-7da141875918",
+      "type": "modelNode",
+      "position": {
+        "x": 500,
+        "y": 500
+      },
+      "dragHandle": ".custom-drag-handle",
+      "data": {
+        "nodeId": "f0f1230c-8f61-4c1b-8cad-7da141875918",
+        "modelDetails": {
+          "friendlyName": "Address",
+          "description": "",
+          "url": "",
+          "dataSourceId": "789"
+        }
+      },
+      "width": 452,
+      "height": 838
+    },
+    {
+      "id": "56765",
+      "type": "modelNode",
+      "position": {
+        "x": 1500,
+        "y": 500
+      },
+      "dragHandle": ".custom-drag-handle",
+      "data": {
+        "nodeId": "56765",
+        "modelDetails": {
+          "friendlyName": "Address",
+          "description": "",
+          "url": "",
+          "dataSourceId": "123"
+        }
+      },
+      "width": 452,
+      "height": 838
+    }
+  ],
+  "visibleEdges": [
+    {
+      "id": "60890413-7b80-4f39-a6a1-27221227e1e3",
+      "source": "f0f1230c-8f61-4c1b-8cad-7da141875918",
+      "target": "56765",
+      "sourceHandle": "handle|nd|f0f1230c-8f61-4c1b-8cad-7da141875918|attr|addr_zip|dt|model",
+      "type": "smoothstep"
+    }
+  ],
+  "systemNodes": [
+    {
+      "id": "toolboxNode",
+      "type": "flowtoolbox",
+      "position": { "x": 50, "y": 750 },
+      "data": {
+        "position": "top-left",
+        "component": "flowtoolboxcomponent",
+        "modelDetails": {
+          "name": "ToolBox",
+          "friendlyName": "ToolBox",
+          "description": "Tool box",
+          "createdBy": "admin",
+          "modifiedBy": "admin",
+          "dateCreated": "25/03/2024",
+          "dateModified": "25/03/2024"
+        }
+      },
+      "dragHandle": ".custom-drag-handle",
+      "hidden": false
+    }
+  ]
+}
