@@ -18,11 +18,10 @@ interface LoadCanvasResponse {
 // Define the function to load canvas data
 export const loadCanvas = (
   userId: string,
-  modelId: string
+  layoutId: string | null,
+  modelId: string | null
 ): Promise<LoadCanvasResponse> => {
-  return apiGet<LoadCanvasResponse>(
-    `/canvas?userId=${userId}&modelId=${modelId}`
-  );
+  return apiGet<LoadCanvasResponse>(`/canvas/${userId}/${layoutId}/${modelId}`);
 };
 
 export const loadCanvasDummy = async (
@@ -52,11 +51,12 @@ export const loadCanvasDummy = async (
 
 export const useCanvasData = (
   userId: string,
+  layoutId: string | null,
   modelId: string | null
 ): UseQueryResult<LoadCanvasResponse, Error> => {
   return useQuery<LoadCanvasResponse, Error>({
     queryKey: ["canvasData", modelId, userId],
-    queryFn: () => loadCanvasDummy(userId, modelId!),
+    queryFn: () => loadCanvas(userId, layoutId, modelId!),
     enabled: !!userId && !!modelId,
     refetchOnMount: true,
     refetchOnWindowFocus: true,

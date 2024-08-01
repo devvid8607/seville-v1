@@ -1,0 +1,22 @@
+[
+  {
+    "id": "1",
+    "name": "Layout1",
+    "friendlyName": "Layout One",
+    "description": "Description of Layout One",
+    "createdBy": "admin",
+    "modifiedBy": "admin",
+    "dateCreated": "25/03/2024",
+    "dateModified": "26/03/2024"
+  },
+  {
+    "id": "2",
+    "name": "Layout2",
+    "friendlyName": "Layout Two",
+    "description": "Description of Layout Two",
+    "createdBy": "admin",
+    "modifiedBy": "admin",
+    "dateCreated": "25/03/2024",
+    "dateModified": "26/03/2024"
+  }
+]

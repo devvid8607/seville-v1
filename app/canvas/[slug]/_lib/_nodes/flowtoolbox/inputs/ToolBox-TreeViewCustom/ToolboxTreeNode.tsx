@@ -28,7 +28,7 @@ const ToolBoxTreeNode: React.FC<TreeNodeProps> = ({ node, fetchChildren }) => {
     if (!open && haschildren && children.length === 0) {
       setNodeLoading(nodeId, true);
       //inducing delay to show loading
-      await new Promise((resolve) => setTimeout(resolve, 500));
+      await new Promise((resolve) => setTimeout(resolve, 4000));
       await fetchChildren(nodeId);
       setNodeLoading(nodeId, false);
     }

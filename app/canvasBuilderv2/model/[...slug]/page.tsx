@@ -8,20 +8,33 @@ import useModelStore from "../_lib/_store/modelStore/ModelDetailsFromBackendStor
 import useModelBackendStore from "../_lib/_store/modelStore/ModelBackEndStore";
 import { useFetchDatatypes } from "../_lib/_queries/useDatatypesQueries";
 import { NewModelCreator } from "../_lib/_components/model/NewModelCreator";
-interface ModelCreatorPageProps {
-  params: {
-    id: string;
-  };
-}
+import { useTabStore } from "@/app/canvas/[slug]/_lib/_store/TabStateManagmentStore";
 
-const ModelCanvas = ({ params }: ModelCreatorPageProps) => {
+const ModelCanvas = ({ params }: { params: { slug: string[] } }) => {
+  console.log("params", params);
+  const { slug } = params;
+  const decodedSlug = slug.map((segment) => decodeURIComponent(segment));
+  const setIsLayoutIdNull = useTabStore((state) => state.setIsLayoutIdNull);
+
+  const layoutId =
+    decodedSlug
+      .find((segment) => segment.startsWith("LayoutId:"))
+      ?.split(":")[1] || "null";
+  const modelId =
+    decodedSlug
+      .find((segment) => segment.startsWith("ModelId:"))
+      ?.split(":")[1] || "null";
+
+  console.log("layoutId:", layoutId); // Debug log
+  console.log("modelId:", modelId);
+
   const {
     data: canvasData,
     isLoading,
     isError,
     error,
     refetch,
-  } = useCanvasData("dummyuser", params.id);
+  } = useCanvasData("dummyuser", layoutId, modelId);
   const { clearAllEdgedDataInStore, clearAllNodesDataInStore } =
     useModelNodesStore((state) => ({
       clearAllEdgedDataInStore: state.clearAllEdgedDataInStore,
@@ -59,6 +72,10 @@ const ModelCanvas = ({ params }: ModelCreatorPageProps) => {
       });
     }
   }, [canvasData]);
+  useEffect(() => {
+    if (layoutId === "null") setIsLayoutIdNull(true);
+    else setIsLayoutIdNull(false);
+  }, [layoutId]);
 
   const handleRefetch = async () => {
     setLoading(true);

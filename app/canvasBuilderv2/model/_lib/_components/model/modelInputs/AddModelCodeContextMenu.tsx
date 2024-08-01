@@ -17,6 +17,7 @@ import useModelStore from "../../../_store/modelStore/ModelDetailsFromBackendSto
 import { Box } from "@mui/material";
 import { SmallModelDropdown } from "@/app/canvas/[slug]/_lib/_components/sidebarTabComponents/propertiesTab/components/SmallModelDropDown";
 import useDataTypesStore from "@/app/canvas/[slug]/_lib/_store/DataTypesStore";
+import { handleModelSelection } from "../../../_queries/useModelQueries";
 
 export const AddModelCodeContextMenu = () => {
   // #region store imports
@@ -172,10 +173,14 @@ export const AddModelCodeContextMenu = () => {
     }
   };
 
-  const handleModelChangeDropDown = (newValue: string) => {
+  const handleModelChangeDropDown = async (newValue: string) => {
     console.log(handleId);
 
-    const selectedModel = getModelById(newValue);
+    let selectedModel = getModelById(newValue);
+    if (!selectedModel) {
+      selectedModel = await handleModelSelection(newValue);
+      console.log("selectedmodel", selectedModel);
+    }
     if (handleId && selectedModel) {
       const currentNodeId = getNodeIDFromHandle(handleId);
       const currentAttributeId = getAttributeIdFromHandle(handleId);
@@ -240,7 +245,13 @@ export const AddModelCodeContextMenu = () => {
     }
   };
 
-  const copyModel = (newValue: string) => {
+  const copyModel = async (newValue: string) => {
+    let selectedModel = getModelById(newValue);
+    if (!selectedModel) {
+      selectedModel = await handleModelSelection(newValue);
+      selectedModel && addModelToStore(selectedModel);
+      console.log("selectedmodel", selectedModel);
+    }
     console.log(`Starting model copy with newValue: ${newValue}`); // Log the starting of the operation with the input value
     const result = cloneModel(newValue, "");
     console.log(`cloneModel result:`, result); // Log the result of cloning the model

@@ -177,6 +177,7 @@ export const StaticProperties: React.FC = () => {
     );
   //#endregion
 
+  // alert(isModelPropertyShowing);
   return !isModelPropertyShowing ? (
     <Box>
       <Typography variant="body1" pb={2}>

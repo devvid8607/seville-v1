@@ -5,6 +5,7 @@ import { Box, Paper, TextField, Typography } from "@mui/material";
 
 export const ModelPropertiesContent = () => {
   const modelId = useTabStore((state) => state.modelId);
+
   if (!modelId) return;
 
   const getModelById = useModelStore((state) => state.getModelById);
@@ -13,6 +14,7 @@ export const ModelPropertiesContent = () => {
   );
 
   const currentModel = getModelById(modelId);
+
   if (!currentModel) return;
 
   const [friendlyName, setFriendlyName] = useState(

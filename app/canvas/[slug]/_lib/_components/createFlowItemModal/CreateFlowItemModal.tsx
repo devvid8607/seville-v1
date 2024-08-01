@@ -21,6 +21,8 @@ interface NewModelModalProps {
     template: string;
   }) => void;
   createError: string | null;
+  title: string;
+  isSave: boolean;
 }
 
 const CreateFlowItemModal: React.FC<NewModelModalProps> = ({
@@ -28,6 +30,8 @@ const CreateFlowItemModal: React.FC<NewModelModalProps> = ({
   onClose,
   onCreate,
   createError,
+  title,
+  isSave,
 }) => {
   const [name, setName] = useState("test name");
   const [description, setDescription] = useState("test desc");
@@ -42,7 +46,7 @@ const CreateFlowItemModal: React.FC<NewModelModalProps> = ({
 
   return (
     <Dialog open={open} onClose={onClose}>
-      <DialogTitle>Add New Model</DialogTitle>
+      <DialogTitle>{!isSave ? title : "Save Layout"}</DialogTitle>
       <DialogContent>
         {createError && <Alert severity="error">{createError}</Alert>}
         <TextField
@@ -80,7 +84,7 @@ const CreateFlowItemModal: React.FC<NewModelModalProps> = ({
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose}>Cancel</Button>
-        <Button onClick={handleCreate}>Create</Button>
+        <Button onClick={handleCreate}>{isSave ? "Save" : "Create"}</Button>
       </DialogActions>
     </Dialog>
   );

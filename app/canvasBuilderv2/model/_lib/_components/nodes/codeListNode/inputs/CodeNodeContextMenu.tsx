@@ -226,7 +226,7 @@ export const CodeNodeContextMenu: React.FC<ContextMenuProps> = ({
         // handleClose();
       }
     } else {
-      setErrorText("Selected Existing Model");
+      setErrorText("Selected Existing CodeList");
     }
   };
 

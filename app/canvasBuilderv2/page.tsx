@@ -27,11 +27,11 @@ const CanvasIndexPage = () => {
         </Button>
 
         <Button variant="contained" sx={{ mb: 2 }}>
-          <Link href="/canvas/validationSet">Validation Set</Link>
+          <Link href="/canvasBuilderv2/validationSet">Validation Set</Link>
         </Button>
 
         <Button variant="contained" sx={{ mb: 2 }}>
-          <Link href="/canvas/logicCreator">Logic Creator</Link>
+          <Link href="/canvasBuilderv2/logicCreator">Logic Creator</Link>
         </Button>
 
         <Button variant="contained" sx={{ mb: 2 }}>

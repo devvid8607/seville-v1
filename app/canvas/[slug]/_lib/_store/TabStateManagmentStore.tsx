@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { Model } from "../../modelCreator/_lib/_store/modelStore/ModelDetailsFromBackendStore";
+import { Model } from "@/app/canvasBuilderv2/model/_lib/_store/modelStore/ModelDetailsFromBackendStore";
 
 type MenuPosition = {
   x: number;
@@ -57,11 +57,16 @@ type TabState = {
   setShowMiniMap: (showMiniMap: boolean) => void;
   initialSchema: any;
   setInitialSchema: (initialSchema: any) => void;
+  isLayoutIdNull: boolean;
+  setIsLayoutIdNull: (isLayoutIdNull: boolean) => void;
 };
 
 export const useTabStore = create<TabState>((set) => ({
   loading: true,
   setLoading: (loading) => set({ loading: loading }),
+  isLayoutIdNull: false,
+  setIsLayoutIdNull: (isLayoutIdNull) =>
+    set({ isLayoutIdNull: isLayoutIdNull }),
   showMiniMap: true,
   setShowMiniMap: (showMiniMap) => set({ showMiniMap: showMiniMap }),
   initialSchema: {},

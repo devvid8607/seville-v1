@@ -8,7 +8,7 @@ import initialCategories from "../dummyData/FlowCategories.json";
 import initialSchema from "../dummyData/LogicCreator.json";
 
 import { Edge, Node } from "reactflow";
-import { ModelType } from "../../../modelCreator/_lib/_types/ModelTypes";
+import { ModelType } from "@/app/canvasBuilderv2/model/_lib/_types/ModelTypes";
 import { Category } from "../_types/FlowCategory";
 import { canvasHeader } from "../../../_lib/_types/canvasHeader";
 import { Schema } from "../_types/SevilleSchema";

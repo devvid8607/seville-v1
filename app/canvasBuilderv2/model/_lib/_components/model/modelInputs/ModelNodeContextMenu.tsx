@@ -156,7 +156,7 @@ export const ModelNodeContextMenu: React.FC<ContextMenuProps> = ({
       if (!selectedModel) {
         //return;
         selectedModel = await handleModelSelection(selectedModelId);
-        console.log("selectedmodel", selectedModel);
+
         //no model found from api
         if (!selectedModel) {
           setErrorText("Model Details not found");
@@ -268,6 +268,8 @@ export const ModelNodeContextMenu: React.FC<ContextMenuProps> = ({
         handleClose();
       }
       // }
+    } else {
+      setErrorText("Selected Existing Model");
     }
 
     //handleClose();

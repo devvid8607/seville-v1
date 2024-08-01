@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import axios from "axios";
-//import dataTypeDataDromJSON from "../../_lib/dummyData/DataTypes.json";
+import dataTypeDataDromJSON from "../dummyData/DataTypes.json";
 
 // Define a type for the store's state for better TypeScript support (optional)
 export type DataType = {
@@ -24,6 +24,7 @@ type DataTypesStore = {
   getCurrentListItemById: (id: string) => any;
   getNameByCode: (code: string) => String | undefined;
   setDataTypes: (value: DataType[]) => void;
+  fetchData: () => Promise<void>;
 };
 
 // Create the store
@@ -87,6 +88,21 @@ const useDataTypesStore = create<DataTypesStore>((set, get) => ({
   },
   setDataTypes: (value: DataType[]) => {
     set({ dataTypes: value });
+  },
+  fetchData: async () => {
+    const currentData = get().dataTypes;
+    // Only fetch if dataTypes is empty
+    if (currentData.length === 0) {
+      try {
+        //const response = await axios.get("https://api.example.com/dataTypes");
+
+        set({ dataTypes: dataTypeDataDromJSON.types });
+      } catch (error) {
+        console.error("Failed to fetch data types:", error);
+        // Optionally set a default or fallback state if the fetch fails
+        set({ dataTypes: [] }); // Example fallback to an empty array
+      }
+    }
   },
 }));
 
