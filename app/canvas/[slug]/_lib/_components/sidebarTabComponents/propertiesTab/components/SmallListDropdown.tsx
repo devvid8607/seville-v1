@@ -1,4 +1,4 @@
-import useDataTypesStore from "../../../../../../_lib/_store/DataTypesStore";
+import useDataTypesStore from "../../../../_store/DataTypesStore";
 import {
   Box,
   FormControl,
@@ -62,7 +62,7 @@ export const SmallListDropdown: React.FC<SmallListDropdownProps> = ({
   const { storeDataTypes, setCurrentListValue } = useDataTypesStore(
     (state) => ({
       storeDataTypes: state.dataTypes,
-      setCurrentListValue: state.setCurrentListValue,
+      setCurrentListValue: state.setCurrentListValueToStore,
     })
   );
   const [selectedValue, setSelectedValue] = useState(

@@ -1,27 +1,17 @@
 // #region Imports
-import { Box, CircularProgress, Typography } from "@mui/material";
-import React, {
-  DragEvent,
-  memo,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { Box, CircularProgress } from "@mui/material";
+import React, { DragEvent, memo, useCallback, useEffect } from "react";
 import {
   Background,
   BackgroundVariant,
   Controls,
-  Edge,
   EdgeTypes,
   MiniMap,
   Node,
   NodeTypes,
   Panel,
   ReactFlow,
-  ReactFlowActions,
   ReactFlowInstance,
-  Viewport,
   XYPosition,
   useReactFlow,
 } from "reactflow";
@@ -29,36 +19,25 @@ import "reactflow/dist/style.css";
 
 import { DeleteForeverOutlined } from "@mui/icons-material";
 
+import { HelpDrawer } from "@/app/canvas/[slug]/_lib/_components/helpDrawer/HelpDrawer";
 import SevilleToolbarNode from "@/app/canvas/[slug]/_lib/_nodes/flowComponents/FlowToolbar";
 import { createSavedModelEdgesFromJSON } from "../../_helpers/createSavedModelEdgesFromJSON";
-import {
-  createSavedModelNodefromJSON,
-  createSavedModelNodesfromJSON,
-} from "../../_helpers/createSavedModelNodesfromJSON";
-import { HelpDrawer } from "@/app/canvas/[slug]/_lib/_components/helpDrawer/HelpDrawer";
+import { createSavedModelNodesfromJSON } from "../../_helpers/createSavedModelNodesfromJSON";
 import { CanvasFixedRightSideBar } from "../canvasFixedRightSideBar/CanvasFixedRightSideBar";
 
-import {
-  CreateSavedModelNode,
-  useCreateSavedModelNodesFromJSON,
-} from "../../_helpers/createSavedModelNodesFromJSONNodeFormat";
-import { AddModelCodeContextMenu } from "./modelInputs/AddModelCodeContextMenu";
+import { useTabStore } from "@/app/canvas/[slug]/_lib/_store/TabStateManagmentStore";
 import useModelBackendStore from "../../_store/modelStore/ModelBackEndStore";
 import useModelStore from "../../_store/modelStore/ModelDetailsFromBackendStore";
 import { useModelNodesStore } from "../../_store/modelStore/ModelNodesStore";
-import { useTabStore } from "@/app/canvas/[slug]/_lib/_store/TabStateManagmentStore";
+import { AddModelCodeContextMenu } from "./modelInputs/AddModelCodeContextMenu";
 
+import { EditableContent } from "@/app/canvas/[slug]/_lib/_components/EditableContent";
+import { useViewport } from "reactflow";
 import {
   saveModelCanvasNodes,
   saveModelEdges,
 } from "../../_helpers/saveModelCanvas";
-import { ModelNode } from "./ModelNode";
-import { useViewport } from "reactflow";
-import { useSearchParams } from "next/navigation";
-import { EditableContent } from "@/app/canvas/[slug]/_lib/_components/EditableContent";
 import { useSaveModels } from "../../_queries/useModelQueries";
-import { useCanvasData } from "../../_queries/useCanvasQueries";
-import { queryClient } from "@/app/providers/QueryClientProvider";
 // #endregion
 
 // #region types

@@ -17,12 +17,12 @@ type SmallDropdownProps = {
   currentValue?: string;
   size?: TextFieldProps["size"];
   enabled?: boolean;
-  config: {
-    options: Array<{
-      id: string;
-      label: string;
-    }>;
-  };
+  // config: {
+  //   options: Array<{
+  //     id: string;
+  //     label: string;
+  //   }>;
+  // };
   updatePropertyValueToModel: (propertyName: string, newValue: any) => void;
 };
 
@@ -35,7 +35,7 @@ export const SmallDropdown: React.FC<SmallDropdownProps> = ({
   id,
   currentValue,
   enabled = true,
-  config: { options },
+  // config: { options },
   updatePropertyValueToModel,
 }) => {
   const [selectedValue, setSelectedValue] = useState(
@@ -47,6 +47,11 @@ export const SmallDropdown: React.FC<SmallDropdownProps> = ({
       currentValue ? currentValue : defaultValue ? defaultValue : ""
     );
   }, [currentValue, defaultValue]);
+
+  const options = [
+    { id: "true", label: "Yes" },
+    { id: "false", label: "No" },
+  ];
 
   const handleChange = (event: SelectChangeEvent<string>) => {
     setSelectedValue(event.target.value);

@@ -1,6 +1,5 @@
 "use client";
 import useDataTypesStore from "@/app/canvas/[slug]/_lib/_store/DataTypesStore";
-
 import { useEffect, useState } from "react";
 import { useCanvasData } from "../_lib/_queries/useCanvasQueries";
 import { useModelNodesStore } from "../_lib/_store/modelStore/ModelNodesStore";

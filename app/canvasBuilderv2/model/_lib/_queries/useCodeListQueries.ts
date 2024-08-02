@@ -1,6 +1,6 @@
 import { apiGet } from "@/app/helpers/apiClient";
 import { useQuery } from "@tanstack/react-query";
-import { CodeList } from "../../../_lib/_nodes/codeListNode/store/CodeListStore";
+import { CodeList } from "@/app/canvas/[slug]/_lib/_nodes/codeListNode/store/CodeListStore";
 
 //#region fetch a codelist based on id
 export const fetchCodeById = async (codeId: string) => {

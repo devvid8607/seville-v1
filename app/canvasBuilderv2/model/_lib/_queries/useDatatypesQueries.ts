@@ -1,6 +1,6 @@
 import { apiGet } from "@/app/helpers/apiClient";
 import { useQuery } from "@tanstack/react-query";
-import { DataType } from "../../../_lib/_store/DataTypesStore";
+import { DataType } from "@/app/canvas/[slug]/_lib/_store/DataTypesStore";
 
 export const fetchDatatypes = async () => {
   return apiGet<DataType[]>(`/datatypes`);

@@ -20,14 +20,14 @@ export type SmallModelDropdownProps = {
   currentValue?: string;
   size?: TextFieldProps["size"];
   enabled?: boolean;
-  config: {
-    options: Array<{
-      id: string;
-      label: string;
-    }>;
-    fromApi: boolean;
-    ApiURL: string;
-  };
+  // config: {
+  //   options: Array<{
+  //     id: string;
+  //     label: string;
+  //   }>;
+  //   fromApi: boolean;
+  //   ApiURL: string;
+  // };
   getModelPropsFromAPI: (newValue: any) => void;
 };
 

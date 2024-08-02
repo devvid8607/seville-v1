@@ -166,7 +166,6 @@ export const handleModelSelection = async (
 
 interface SaveModelResponse {
   message: string;
-  // Define the structure of your save model response
 }
 
 const saveModels = async (data: Model[]): Promise<SaveModelResponse> => {
